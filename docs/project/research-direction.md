@@ -22,7 +22,7 @@
 具体的な分子・物性モデル、入力モデル、深さ上限、最終精度、比較手法、予算、中心定理は未確定。新規性・量子優位性・論文化可能性は未確認。数値実験とLean検証は未実施。
 
 ## 判断の記録と次回
-- [候補比較の小調査](../../memo/research/2026-10-23_filter-topic-comparison.md)
-- [今回の確定・終了記録と次回アクション](../../memo/planning/2026-10-23_research-direction-confirmed.md)
+- [候補比較の小調査](../../memo/research/2026-10-23_filter-topic-comparison_2.md)
+- [今回の確定・終了記録と次回アクション](../../memo/planning/2026-10-23_research-direction-confirmed_3.md)
 
 チャットで依頼された時だけ研究を進める。Astra全般・Sol high以上の事前承認ルールは引き続き適用する。
