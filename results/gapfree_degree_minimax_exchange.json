@@ -1,0 +1,1537 @@
+{
+  "metadata": {
+    "basis": "Chebyshev T_k(z), z=2(E-L)/(Emax-L)-1",
+    "deterministic": true,
+    "numpy": "2.3.5",
+    "parameters": {
+      "A": 0.0011111111111111111,
+      "bias_target": 0.01,
+      "eta": 0.1,
+      "gap": "unknown",
+      "ground_bracket": [
+        -0.05,
+        0.05
+      ],
+      "scalar_unconstrained_optimum": 1.6935087808430286e-05,
+      "shifted_power_degree_58_raw_transmission": 9.077777240596324e-06,
+      "support": [
+        -0.05,
+        1.0
+      ]
+    },
+    "python": "3.12.14",
+    "scipy": "1.17.0",
+    "seed": null,
+    "warning": "Finite-grid LP/exchange screening only; no continuous bias certificate, QSVT parity/phase synthesis, compiled depth, or LCU circuit cost. Weight LP is a superset relaxation and the LP solver output is floating point."
+  },
+  "runs": [
+    {
+      "amplitude_degree": 16,
+      "base_grids": {
+        "excited": 101,
+        "ground": 21,
+        "pair_constraints": 1991,
+        "support": 201
+      },
+      "coefficient_l1_norm": 1.0,
+      "continuous_certificate": false,
+      "design_bias": 0.01,
+      "family": "weight",
+      "final_dense_validation_passes_target": false,
+      "final_raw_chebyshev_coefficients": [
+        0.05294563215624221,
+        -0.10498051061237913,
+        0.10229427363787319,
+        -0.09796661878496367,
+        0.09220867841400573,
+        -0.08529169395586032,
+        0.07752602582256604,
+        -0.0692383898623183,
+        0.060749627882769365,
+        -0.052355065455090125,
+        0.0443090287157694,
+        -0.036814456175784244,
+        0.03001787850870293,
+        -0.024009426386229455,
+        0.018827055291903788,
+        -0.014463877394545901,
+        0.010877377179954267,
+        -0.007999341996634945,
+        0.005745508376491108,
+        -0.004024178267791687,
+        0.002743327817041481,
+        -0.0018159899946038139,
+        0.0011639079638290865,
+        -0.0007196132062368411,
+        0.00042718578698177777,
+        -0.00024199941402238732,
+        0.0001297584239702032,
+        -6.51115013856745e-05,
+        3.007761186356777e-05,
+        -1.2470033529852647e-05,
+        4.4441278159626895e-06,
+        -1.2495755515119814e-06,
+        2.1966529201365169e-07
+      ],
+      "iterations": [
+        {
+          "bracket_min_weight_after_global_l1_scaling": 1.4604170237017235e-05,
+          "chebyshev_coefficient_l1_norm": 1.0,
+          "dense_max_filtered_mean_bias_at_target": 0.012234264088396285,
+          "dense_max_relative_pair_violation_at_design_bias": 0.22645662890147777,
+          "dense_max_support_amplitude_or_weight": 0.9999999999999999,
+          "dense_min_ground_amplitude": 1.4604170237017235e-05,
+          "dense_min_support_amplitude_or_weight": -1.2624632367572896e-08,
+          "exchange_round": 0,
+          "grid_objective_min_ground_response": 1.4604170237002803e-05,
+          "grid_objective_min_ground_weight_before_l1_scaling": 1.4604170237002803e-05,
+          "lp_diagnostics": {
+            "dual_objective": -0.0035488133669616673,
+            "dual_stationarity_inf_norm": 2.9103830456733704e-11,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 1.7064133309499518e-13,
+            "primal_minus_dual_gap": -6.300142699200428e-13,
+            "primal_objective": -0.0035488133675916815
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 1.4548044936863921e-05,
+          "chebyshev_coefficient_l1_norm": 0.9999999999999999,
+          "dense_max_filtered_mean_bias_at_target": 0.011035031177332897,
+          "dense_max_relative_pair_violation_at_design_bias": 0.10482926029392248,
+          "dense_max_support_amplitude_or_weight": 1.0,
+          "dense_min_ground_amplitude": 1.4548044936863921e-05,
+          "dense_min_support_amplitude_or_weight": -8.109329595346291e-09,
+          "exchange_round": 1,
+          "grid_objective_min_ground_response": 1.4548044936877709e-05,
+          "grid_objective_min_ground_weight_before_l1_scaling": 1.4548044936877709e-05,
+          "lp_diagnostics": {
+            "dual_objective": -0.003535174918511075,
+            "dual_stationarity_inf_norm": 2.7546320779947564e-10,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 4.259850232519661e-11,
+            "primal_minus_dual_gap": -1.150208834427291e-12,
+            "primal_objective": -0.0035351749196612836
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 1.4533891860309718e-05,
+          "chebyshev_coefficient_l1_norm": 0.9999999999999999,
+          "dense_max_filtered_mean_bias_at_target": 0.010349383248121584,
+          "dense_max_relative_pair_violation_at_design_bias": 0.035492952884035756,
+          "dense_max_support_amplitude_or_weight": 0.9999999999999998,
+          "dense_min_ground_amplitude": 1.4533891860309718e-05,
+          "dense_min_support_amplitude_or_weight": -8.69104074646378e-09,
+          "exchange_round": 2,
+          "grid_objective_min_ground_response": 1.4533891860334751e-05,
+          "grid_objective_min_ground_weight_before_l1_scaling": 1.4533891860334751e-05,
+          "lp_diagnostics": {
+            "dual_objective": -0.0035317357264883498,
+            "dual_stationarity_inf_norm": 8.111555871437304e-11,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 1.2430331862835296e-12,
+            "primal_minus_dual_gap": 4.427004769713694e-12,
+            "primal_objective": -0.003531735722061345
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 1.2613487389315485e-05,
+          "chebyshev_coefficient_l1_norm": 1.0,
+          "dense_max_filtered_mean_bias_at_target": 0.010182307780598426,
+          "dense_max_relative_pair_violation_at_design_bias": 0.018723145917150186,
+          "dense_max_support_amplitude_or_weight": 1.0,
+          "dense_min_ground_amplitude": 1.2613487389315485e-05,
+          "dense_min_support_amplitude_or_weight": -2.53065296585725e-09,
+          "exchange_round": 3,
+          "grid_objective_min_ground_response": 1.2613487389353771e-05,
+          "grid_objective_min_ground_weight_before_l1_scaling": 1.2613487389353771e-05,
+          "lp_diagnostics": {
+            "dual_objective": -0.003065077432893304,
+            "dual_stationarity_inf_norm": 3.9335645851679146e-10,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 4.276206324758557e-11,
+            "primal_minus_dual_gap": -2.7196630364434426e-12,
+            "primal_objective": -0.003065077435612967
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 1.2588762613954229e-05,
+          "chebyshev_coefficient_l1_norm": 1.0,
+          "dense_max_filtered_mean_bias_at_target": 0.010101216540658596,
+          "dense_max_relative_pair_violation_at_design_bias": 0.01326549230182894,
+          "dense_max_support_amplitude_or_weight": 1.0,
+          "dense_min_ground_amplitude": 1.2588762613954229e-05,
+          "dense_min_support_amplitude_or_weight": -2.318802810299516e-09,
+          "exchange_round": 4,
+          "grid_objective_min_ground_response": 1.2588762613965858e-05,
+          "grid_objective_min_ground_weight_before_l1_scaling": 1.2588762613965858e-05,
+          "lp_diagnostics": {
+            "dual_objective": -0.003059069334085507,
+            "dual_stationarity_inf_norm": 5.816218617837876e-10,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 3.2512403186161854e-11,
+            "primal_minus_dual_gap": 1.8891803052478728e-11,
+            "primal_objective": -0.003059069315193704
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 1.2492159979987015e-05,
+          "chebyshev_coefficient_l1_norm": 1.0,
+          "dense_max_filtered_mean_bias_at_target": 0.010100167679724232,
+          "dense_max_relative_pair_violation_at_design_bias": 0.010311933387302297,
+          "dense_max_support_amplitude_or_weight": 1.0,
+          "dense_min_ground_amplitude": 1.2492159979987015e-05,
+          "dense_min_support_amplitude_or_weight": -2.531310039846148e-09,
+          "exchange_round": 5,
+          "grid_objective_min_ground_response": 1.2492159979964365e-05,
+          "grid_objective_min_ground_weight_before_l1_scaling": 1.2492159979964365e-05,
+          "lp_diagnostics": {
+            "dual_objective": -0.0030355948988116666,
+            "dual_stationarity_inf_norm": 2.6290081223123707e-10,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 3.953304868273463e-11,
+            "primal_minus_dual_gap": 2.3680325495628596e-11,
+            "primal_objective": -0.003035594875131341
+          }
+        }
+      ],
+      "lp_optimum_status_warning": "HiGHS floating optimum and primal/dual residuals are not exact certificates; primal objective is not by itself an upper bound on the relaxed optimum",
+      "minimum_amplitude_floor_on_support_grid": 0.0,
+      "pair_cuts": [
+        {
+          "distance": 0.9101000000000002,
+          "excited_offset": 1.0101000000000002,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.12579100956856393
+        },
+        {
+          "distance": 0.9164000000000002,
+          "excited_offset": 1.0164000000000002,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.15403759054637933
+        },
+        {
+          "distance": 0.9122000000000002,
+          "excited_offset": 1.0122000000000002,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.21428031765688904
+        },
+        {
+          "distance": 0.9143000000000002,
+          "excited_offset": 1.0143000000000002,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.22645662890147777
+        },
+        {
+          "distance": 0.9416000000000001,
+          "excited_offset": 1.0416,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.06781985681914815
+        },
+        {
+          "distance": 0.8744000000000002,
+          "excited_offset": 0.9744000000000002,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.07038260762064863
+        },
+        {
+          "distance": 0.8702000000000002,
+          "excited_offset": 0.9702000000000002,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.10246616315178203
+        },
+        {
+          "distance": 0.8723000000000002,
+          "excited_offset": 0.9723000000000002,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.10482926029392248
+        },
+        {
+          "distance": 0.018900000000000004,
+          "excited_offset": 0.018900000000000004,
+          "ground_offset": 0.0,
+          "relative_violation_before_cut": 0.0255041586046425
+        },
+        {
+          "distance": 0.20870000000000002,
+          "excited_offset": 0.30870000000000003,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.027951408129787136
+        },
+        {
+          "distance": 0.6602000000000001,
+          "excited_offset": 0.7602000000000001,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.03498920199732103
+        },
+        {
+          "distance": 0.6623000000000001,
+          "excited_offset": 0.7623000000000001,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.035492952884035756
+        },
+        {
+          "distance": 0.7421000000000001,
+          "excited_offset": 0.8421000000000001,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.013989589407162217
+        },
+        {
+          "distance": 0.3851000000000001,
+          "excited_offset": 0.4851000000000001,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.014447090979607502
+        },
+        {
+          "distance": 0.13310000000000002,
+          "excited_offset": 0.23310000000000003,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.01446973792321904
+        },
+        {
+          "distance": 0.3872000000000001,
+          "excited_offset": 0.4872000000000001,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.018723145917150186
+        },
+        {
+          "distance": 0.019400000000000014,
+          "excited_offset": 0.11340000000000001,
+          "ground_offset": 0.094,
+          "relative_violation_before_cut": 0.011882471348202861
+        },
+        {
+          "distance": 0.018400000000000014,
+          "excited_offset": 0.11340000000000001,
+          "ground_offset": 0.095,
+          "relative_violation_before_cut": 0.012130098351216256
+        },
+        {
+          "distance": 0.019500000000000017,
+          "excited_offset": 0.11550000000000002,
+          "ground_offset": 0.096,
+          "relative_violation_before_cut": 0.012416527380181064
+        },
+        {
+          "distance": 0.018500000000000016,
+          "excited_offset": 0.11550000000000002,
+          "ground_offset": 0.097,
+          "relative_violation_before_cut": 0.01326549230182894
+        }
+      ],
+      "status": 0,
+      "status_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+      "validation_bias_target": 0.01,
+      "validation_grids": {
+        "excited": 501,
+        "ground": 101,
+        "support": 501
+      },
+      "weight_degree": 32
+    },
+    {
+      "amplitude_degree": 30,
+      "base_grids": {
+        "excited": 101,
+        "ground": 21,
+        "pair_constraints": 1991,
+        "support": 201
+      },
+      "coefficient_l1_norm": 1.2223317267324136,
+      "continuous_certificate": false,
+      "design_bias": 0.01,
+      "family": "weight",
+      "final_dense_validation_passes_target": false,
+      "final_raw_chebyshev_coefficients": [
+        0.06232880194790734,
+        -0.12356362339324292,
+        0.12033516667802434,
+        -0.11512801374519413,
+        0.10818737604945845,
+        -0.09982823253624624,
+        0.0904109453634321,
+        -0.08031510402652604,
+        0.06991408607941688,
+        -0.05955292199394997,
+        0.049531044177877286,
+        -0.0400910616329866,
+        0.031413581295087395,
+        -0.023617688000632294,
+        0.01676586382813198,
+        -0.01087213165898723,
+        0.00591184751770159,
+        -0.0018319759519489884,
+        -0.0014393211397516167,
+        0.0039843617300984215,
+        -0.0058893793991492615,
+        0.0072396839227580785,
+        -0.00811651676691093,
+        0.0085952216011375,
+        -0.008744489461131762,
+        0.008626253117075995,
+        -0.008296017090380532,
+        0.007803320156157527,
+        -0.007192233895075694,
+        0.006501758539955733,
+        -0.005766115770685777,
+        0.005014926735453872,
+        -0.0042733199800542515,
+        0.0035620076267017385,
+        -0.0028973728312724975,
+        0.0022916156102570366,
+        -0.0017529559938153974,
+        0.0012859407570781271,
+        -0.0008918031786411384,
+        0.0005689191629326504,
+        -0.0003132823012716828,
+        0.00011904659845961045,
+        2.0960444673581044e-05,
+        -0.00011469024495002282,
+        0.0001704082277738656,
+        -0.0001962286508537515,
+        0.00019977331253190963,
+        -0.00018785949169875739,
+        0.00016633508837082456,
+        -0.00013994614193328262,
+        0.00011235354322363361,
+        -8.615200511278507e-05,
+        6.301435905674139e-05,
+        -4.380155150124551e-05,
+        2.876529843029431e-05,
+        -1.7675444064675855e-05,
+        1.0025075315740027e-05,
+        -5.1266957893887986e-06,
+        2.279611130281446e-06,
+        -8.114328222772681e-07,
+        1.9087022214182132e-07
+      ],
+      "iterations": [
+        {
+          "bracket_min_weight_after_global_l1_scaling": 1.868571496389936e-05,
+          "chebyshev_coefficient_l1_norm": 1.5510096329766783,
+          "dense_max_filtered_mean_bias_at_target": 0.19473646509406087,
+          "dense_max_relative_pair_violation_at_design_bias": 23.27694126405763,
+          "dense_max_support_amplitude_or_weight": 1.2537147985465833,
+          "dense_min_ground_amplitude": 1.868571496389936e-05,
+          "dense_min_support_amplitude_or_weight": -6.1282720651918395e-06,
+          "exchange_round": 0,
+          "grid_objective_min_ground_response": 1.8685714963874716e-05,
+          "grid_objective_min_ground_weight_before_l1_scaling": 1.8685714963874716e-05,
+          "lp_diagnostics": {
+            "dual_objective": -0.004540628736576124,
+            "dual_stationarity_inf_norm": 4.477085369103406e-12,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 1.0531443889500607e-12,
+            "primal_minus_dual_gap": 3.545679375105415e-13,
+            "primal_objective": -0.0045406287362215565
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 1.8586151472775354e-05,
+          "chebyshev_coefficient_l1_norm": 1.2232735448425065,
+          "dense_max_filtered_mean_bias_at_target": 0.13177159693202917,
+          "dense_max_relative_pair_violation_at_design_bias": 14.148348625704699,
+          "dense_max_support_amplitude_or_weight": 1.0,
+          "dense_min_ground_amplitude": 1.8586151472775354e-05,
+          "dense_min_support_amplitude_or_weight": -1.2832261823941402e-07,
+          "exchange_round": 1,
+          "grid_objective_min_ground_response": 1.858615147281096e-05,
+          "grid_objective_min_ground_weight_before_l1_scaling": 1.858615147281096e-05,
+          "lp_diagnostics": {
+            "dual_objective": -0.004516434808110148,
+            "dual_stationarity_inf_norm": 3.9869219037314e-12,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 1.7291995743282107e-12,
+            "primal_minus_dual_gap": 2.1708416314547563e-13,
+            "primal_objective": -0.004516434807893064
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 1.8568953951122352e-05,
+          "chebyshev_coefficient_l1_norm": 1.2227159761961532,
+          "dense_max_filtered_mean_bias_at_target": 0.022443058744874265,
+          "dense_max_relative_pair_violation_at_design_bias": 1.275253749503349,
+          "dense_max_support_amplitude_or_weight": 1.0000000000000002,
+          "dense_min_ground_amplitude": 1.8568953951122352e-05,
+          "dense_min_support_amplitude_or_weight": -4.892265125425052e-08,
+          "exchange_round": 2,
+          "grid_objective_min_ground_response": 1.856895395119896e-05,
+          "grid_objective_min_ground_weight_before_l1_scaling": 1.856895395119896e-05,
+          "lp_diagnostics": {
+            "dual_objective": -0.004512255810560362,
+            "dual_stationarity_inf_norm": 7.87281351222191e-12,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 1.4993040448640497e-11,
+            "primal_minus_dual_gap": 4.1901378200481787e-13,
+            "primal_objective": -0.004512255810141348
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 1.855555509952594e-05,
+          "chebyshev_coefficient_l1_norm": 1.2225554033602775,
+          "dense_max_filtered_mean_bias_at_target": 0.01474330945031884,
+          "dense_max_relative_pair_violation_at_design_bias": 0.482387110004288,
+          "dense_max_support_amplitude_or_weight": 1.0,
+          "dense_min_ground_amplitude": 1.855555509952594e-05,
+          "dense_min_support_amplitude_or_weight": -1.2470305027497707e-08,
+          "exchange_round": 3,
+          "grid_objective_min_ground_response": 1.855555509954864e-05,
+          "grid_objective_min_ground_weight_before_l1_scaling": 1.855555509954864e-05,
+          "lp_diagnostics": {
+            "dual_objective": -0.004508999888635401,
+            "dual_stationarity_inf_norm": 5.6701310313655995e-12,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 4.271058685759513e-12,
+            "primal_minus_dual_gap": -5.549189580067448e-13,
+            "primal_objective": -0.00450899988919032
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 1.855195388566396e-05,
+          "chebyshev_coefficient_l1_norm": 1.2224841750787518,
+          "dense_max_filtered_mean_bias_at_target": 0.01163414518734782,
+          "dense_max_relative_pair_violation_at_design_bias": 0.16554049528465198,
+          "dense_max_support_amplitude_or_weight": 1.0000000000000013,
+          "dense_min_ground_amplitude": 1.855195388566396e-05,
+          "dense_min_support_amplitude_or_weight": -8.443207147700445e-09,
+          "exchange_round": 4,
+          "grid_objective_min_ground_response": 1.8551953885658164e-05,
+          "grid_objective_min_ground_weight_before_l1_scaling": 1.8551953885658164e-05,
+          "lp_diagnostics": {
+            "dual_objective": -0.004508124794284543,
+            "dual_stationarity_inf_norm": 1.5926844424067144e-12,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 3.916187239403311e-13,
+            "primal_minus_dual_gap": 6.960838155878335e-14,
+            "primal_objective": -0.004508124794214935
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 1.8543684608543014e-05,
+          "chebyshev_coefficient_l1_norm": 1.2223317267324136,
+          "dense_max_filtered_mean_bias_at_target": 0.010962632877443637,
+          "dense_max_relative_pair_violation_at_design_bias": 0.09998125868601715,
+          "dense_max_support_amplitude_or_weight": 1.0000000000000002,
+          "dense_min_ground_amplitude": 1.8543684608543014e-05,
+          "dense_min_support_amplitude_or_weight": -6.60857911746752e-09,
+          "exchange_round": 5,
+          "grid_objective_min_ground_response": 1.854368460855598e-05,
+          "grid_objective_min_ground_weight_before_l1_scaling": 1.854368460855598e-05,
+          "lp_diagnostics": {
+            "dual_objective": -0.004506115360344454,
+            "dual_stationarity_inf_norm": 5.258016244624741e-12,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 2.225048758523057e-12,
+            "primal_minus_dual_gap": 4.653499807716344e-13,
+            "primal_objective": -0.004506115359879104
+          }
+        }
+      ],
+      "lp_optimum_status_warning": "HiGHS floating optimum and primal/dual residuals are not exact certificates; primal objective is not by itself an upper bound on the relaxed optimum",
+      "minimum_amplitude_floor_on_support_grid": 0.0,
+      "pair_cuts": [
+        {
+          "distance": 0.9416000000000001,
+          "excited_offset": 1.0416,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 17.485546651239655
+        },
+        {
+          "distance": 0.9457000000000001,
+          "excited_offset": 1.0437,
+          "ground_offset": 0.098,
+          "relative_violation_before_cut": 18.68987071691757
+        },
+        {
+          "distance": 0.9447000000000001,
+          "excited_offset": 1.0437,
+          "ground_offset": 0.099,
+          "relative_violation_before_cut": 20.84221716562199
+        },
+        {
+          "distance": 0.9437000000000001,
+          "excited_offset": 1.0437,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 23.27694126405763
+        },
+        {
+          "distance": 0.9353000000000001,
+          "excited_offset": 1.0353,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 10.157804700739693
+        },
+        {
+          "distance": 0.9478000000000001,
+          "excited_offset": 1.0458,
+          "ground_offset": 0.098,
+          "relative_violation_before_cut": 11.283646275791922
+        },
+        {
+          "distance": 0.9468000000000001,
+          "excited_offset": 1.0458,
+          "ground_offset": 0.099,
+          "relative_violation_before_cut": 12.628874691217046
+        },
+        {
+          "distance": 0.9458000000000001,
+          "excited_offset": 1.0458,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 14.148348625704699
+        },
+        {
+          "distance": 0.9269000000000002,
+          "excited_offset": 1.0269000000000001,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.8853738144233689
+        },
+        {
+          "distance": 0.9227000000000002,
+          "excited_offset": 1.0227000000000002,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 1.021973493586712
+        },
+        {
+          "distance": 0.9258000000000002,
+          "excited_offset": 1.0248000000000002,
+          "ground_offset": 0.099,
+          "relative_violation_before_cut": 1.047033889617568
+        },
+        {
+          "distance": 0.9248000000000002,
+          "excited_offset": 1.0248000000000002,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 1.275253749503349
+        },
+        {
+          "distance": 0.8817000000000002,
+          "excited_offset": 0.9807000000000001,
+          "ground_offset": 0.099,
+          "relative_violation_before_cut": 0.32117479288646367
+        },
+        {
+          "distance": 0.8838000000000001,
+          "excited_offset": 0.9828000000000001,
+          "ground_offset": 0.099,
+          "relative_violation_before_cut": 0.33368373378180416
+        },
+        {
+          "distance": 0.8807000000000001,
+          "excited_offset": 0.9807000000000001,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.4684793910553817
+        },
+        {
+          "distance": 0.8828000000000001,
+          "excited_offset": 0.9828000000000001,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.482387110004288
+        },
+        {
+          "distance": 0.07010000000000002,
+          "excited_offset": 0.17010000000000003,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.10055533068209899
+        },
+        {
+          "distance": 0.9374000000000001,
+          "excited_offset": 1.0374,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.11076664487414778
+        },
+        {
+          "distance": 0.07220000000000001,
+          "excited_offset": 0.17220000000000002,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.13095344817004628
+        },
+        {
+          "distance": 0.9059000000000003,
+          "excited_offset": 1.0059000000000002,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.16554049528465198
+        }
+      ],
+      "status": 0,
+      "status_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+      "validation_bias_target": 0.01,
+      "validation_grids": {
+        "excited": 501,
+        "ground": 101,
+        "support": 501
+      },
+      "weight_degree": 60
+    },
+    {
+      "amplitude_degree": 16,
+      "base_grids": {
+        "excited": 101,
+        "ground": 21,
+        "pair_constraints": 1991,
+        "support": 201
+      },
+      "coefficient_l1_norm": 0.0,
+      "continuous_certificate": false,
+      "design_bias": 0.01,
+      "family": "amplitude",
+      "final_dense_validation_passes_target": true,
+      "final_raw_chebyshev_coefficients": [
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0,
+        -0.0
+      ],
+      "iterations": [
+        {
+          "bracket_min_weight_after_global_l1_scaling": 0.0,
+          "chebyshev_coefficient_l1_norm": 0.0,
+          "dense_max_filtered_mean_bias_at_target": 0.0,
+          "dense_max_relative_pair_violation_at_design_bias": Infinity,
+          "dense_max_support_amplitude_or_weight": 0.0,
+          "dense_min_ground_amplitude": 0.0,
+          "dense_min_support_amplitude_or_weight": 0.0,
+          "exchange_round": 0,
+          "grid_objective_min_ground_response": -0.0,
+          "grid_objective_min_ground_weight_before_l1_scaling": 0.0,
+          "lp_diagnostics": {
+            "dual_objective": 0.0,
+            "dual_stationarity_inf_norm": 2.4442670110147446e-12,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 0.0,
+            "primal_minus_dual_gap": 0.0,
+            "primal_objective": 0.0
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 0.0,
+          "chebyshev_coefficient_l1_norm": 0.0,
+          "dense_max_filtered_mean_bias_at_target": 0.0,
+          "dense_max_relative_pair_violation_at_design_bias": Infinity,
+          "dense_max_support_amplitude_or_weight": 0.0,
+          "dense_min_ground_amplitude": 0.0,
+          "dense_min_support_amplitude_or_weight": 0.0,
+          "exchange_round": 1,
+          "grid_objective_min_ground_response": -0.0,
+          "grid_objective_min_ground_weight_before_l1_scaling": 0.0,
+          "lp_diagnostics": {
+            "dual_objective": 0.0,
+            "dual_stationarity_inf_norm": 2.4442670110147446e-12,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 0.0,
+            "primal_minus_dual_gap": 0.0,
+            "primal_objective": 0.0
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 0.0,
+          "chebyshev_coefficient_l1_norm": 0.0,
+          "dense_max_filtered_mean_bias_at_target": 0.0,
+          "dense_max_relative_pair_violation_at_design_bias": Infinity,
+          "dense_max_support_amplitude_or_weight": 0.0,
+          "dense_min_ground_amplitude": 0.0,
+          "dense_min_support_amplitude_or_weight": 0.0,
+          "exchange_round": 2,
+          "grid_objective_min_ground_response": -0.0,
+          "grid_objective_min_ground_weight_before_l1_scaling": 0.0,
+          "lp_diagnostics": {
+            "dual_objective": 0.0,
+            "dual_stationarity_inf_norm": 2.4442670110147446e-12,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 0.0,
+            "primal_minus_dual_gap": 0.0,
+            "primal_objective": 0.0
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 0.0,
+          "chebyshev_coefficient_l1_norm": 0.0,
+          "dense_max_filtered_mean_bias_at_target": 0.0,
+          "dense_max_relative_pair_violation_at_design_bias": Infinity,
+          "dense_max_support_amplitude_or_weight": 0.0,
+          "dense_min_ground_amplitude": 0.0,
+          "dense_min_support_amplitude_or_weight": 0.0,
+          "exchange_round": 3,
+          "grid_objective_min_ground_response": -0.0,
+          "grid_objective_min_ground_weight_before_l1_scaling": 0.0,
+          "lp_diagnostics": {
+            "dual_objective": 0.0,
+            "dual_stationarity_inf_norm": 2.4442670110147446e-12,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 0.0,
+            "primal_minus_dual_gap": 0.0,
+            "primal_objective": 0.0
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 0.0,
+          "chebyshev_coefficient_l1_norm": 0.0,
+          "dense_max_filtered_mean_bias_at_target": 0.0,
+          "dense_max_relative_pair_violation_at_design_bias": Infinity,
+          "dense_max_support_amplitude_or_weight": 0.0,
+          "dense_min_ground_amplitude": 0.0,
+          "dense_min_support_amplitude_or_weight": 0.0,
+          "exchange_round": 4,
+          "grid_objective_min_ground_response": -0.0,
+          "grid_objective_min_ground_weight_before_l1_scaling": 0.0,
+          "lp_diagnostics": {
+            "dual_objective": 0.0,
+            "dual_stationarity_inf_norm": 2.4442670110147446e-12,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 0.0,
+            "primal_minus_dual_gap": 0.0,
+            "primal_objective": 0.0
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 0.0,
+          "chebyshev_coefficient_l1_norm": 0.0,
+          "dense_max_filtered_mean_bias_at_target": 0.0,
+          "dense_max_relative_pair_violation_at_design_bias": Infinity,
+          "dense_max_support_amplitude_or_weight": 0.0,
+          "dense_min_ground_amplitude": 0.0,
+          "dense_min_support_amplitude_or_weight": 0.0,
+          "exchange_round": 5,
+          "grid_objective_min_ground_response": -0.0,
+          "grid_objective_min_ground_weight_before_l1_scaling": 0.0,
+          "lp_diagnostics": {
+            "dual_objective": 0.0,
+            "dual_stationarity_inf_norm": 2.4442670110147446e-12,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 0.0,
+            "primal_minus_dual_gap": 0.0,
+            "primal_objective": 0.0
+          }
+        }
+      ],
+      "lp_optimum_status_warning": "HiGHS floating optimum and primal/dual residuals are not exact certificates; primal objective is not by itself an upper bound on the relaxed optimum",
+      "minimum_amplitude_floor_on_support_grid": 0.0,
+      "pair_cuts": [
+        {
+          "distance": 0.9520000000000001,
+          "excited_offset": 1.05,
+          "ground_offset": 0.098,
+          "relative_violation_before_cut": Infinity
+        },
+        {
+          "distance": 0.9510000000000001,
+          "excited_offset": 1.05,
+          "ground_offset": 0.099,
+          "relative_violation_before_cut": Infinity
+        },
+        {
+          "distance": 0.9500000000000001,
+          "excited_offset": 1.05,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": Infinity
+        },
+        {
+          "distance": 0.010500000000000002,
+          "excited_offset": 0.010500000000000002,
+          "ground_offset": 0.0,
+          "relative_violation_before_cut": Infinity
+        },
+        {
+          "distance": 0.9520000000000001,
+          "excited_offset": 1.05,
+          "ground_offset": 0.098,
+          "relative_violation_before_cut": Infinity
+        },
+        {
+          "distance": 0.9510000000000001,
+          "excited_offset": 1.05,
+          "ground_offset": 0.099,
+          "relative_violation_before_cut": Infinity
+        },
+        {
+          "distance": 0.9500000000000001,
+          "excited_offset": 1.05,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": Infinity
+        },
+        {
+          "distance": 0.010500000000000002,
+          "excited_offset": 0.010500000000000002,
+          "ground_offset": 0.0,
+          "relative_violation_before_cut": Infinity
+        },
+        {
+          "distance": 0.9520000000000001,
+          "excited_offset": 1.05,
+          "ground_offset": 0.098,
+          "relative_violation_before_cut": Infinity
+        },
+        {
+          "distance": 0.9510000000000001,
+          "excited_offset": 1.05,
+          "ground_offset": 0.099,
+          "relative_violation_before_cut": Infinity
+        },
+        {
+          "distance": 0.9500000000000001,
+          "excited_offset": 1.05,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": Infinity
+        },
+        {
+          "distance": 0.010500000000000002,
+          "excited_offset": 0.010500000000000002,
+          "ground_offset": 0.0,
+          "relative_violation_before_cut": Infinity
+        },
+        {
+          "distance": 0.9520000000000001,
+          "excited_offset": 1.05,
+          "ground_offset": 0.098,
+          "relative_violation_before_cut": Infinity
+        },
+        {
+          "distance": 0.9510000000000001,
+          "excited_offset": 1.05,
+          "ground_offset": 0.099,
+          "relative_violation_before_cut": Infinity
+        },
+        {
+          "distance": 0.9500000000000001,
+          "excited_offset": 1.05,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": Infinity
+        },
+        {
+          "distance": 0.010500000000000002,
+          "excited_offset": 0.010500000000000002,
+          "ground_offset": 0.0,
+          "relative_violation_before_cut": Infinity
+        },
+        {
+          "distance": 0.9520000000000001,
+          "excited_offset": 1.05,
+          "ground_offset": 0.098,
+          "relative_violation_before_cut": Infinity
+        },
+        {
+          "distance": 0.9510000000000001,
+          "excited_offset": 1.05,
+          "ground_offset": 0.099,
+          "relative_violation_before_cut": Infinity
+        },
+        {
+          "distance": 0.9500000000000001,
+          "excited_offset": 1.05,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": Infinity
+        },
+        {
+          "distance": 0.010500000000000002,
+          "excited_offset": 0.010500000000000002,
+          "ground_offset": 0.0,
+          "relative_violation_before_cut": Infinity
+        }
+      ],
+      "status": 0,
+      "status_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+      "validation_bias_target": 0.01,
+      "validation_grids": {
+        "excited": 501,
+        "ground": 101,
+        "support": 501
+      },
+      "weight_degree": 32
+    },
+    {
+      "amplitude_degree": 20,
+      "base_grids": {
+        "excited": 101,
+        "ground": 21,
+        "pair_constraints": 1991,
+        "support": 201
+      },
+      "coefficient_l1_norm": 0.9999999999999999,
+      "continuous_certificate": false,
+      "design_bias": 0.01,
+      "family": "amplitude",
+      "final_dense_validation_passes_target": false,
+      "final_raw_chebyshev_coefficients": [
+        0.0746224469571216,
+        -0.14647725227139627,
+        0.13892592644800122,
+        -0.1272616121042308,
+        0.11258464545834823,
+        -0.09618760050184003,
+        0.07936601724189887,
+        -0.06325386780465422,
+        0.048708233150237354,
+        -0.036256475606869565,
+        0.026102986314080385,
+        -0.018186747516010574,
+        0.012263317547931203,
+        -0.007995560849544631,
+        0.005027064349187728,
+        -0.0030349979111030274,
+        0.0017527451672940371,
+        -0.0009722062478876478,
+        0.0005322564716330442,
+        -0.00030395593383119587,
+        0.00018408414689833962
+      ],
+      "iterations": [
+        {
+          "bracket_min_weight_after_global_l1_scaling": 1.724926766994394e-05,
+          "chebyshev_coefficient_l1_norm": 1.0,
+          "dense_max_filtered_mean_bias_at_target": 0.010901516330953681,
+          "dense_max_relative_pair_violation_at_design_bias": 0.044618119013619895,
+          "dense_max_support_amplitude_or_weight": 1.0,
+          "dense_min_ground_amplitude": 0.004153223768344771,
+          "dense_min_support_amplitude_or_weight": -1.2655375811349576e-06,
+          "exchange_round": 0,
+          "grid_objective_min_ground_response": 0.004153223768344738,
+          "grid_objective_min_ground_weight_before_l1_scaling": 1.7249267669943665e-05,
+          "lp_diagnostics": {
+            "dual_objective": -1.009233375707904,
+            "dual_stationarity_inf_norm": 5.74651437545981e-13,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 2.3204962257272754e-14,
+            "primal_minus_dual_gap": 1.325606291402437e-13,
+            "primal_objective": -1.0092333757077714
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 1.724767297606291e-05,
+          "chebyshev_coefficient_l1_norm": 1.0,
+          "dense_max_filtered_mean_bias_at_target": 0.01016274299007348,
+          "dense_max_relative_pair_violation_at_design_bias": 0.009012496746463095,
+          "dense_max_support_amplitude_or_weight": 1.0,
+          "dense_min_ground_amplitude": 0.00415303178124884,
+          "dense_min_support_amplitude_or_weight": -7.245955646107186e-07,
+          "exchange_round": 1,
+          "grid_objective_min_ground_response": 0.004153031781248875,
+          "grid_objective_min_ground_weight_before_l1_scaling": 1.7247672976063205e-05,
+          "lp_diagnostics": {
+            "dual_objective": -1.0091867228434275,
+            "dual_stationarity_inf_norm": 3.5926817076870066e-13,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 4.5146178462296405e-14,
+            "primal_minus_dual_gap": -4.929390229335695e-14,
+            "primal_objective": -1.0091867228434768
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 1.6655577335957425e-05,
+          "chebyshev_coefficient_l1_norm": 1.0000000000000002,
+          "dense_max_filtered_mean_bias_at_target": 0.010141112272585141,
+          "dense_max_relative_pair_violation_at_design_bias": 0.007282325314039495,
+          "dense_max_support_amplitude_or_weight": 1.0000000000000002,
+          "dense_min_ground_amplitude": 0.004081124518555815,
+          "dense_min_support_amplitude_or_weight": -7.138397224907113e-07,
+          "exchange_round": 2,
+          "grid_objective_min_ground_response": 0.004081124518555837,
+          "grid_objective_min_ground_weight_before_l1_scaling": 1.6655577335957615e-05,
+          "lp_diagnostics": {
+            "dual_objective": -0.9917132580090318,
+            "dual_stationarity_inf_norm": 3.1397107136399427e-13,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 1.5879658699091692e-14,
+            "primal_minus_dual_gap": -3.674838211509268e-14,
+            "primal_objective": -0.9917132580090685
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 1.6654256622591426e-05,
+          "chebyshev_coefficient_l1_norm": 0.9999999999999999,
+          "dense_max_filtered_mean_bias_at_target": 0.010050414272245484,
+          "dense_max_relative_pair_violation_at_design_bias": 0.005216768159904905,
+          "dense_max_support_amplitude_or_weight": 1.0,
+          "dense_min_ground_amplitude": 0.0040809627078168,
+          "dense_min_support_amplitude_or_weight": -5.381916792991019e-07,
+          "exchange_round": 3,
+          "grid_objective_min_ground_response": 0.00408096270781682,
+          "grid_objective_min_ground_weight_before_l1_scaling": 1.6654256622591595e-05,
+          "lp_diagnostics": {
+            "dual_objective": -0.9916739379993462,
+            "dual_stationarity_inf_norm": 3.7980729672426605e-13,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 4.543240783583258e-15,
+            "primal_minus_dual_gap": -1.4133139103478243e-13,
+            "primal_objective": -0.9916739379994876
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 1.6569445570750435e-05,
+          "chebyshev_coefficient_l1_norm": 1.0000000000000002,
+          "dense_max_filtered_mean_bias_at_target": 0.010028677052629156,
+          "dense_max_relative_pair_violation_at_design_bias": 0.003050114290927164,
+          "dense_max_support_amplitude_or_weight": 1.0000000000000002,
+          "dense_min_ground_amplitude": 0.004070558385621123,
+          "dense_min_support_amplitude_or_weight": -2.509149632740971e-07,
+          "exchange_round": 4,
+          "grid_objective_min_ground_response": 0.00407055838562112,
+          "grid_objective_min_ground_weight_before_l1_scaling": 1.656944557075042e-05,
+          "lp_diagnostics": {
+            "dual_objective": -0.9891456877059603,
+            "dual_stationarity_inf_norm": 4.3165471197426086e-13,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 1.108314828801582e-14,
+            "primal_minus_dual_gap": 2.7977620220553945e-14,
+            "primal_objective": -0.9891456877059324
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 1.6450747344283518e-05,
+          "chebyshev_coefficient_l1_norm": 0.9999999999999999,
+          "dense_max_filtered_mean_bias_at_target": 0.01001067651106876,
+          "dense_max_relative_pair_violation_at_design_bias": 0.0011343477180671968,
+          "dense_max_support_amplitude_or_weight": 1.0,
+          "dense_min_ground_amplitude": 0.00405595208850937,
+          "dense_min_support_amplitude_or_weight": -8.523919941737858e-07,
+          "exchange_round": 5,
+          "grid_objective_min_ground_response": 0.0040559520885094045,
+          "grid_objective_min_ground_weight_before_l1_scaling": 1.64507473442838e-05,
+          "lp_diagnostics": {
+            "dual_objective": -0.9855963575077569,
+            "dual_stationarity_inf_norm": 2.6290081223123707e-13,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 2.3926173542410112e-14,
+            "primal_minus_dual_gap": -2.853273173286652e-14,
+            "primal_objective": -0.9855963575077854
+          }
+        }
+      ],
+      "lp_optimum_status_warning": "HiGHS floating optimum and primal/dual residuals are not exact certificates; primal objective is not by itself an upper bound on the relaxed optimum",
+      "minimum_amplitude_floor_on_support_grid": 0.0,
+      "pair_cuts": [
+        {
+          "distance": 0.7442000000000002,
+          "excited_offset": 0.8442000000000002,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.013486168296546142
+        },
+        {
+          "distance": 0.7463000000000002,
+          "excited_offset": 0.8463000000000002,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.014530412114013735
+        },
+        {
+          "distance": 0.9269000000000002,
+          "excited_offset": 1.0269000000000001,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.04310205813356638
+        },
+        {
+          "distance": 0.9248000000000002,
+          "excited_offset": 1.0248000000000002,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.044618119013619895
+        },
+        {
+          "distance": 0.019100000000000002,
+          "excited_offset": 0.023100000000000002,
+          "ground_offset": 0.004,
+          "relative_violation_before_cut": 0.00792505669087995
+        },
+        {
+          "distance": 0.45020000000000016,
+          "excited_offset": 0.5502000000000001,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.00829071055700692
+        },
+        {
+          "distance": 0.019000000000000003,
+          "excited_offset": 0.021000000000000005,
+          "ground_offset": 0.002,
+          "relative_violation_before_cut": 0.00844260667966279
+        },
+        {
+          "distance": 0.018900000000000004,
+          "excited_offset": 0.018900000000000004,
+          "ground_offset": 0.0,
+          "relative_violation_before_cut": 0.009012496746463095
+        },
+        {
+          "distance": 0.2906000000000001,
+          "excited_offset": 0.39060000000000006,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.005441930655066374
+        },
+        {
+          "distance": 0.29480000000000006,
+          "excited_offset": 0.39480000000000004,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.00551735316202584
+        },
+        {
+          "distance": 0.6077000000000001,
+          "excited_offset": 0.7077000000000001,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.0058998670112522245
+        },
+        {
+          "distance": 0.29270000000000007,
+          "excited_offset": 0.39270000000000005,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.007282325314039495
+        },
+        {
+          "distance": 0.019200000000000023,
+          "excited_offset": 0.10920000000000002,
+          "ground_offset": 0.09,
+          "relative_violation_before_cut": 0.004361567826410839
+        },
+        {
+          "distance": 0.019500000000000017,
+          "excited_offset": 0.11550000000000002,
+          "ground_offset": 0.096,
+          "relative_violation_before_cut": 0.0048990015304539725
+        },
+        {
+          "distance": 0.01930000000000001,
+          "excited_offset": 0.11130000000000001,
+          "ground_offset": 0.092,
+          "relative_violation_before_cut": 0.004982931977097538
+        },
+        {
+          "distance": 0.019400000000000014,
+          "excited_offset": 0.11340000000000001,
+          "ground_offset": 0.094,
+          "relative_violation_before_cut": 0.005216768159904905
+        },
+        {
+          "distance": 0.019100000000000006,
+          "excited_offset": 0.0651,
+          "ground_offset": 0.046,
+          "relative_violation_before_cut": 0.0028477845202459218
+        },
+        {
+          "distance": 0.018800000000000004,
+          "excited_offset": 0.058800000000000005,
+          "ground_offset": 0.04,
+          "relative_violation_before_cut": 0.002920116554245622
+        },
+        {
+          "distance": 0.019000000000000017,
+          "excited_offset": 0.06300000000000001,
+          "ground_offset": 0.044,
+          "relative_violation_before_cut": 0.003025602393910809
+        },
+        {
+          "distance": 0.018900000000000007,
+          "excited_offset": 0.06090000000000001,
+          "ground_offset": 0.042,
+          "relative_violation_before_cut": 0.003050114290927164
+        }
+      ],
+      "status": 0,
+      "status_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+      "validation_bias_target": 0.01,
+      "validation_grids": {
+        "excited": 501,
+        "ground": 101,
+        "support": 501
+      },
+      "weight_degree": 40
+    },
+    {
+      "amplitude_degree": 20,
+      "base_grids": {
+        "excited": 101,
+        "ground": 21,
+        "pair_constraints": 1991,
+        "support": 201
+      },
+      "coefficient_l1_norm": 0.9999999999999999,
+      "continuous_certificate": false,
+      "design_bias": 0.0095,
+      "family": "amplitude",
+      "final_dense_validation_passes_target": true,
+      "final_raw_chebyshev_coefficients": [
+        0.0727257790493049,
+        -0.1429204668152451,
+        0.13593880915427353,
+        -0.12510045713871507,
+        0.11138216844487701,
+        -0.09594147152365144,
+        0.07995396741148082,
+        -0.06446927328664387,
+        0.05030522787063851,
+        -0.037994306767893296,
+        0.027781623952764428,
+        -0.0196668897329184,
+        0.013471975569289744,
+        -0.008917125169675489,
+        0.00568758077822677,
+        -0.0034820674890032144,
+        0.002038155078059322,
+        -0.001139513705356652,
+        0.0006122675420492556,
+        -0.00031840666460186283,
+        0.00015246685533126933
+      ],
+      "iterations": [
+        {
+          "bracket_min_weight_after_global_l1_scaling": 9.933926876638039e-06,
+          "chebyshev_coefficient_l1_norm": 0.9999999999999999,
+          "dense_max_filtered_mean_bias_at_target": 0.010179411038395288,
+          "dense_max_relative_pair_violation_at_design_bias": 0.035524546787163436,
+          "dense_max_support_amplitude_or_weight": 1.0000000000000002,
+          "dense_min_ground_amplitude": 0.0031518132680471472,
+          "dense_min_support_amplitude_or_weight": 9.304603379359136e-06,
+          "exchange_round": 0,
+          "grid_objective_min_ground_response": 0.0031518132680471308,
+          "grid_objective_min_ground_weight_before_l1_scaling": 9.933926876637934e-06,
+          "lp_diagnostics": {
+            "dual_objective": -0.7658906241356351,
+            "dual_stationarity_inf_norm": 1.7852386235972517e-12,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 1.9220736113823023e-15,
+            "primal_minus_dual_gap": 1.822986206434507e-13,
+            "primal_objective": -0.7658906241354528
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 9.065326295251662e-06,
+          "chebyshev_coefficient_l1_norm": 1.0,
+          "dense_max_filtered_mean_bias_at_target": 0.009654351855193305,
+          "dense_max_relative_pair_violation_at_design_bias": 0.016750860791632904,
+          "dense_max_support_amplitude_or_weight": 1.0,
+          "dense_min_ground_amplitude": 0.003010868030195223,
+          "dense_min_support_amplitude_or_weight": 9.439090480483605e-06,
+          "exchange_round": 1,
+          "grid_objective_min_ground_response": 0.0030108680301952043,
+          "grid_objective_min_ground_weight_before_l1_scaling": 9.065326295251549e-06,
+          "lp_diagnostics": {
+            "dual_objective": -0.73164093133744,
+            "dual_stationarity_inf_norm": 4.334310688136611e-13,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 8.370094981696719e-15,
+            "primal_minus_dual_gap": 5.329070518200751e-15,
+            "primal_objective": -0.7316409313374347
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 8.979245921004108e-06,
+          "chebyshev_coefficient_l1_norm": 1.0,
+          "dense_max_filtered_mean_bias_at_target": 0.009602196168590421,
+          "dense_max_relative_pair_violation_at_design_bias": 0.0057360182953318795,
+          "dense_max_support_amplitude_or_weight": 0.9999999999999999,
+          "dense_min_ground_amplitude": 0.0029965389904027793,
+          "dense_min_support_amplitude_or_weight": 9.617234675525689e-06,
+          "exchange_round": 2,
+          "grid_objective_min_ground_response": 0.002996538990402769,
+          "grid_objective_min_ground_weight_before_l1_scaling": 8.979245921004045e-06,
+          "lp_diagnostics": {
+            "dual_objective": -0.728158974667734,
+            "dual_stationarity_inf_norm": 5.258016244624741e-13,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 8.595988504334073e-15,
+            "primal_minus_dual_gap": -1.3888890038060708e-13,
+            "primal_objective": -0.7281589746678729
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 8.978143879063165e-06,
+          "chebyshev_coefficient_l1_norm": 0.9999999999999999,
+          "dense_max_filtered_mean_bias_at_target": 0.009549975450003573,
+          "dense_max_relative_pair_violation_at_design_bias": 0.0026607447248980787,
+          "dense_max_support_amplitude_or_weight": 1.0,
+          "dense_min_ground_amplitude": 0.002996355098959929,
+          "dense_min_support_amplitude_or_weight": 9.86667991245799e-06,
+          "exchange_round": 3,
+          "grid_objective_min_ground_response": 0.002996355098959938,
+          "grid_objective_min_ground_weight_before_l1_scaling": 8.97814387906322e-06,
+          "lp_diagnostics": {
+            "dual_objective": -0.7281142890474591,
+            "dual_stationarity_inf_norm": 1.0373923942097463e-12,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 4.244564769106951e-14,
+            "primal_minus_dual_gap": 1.9406698470447736e-13,
+            "primal_objective": -0.728114289047265
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 8.928465059897413e-06,
+          "chebyshev_coefficient_l1_norm": 1.0,
+          "dense_max_filtered_mean_bias_at_target": 0.009531220458612216,
+          "dense_max_relative_pair_violation_at_design_bias": 0.001660271069981567,
+          "dense_max_support_amplitude_or_weight": 0.9999999999999999,
+          "dense_min_ground_amplitude": 0.002988053724399448,
+          "dense_min_support_amplitude_or_weight": 9.430856019058185e-06,
+          "exchange_round": 4,
+          "grid_objective_min_ground_response": 0.0029880537243994663,
+          "grid_objective_min_ground_weight_before_l1_scaling": 8.928465059897522e-06,
+          "lp_diagnostics": {
+            "dual_objective": -0.7260970550290711,
+            "dual_stationarity_inf_norm": 1.7408297026122455e-13,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 1.452071969609836e-14,
+            "primal_minus_dual_gap": 6.661338147750939e-16,
+            "primal_objective": -0.7260970550290704
+          }
+        },
+        {
+          "bracket_min_weight_after_global_l1_scaling": 8.917737803053303e-06,
+          "chebyshev_coefficient_l1_norm": 0.9999999999999999,
+          "dense_max_filtered_mean_bias_at_target": 0.009500000000076584,
+          "dense_max_relative_pair_violation_at_design_bias": 4.163114297739412e-12,
+          "dense_max_support_amplitude_or_weight": 1.0,
+          "dense_min_ground_amplitude": 0.0029862581608182007,
+          "dense_min_support_amplitude_or_weight": 9.99942628785866e-06,
+          "exchange_round": 5,
+          "grid_objective_min_ground_response": 0.0029862581608181764,
+          "grid_objective_min_ground_weight_before_l1_scaling": 8.917737803053157e-06,
+          "lp_diagnostics": {
+            "dual_objective": -0.7256607330788769,
+            "dual_stationarity_inf_norm": 4.4231285301066237e-13,
+            "interpretation": "floating-point HiGHS diagnostics, not an exact certificate",
+            "max_primal_inequality_violation": 1.2055542111463757e-14,
+            "primal_minus_dual_gap": 5.995204332975845e-14,
+            "primal_objective": -0.725660733078817
+          }
+        }
+      ],
+      "lp_optimum_status_warning": "HiGHS floating optimum and primal/dual residuals are not exact certificates; primal objective is not by itself an upper bound on the relaxed optimum",
+      "minimum_amplitude_floor_on_support_grid": 1e-05,
+      "pair_cuts": [
+        {
+          "distance": 0.017900000000000003,
+          "excited_offset": 0.018900000000000004,
+          "ground_offset": 0.001,
+          "relative_violation_before_cut": 0.019865141606696834
+        },
+        {
+          "distance": 0.018900000000000004,
+          "excited_offset": 0.018900000000000004,
+          "ground_offset": 0.0,
+          "relative_violation_before_cut": 0.019956846703400366
+        },
+        {
+          "distance": 0.9248000000000002,
+          "excited_offset": 1.0248000000000002,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.03325765067245401
+        },
+        {
+          "distance": 0.9269000000000002,
+          "excited_offset": 1.0269000000000001,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.035524546787163436
+        },
+        {
+          "distance": 0.017500000000000016,
+          "excited_offset": 0.11550000000000002,
+          "ground_offset": 0.098,
+          "relative_violation_before_cut": 0.013644414035299146
+        },
+        {
+          "distance": 0.018500000000000016,
+          "excited_offset": 0.11550000000000002,
+          "ground_offset": 0.097,
+          "relative_violation_before_cut": 0.014995337723692437
+        },
+        {
+          "distance": 0.017600000000000005,
+          "excited_offset": 0.11760000000000001,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.016014708318807802
+        },
+        {
+          "distance": 0.018600000000000005,
+          "excited_offset": 0.11760000000000001,
+          "ground_offset": 0.099,
+          "relative_violation_before_cut": 0.016750860791632904
+        },
+        {
+          "distance": 0.6119000000000001,
+          "excited_offset": 0.7119000000000001,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.003943715133291725
+        },
+        {
+          "distance": 0.6098000000000001,
+          "excited_offset": 0.7098000000000001,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.004228337958523731
+        },
+        {
+          "distance": 0.14990000000000003,
+          "excited_offset": 0.24990000000000004,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.0048537995079582785
+        },
+        {
+          "distance": 0.14780000000000004,
+          "excited_offset": 0.24780000000000005,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.0057360182953318795
+        },
+        {
+          "distance": 0.018000000000000016,
+          "excited_offset": 0.08400000000000002,
+          "ground_offset": 0.066,
+          "relative_violation_before_cut": 0.0022701453830860086
+        },
+        {
+          "distance": 0.018200000000000008,
+          "excited_offset": 0.08820000000000001,
+          "ground_offset": 0.07,
+          "relative_violation_before_cut": 0.0022925477542792283
+        },
+        {
+          "distance": 0.018100000000000005,
+          "excited_offset": 0.08610000000000001,
+          "ground_offset": 0.068,
+          "relative_violation_before_cut": 0.0023575922332970123
+        },
+        {
+          "distance": 0.7484000000000002,
+          "excited_offset": 0.8484000000000002,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.0026607447248980787
+        },
+        {
+          "distance": 0.017700000000000007,
+          "excited_offset": 0.0777,
+          "ground_offset": 0.06,
+          "relative_violation_before_cut": 8.686301230320659e-05
+        },
+        {
+          "distance": 0.017900000000000013,
+          "excited_offset": 0.08190000000000001,
+          "ground_offset": 0.064,
+          "relative_violation_before_cut": 0.00021734055099797978
+        },
+        {
+          "distance": 0.01780000000000001,
+          "excited_offset": 0.07980000000000001,
+          "ground_offset": 0.062,
+          "relative_violation_before_cut": 0.00025069400149790866
+        },
+        {
+          "distance": 0.8576000000000001,
+          "excited_offset": 0.9576000000000001,
+          "ground_offset": 0.1,
+          "relative_violation_before_cut": 0.001660271069981567
+        }
+      ],
+      "status": 0,
+      "status_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+      "validation_bias_target": 0.01,
+      "validation_grids": {
+        "excited": 501,
+        "ground": 101,
+        "support": 501
+      },
+      "weight_degree": 40
+    }
+  ]
+}
