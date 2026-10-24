@@ -1,0 +1,126 @@
+{
+  "best_physical_cost": {
+    "B": 1.0,
+    "K": 3,
+    "L1": 1.0,
+    "bias_arg": [
+      -0.05,
+      0.45
+    ],
+    "bias_proxy": 0.12936689054949632,
+    "coefficients": [
+      0.3125,
+      0.234375,
+      0.09375,
+      0.015625
+    ],
+    "eps_stat": 0.128966442783837,
+    "fd_bias_bound": 0.041666666666666664,
+    "h": 0.5,
+    "herald_lower": 0.09636287914522307,
+    "physical_accepted_shots": 1775,
+    "physical_attempt_proxy": 18419.956063423524,
+    "physical_cost_proxy": 192911.45200831784,
+    "physical_depth_proxy": 9.92477796076938,
+    "virtual_cost_proxy": 10271274.652345842,
+    "virtual_depth_proxy": 19.34955592153876,
+    "virtual_shots_each": 967420,
+    "z_lower": 0.09636287914522307
+  },
+  "metadata": {
+    "candidate_count": 12,
+    "coefficient_grid_step": 0.25,
+    "design_grid": {
+      "e0_points": 5,
+      "tail_points": 51
+    },
+    "deterministic": true,
+    "h_grid": [
+      0.1,
+      0.3,
+      0.5,
+      0.8,
+      1.0
+    ],
+    "limitations": [
+      "gridded supremum is a screening proxy, not a certified interval bound",
+      "depth is ideal controlled-evolution-time proxy, not physical gate depth",
+      "finite-difference estimator estimates filtered mean, not a standalone ground-energy estimator",
+      "true validation spectra are post-hoc only; coefficients use priors only",
+      "C_prior and concrete Hamiltonian simulation costs are omitted"
+    ],
+    "objective": {
+      "delta": 0.05,
+      "depth_cap_query_time_proxy": 20.0,
+      "epsilon": 0.3,
+      "state_prep_cost_proxy": 1.0
+    },
+    "prior": {
+      "Emax": 1.0,
+      "bracket_half_width": 0.05,
+      "center": 0.0,
+      "eta_lower": 0.1,
+      "gap_lower": 0.5,
+      "tau": 3.141592653589793
+    },
+    "python": "3.12.14",
+    "seed": null,
+    "validation_bias_grid": {
+      "e0_points": 5,
+      "tail_points": 201
+    }
+  },
+  "results": [
+    {
+      "coefficients": [
+        1.0
+      ],
+      "left_filtered_mean_bias": 0.6230000000000001,
+      "left_z": 1.0,
+      "name": "nofilter",
+      "right_filtered_mean_bias": 0.6719999999999999,
+      "right_z": 1.0,
+      "symmetric_gap_counterexample_filtered_mean_bias": 0.09000000000000001,
+      "symmetric_gap_counterexample_z": 1.0,
+      "two_level_filtered_mean_bias": 0.45,
+      "two_level_z": 1.0
+    },
+    {
+      "B": 1.0,
+      "K": 3,
+      "L1": 1.0,
+      "bias_arg": [
+        -0.05,
+        0.45
+      ],
+      "bias_proxy": 0.12936689054949632,
+      "coefficients": [
+        0.3125,
+        0.234375,
+        0.09375,
+        0.015625
+      ],
+      "eps_stat": 0.128966442783837,
+      "fd_bias_bound": 0.041666666666666664,
+      "h": 0.5,
+      "herald_lower": 0.09636287914522307,
+      "left_filtered_mean_bias": 0.06383960099062386,
+      "left_z": 0.11194619029940127,
+      "name": "screen_best",
+      "physical_accepted_shots": 1775,
+      "physical_attempt_proxy": 18419.956063423524,
+      "physical_cost_proxy": 192911.45200831784,
+      "physical_depth_proxy": 9.92477796076938,
+      "right_filtered_mean_bias": 0.01052075591511599,
+      "right_z": 0.0997565971697134,
+      "symmetric_gap_counterexample_filtered_mean_bias": 0.09,
+      "symmetric_gap_counterexample_z": 0.9636287914522308,
+      "two_level_filtered_mean_bias": 0.12936689054949635,
+      "two_level_z": 0.12999766708388458,
+      "virtual_cost_proxy": 10271274.652345842,
+      "virtual_depth_proxy": 19.34955592153876,
+      "virtual_shots_each": 967420,
+      "z_lower": 0.09636287914522307
+    }
+  ]
+}
