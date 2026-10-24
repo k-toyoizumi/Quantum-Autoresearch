@@ -247,9 +247,12 @@
       "bracket_min_ground_transmission": 0.6700963076084553,
       "degree": 2,
       "global_bound_on_support": "0<=p<=1",
+      "lambert_root_numeric": 1.1010029972769728,
+      "lambert_root_upper_bound_verified": 1.102,
       "max_time_oracle_cost": "not comparable: polynomial/block-encoding oracle; physical depth uncompiled",
       "passes_analytic_sufficient_condition": false,
-      "sufficient_degree_for_continuous_bias_certificate": 58
+      "sufficient_degree_for_continuous_bias_certificate": 58,
+      "upper_bound_equation_rhs": 3.310914970542981
     },
     {
       "S": 1.05,
@@ -257,9 +260,12 @@
       "bracket_min_ground_transmission": 0.4490290614704856,
       "degree": 4,
       "global_bound_on_support": "0<=p<=1",
+      "lambert_root_numeric": 1.1010029972769728,
+      "lambert_root_upper_bound_verified": 1.102,
       "max_time_oracle_cost": "not comparable: polynomial/block-encoding oracle; physical depth uncompiled",
       "passes_analytic_sufficient_condition": false,
-      "sufficient_degree_for_continuous_bias_certificate": 58
+      "sufficient_degree_for_continuous_bias_certificate": 58,
+      "upper_bound_equation_rhs": 3.310914970542981
     },
     {
       "S": 1.05,
@@ -267,9 +273,12 @@
       "bracket_min_ground_transmission": 0.3008927161002625,
       "degree": 6,
       "global_bound_on_support": "0<=p<=1",
+      "lambert_root_numeric": 1.1010029972769728,
+      "lambert_root_upper_bound_verified": 1.102,
       "max_time_oracle_cost": "not comparable: polynomial/block-encoding oracle; physical depth uncompiled",
       "passes_analytic_sufficient_condition": false,
-      "sufficient_degree_for_continuous_bias_certificate": 58
+      "sufficient_degree_for_continuous_bias_certificate": 58,
+      "upper_bound_equation_rhs": 3.310914970542981
     },
     {
       "S": 1.05,
@@ -277,9 +286,12 @@
       "bracket_min_ground_transmission": 1.1089473027986091e-05,
       "degree": 57,
       "global_bound_on_support": "0<=p<=1",
+      "lambert_root_numeric": 1.1010029972769728,
+      "lambert_root_upper_bound_verified": 1.102,
       "max_time_oracle_cost": "not comparable: polynomial/block-encoding oracle; physical depth uncompiled",
       "passes_analytic_sufficient_condition": false,
-      "sufficient_degree_for_continuous_bias_certificate": 58
+      "sufficient_degree_for_continuous_bias_certificate": 58,
+      "upper_bound_equation_rhs": 3.310914970542981
     },
     {
       "S": 1.05,
@@ -287,9 +299,12 @@
       "bracket_min_ground_transmission": 9.077777240596324e-06,
       "degree": 58,
       "global_bound_on_support": "0<=p<=1",
+      "lambert_root_numeric": 1.1010029972769728,
+      "lambert_root_upper_bound_verified": 1.102,
       "max_time_oracle_cost": "not comparable: polynomial/block-encoding oracle; physical depth uncompiled",
       "passes_analytic_sufficient_condition": true,
-      "sufficient_degree_for_continuous_bias_certificate": 58
+      "sufficient_degree_for_continuous_bias_certificate": 58,
+      "upper_bound_equation_rhs": 3.310914970542981
     }
   ],
   "shifted_power_grid_checks": [

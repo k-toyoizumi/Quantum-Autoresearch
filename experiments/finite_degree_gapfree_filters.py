@@ -26,9 +26,13 @@ def finite_difference_gate(degree):
 
 def shifted_power(n):
     S=R # global support endpoint; p(E)=(1-(E-L)/S)^n is bounded in [0,1]
-    r=1.1010029972769728 # W_0((1-eta)/(e eta)), from memo9 bisection
-    required=math.ceil(float(S)*r/(2*float(B)))
+    r=1.1010029972769728 # numeric bisection for W_0((1-eta)/(e eta))
+    r_upper=1.102
+    rhs=(1-float(ETA))/float(ETA)/math.e
+    assert r_upper*math.exp(r_upper)>rhs # monotonicity certifies the root is below this safe bound
+    required=math.ceil(float(S)*r_upper/(2*float(B)))
     return {'degree':n,'S':float(S),'amplitude':'p(x)=(1-x/S)^n, x=E-L','global_bound_on_support':'0<=p<=1',
+      'lambert_root_numeric':r,'lambert_root_upper_bound_verified':r_upper,'upper_bound_equation_rhs':rhs,
       'sufficient_degree_for_continuous_bias_certificate':required,'passes_analytic_sufficient_condition':n>=required,
       'bracket_min_ground_transmission':float((1-float(W/S))**(2*n)),
       'max_time_oracle_cost':'not comparable: polynomial/block-encoding oracle; physical depth uncompiled'}
