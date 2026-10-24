@@ -1,0 +1,163 @@
+{
+  "additive_approximation_counterexample": {
+    "active_ratio_bound": 0.1111111111111111,
+    "caveat": "additive weight floor is a stylized absolute-error perturbation, not a compiled QSP filter",
+    "excited_distance": 0.02,
+    "excited_weight_exact": 1.8816764231589204e-06,
+    "ground_weight_exact": 1.6935087808430265e-05,
+    "rows": [
+      {
+        "absolute_weight_floor": 0.0,
+        "certificate_passes": true,
+        "filtered_mean_bias": 0.010000000000000007,
+        "necessary_ratio_bound": 0.1111111111111111,
+        "relative_weight_ratio": 0.11111111111111123
+      },
+      {
+        "absolute_weight_floor": 1e-08,
+        "certificate_passes": false,
+        "filtered_mean_bias": 0.010023550069597023,
+        "necessary_ratio_bound": 0.1111111111111111,
+        "relative_weight_ratio": 0.11163568135762635
+      },
+      {
+        "absolute_weight_floor": 1e-07,
+        "certificate_passes": false,
+        "filtered_mean_bias": 0.010229422417824936,
+        "necessary_ratio_bound": 0.1111111111111111,
+        "relative_weight_ratio": 0.11632909941199338
+      },
+      {
+        "absolute_weight_floor": 1e-06,
+        "certificate_passes": false,
+        "filtered_mean_bias": 0.01182356233762725,
+        "necessary_ratio_bound": 0.1111111111111111,
+        "relative_weight_ratio": 0.1606725572764917
+      },
+      {
+        "absolute_weight_floor": 1e-05,
+        "certificate_passes": false,
+        "filtered_mean_bias": 0.015975938974560084,
+        "necessary_ratio_bound": 0.1111111111111111,
+        "relative_weight_ratio": 0.44112261699923405
+      },
+      {
+        "absolute_weight_floor": 0.0001,
+        "certificate_passes": false,
+        "filtered_mean_bias": 0.017737915444970432,
+        "necessary_ratio_bound": 0.1111111111111111,
+        "relative_weight_ratio": 0.8712669424772426
+      }
+    ],
+    "target_ground_energy": 0.05
+  },
+  "finite_bracket_chain": [
+    {
+      "bias_target": 0.02,
+      "log_attempt_lower": 5.375278407684165,
+      "max_weight_upper_bound": 0.004629629629629629,
+      "per_step_relative_attenuation": 0.16666666666666666,
+      "previous_step_attempt_bound": 121.00000000000004,
+      "pure_ground_expected_attempts_lower_denominator": 1,
+      "pure_ground_expected_attempts_lower_numerator": 216,
+      "step": 0.03333333333333333,
+      "step_choice_for_previous_example": 0.044444444444444446,
+      "steps": 3
+    },
+    {
+      "bias_target": 0.01,
+      "log_attempt_lower": 10.986122886681096,
+      "max_weight_upper_bound": 1.6935087808430286e-05,
+      "per_step_relative_attenuation": 0.1111111111111111,
+      "previous_step_attempt_bound": 14641.00000000001,
+      "pure_ground_expected_attempts_lower_denominator": 1,
+      "pure_ground_expected_attempts_lower_numerator": 59049,
+      "step": 0.02,
+      "step_choice_for_previous_example": 0.022222222222222223,
+      "steps": 5
+    },
+    {
+      "bias_target": 0.005,
+      "log_attempt_lower": 21.972245773362193,
+      "max_weight_upper_bound": 2.8679719907924413e-10,
+      "per_step_relative_attenuation": 0.1111111111111111,
+      "previous_step_attempt_bound": 2357947691.0000033,
+      "pure_ground_expected_attempts_lower_denominator": 1,
+      "pure_ground_expected_attempts_lower_numerator": 3486784401,
+      "step": 0.01,
+      "step_choice_for_previous_example": 0.011111111111111112,
+      "steps": 10
+    }
+  ],
+  "metadata": {
+    "deterministic": true,
+    "model": {
+      "eta_lower": 0.1,
+      "filter_weight_bound": "0 <= w <= 1",
+      "fixed_filter_independent_of_true_E0": true,
+      "gap": "unknown",
+      "ground_bracket": [
+        -0.05,
+        0.05
+      ],
+      "loss": "worst-case filtered spectral-mean bias",
+      "support_upper": 1.0
+    },
+    "python": "3.12.14",
+    "seed": null,
+    "warning": "exact scalar-weight theorem ignores degree/query/depth/LCU costs; grid checks do not prove continuous feasibility"
+  },
+  "profile_and_exponential_comparison": [
+    {
+      "F_of_width": 5.375278407684165,
+      "F_profile_attempt_proxy": 216.00000000000006,
+      "F_profile_worst_bracket_transmission": 0.0046296296296296285,
+      "bias_target": 0.02,
+      "exponential_attempt_proxy": 245.9221411350598,
+      "exponential_slope_per_energy": 55.05014986384864,
+      "exponential_worst_bracket_transmission": 0.004066327640872331,
+      "lambert_r": 1.1010029972769728,
+      "log_gap_exponential_minus_F": 0.1297365787006992,
+      "pairwise_grid_check": {
+        "E0_points": 101,
+        "distance_points_per_E0": 1001,
+        "largest_log_constraint_violation_F_profile": 2.220446049250313e-16,
+        "largest_log_constraint_violation_exponential": -2.6685409437732233e-10
+      }
+    },
+    {
+      "F_of_width": 10.986122886681098,
+      "F_profile_attempt_proxy": 59049.00000000008,
+      "F_profile_worst_bracket_transmission": 1.6935087808430265e-05,
+      "bias_target": 0.01,
+      "exponential_attempt_proxy": 60477.69950045227,
+      "exponential_slope_per_energy": 110.10029972769728,
+      "exponential_worst_bracket_transmission": 1.653502048292233e-05,
+      "lambert_r": 1.1010029972769728,
+      "log_gap_exponential_minus_F": 0.02390708608863079,
+      "pairwise_grid_check": {
+        "E0_points": 101,
+        "distance_points_per_E0": 1001,
+        "largest_log_constraint_violation_F_profile": 2.220446049250313e-16,
+        "largest_log_constraint_violation_exponential": -1.7690651166191174e-08
+      }
+    },
+    {
+      "F_of_width": 21.972245773362197,
+      "F_profile_attempt_proxy": 3486784401.0000095,
+      "F_profile_worst_bracket_transmission": 2.8679719907924336e-10,
+      "bias_target": 0.005,
+      "exponential_attempt_proxy": 3657552136.867005,
+      "exponential_slope_per_energy": 220.20059945539455,
+      "exponential_worst_bracket_transmission": 2.7340690237066105e-10,
+      "lambert_r": 1.1010029972769728,
+      "log_gap_exponential_minus_F": 0.04781417217726158,
+      "pairwise_grid_check": {
+        "E0_points": 101,
+        "distance_points_per_E0": 1001,
+        "largest_log_constraint_violation_F_profile": 0.0,
+        "largest_log_constraint_violation_exponential": -0.0007566957649678407
+      }
+    }
+  ]
+}
