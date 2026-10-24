@@ -4,7 +4,7 @@
 
 ## サマリー
 
-旧資産の角度合成は PyQSP の `Wx` 規約と偶奇係数配列を前提にし、返却位相を手作業で反射型へ変換している。現在の PyQSP 主APIは Chebyshev 基底の係数を受けるため、旧係数が単項式（power）基底なら、同じ配列を渡すだけでは互換性がない。PennyLane は通常 QSVT の角度合成・規約変換・projector-phase 回路を同じAPIにまとめる有力な簡潔案だが、旧Qiskit回路や固有のブロック符号化を自動的に置き換えるものではない。
+旧資産の角度合成は PyQSP の `Wx` 規約と偶奇係数配列を前提にし、返却位相を手作業で反射型へ変換している。現在の PyQSP 主APIは Chebyshev 基底の係数を受けるため、旧 `coefs.py` は `numpy.polynomial.Polynomial` とpower-basis Horner評価を使い、係数配列を昇次の単項式基底として扱う。同じ配列を現在のChebyshev基底APIへ渡すだけでは互換性がない。PennyLane は通常 QSVT の角度合成・規約変換・projector-phase 回路を同じAPIにまとめる有力な簡潔案だが、旧Qiskit回路や固有のブロック符号化を自動的に置き換えるものではない。
 
 暫定案は、標準的な実数・確定パリティ多項式について PennyLane の `poly_to_angles(..., "QSVT", angle_solver="iterative")` を高次数候補として比較し、手元の既存Qiskit回路は Aer で行列・ゲート深さを確認できる比較基準として維持すること。対称QSPなら現行 PyQSP の `sym_qsp` と QSPPACK Python の Newton/direct NLFT も同じ多項式で比較候補にする。精度・速度・深さの実測はしておらず、採用は暫定である。
 
@@ -28,11 +28,11 @@
 | シミュレータ：Qiskit Aer | 既存Qiskit回路を実行。AerSimulatorのstatevector/density_matrix/unitary等。transpile後の回路構成・ゲート数・depthもQiskit側で確認可能 | 既存 `qsvt.py` の最小改修で、理想行列・回路深さ・各ゲート数を監査できる | unitary行列は小規模向けで、測定/リセットを含められない。物理ノイズ・方式の選択は別問題。Aerの回路depthはoracle分解とbasis gate設定に依存 | 低 | 旧コードの回路コスト・正しさ基準として継続 |
 | シミュレータ：PennyLane Lightning.qubit | PennyLane QNode/deviceに載る状態ベクトル型シミュレータ | PennyLane QSVT回路と自然に接続し、CPU並列等のLightning機能を利用できる | Qiskit回路を移植/変換する負担。statevector規模はメモリが指数増加。Aerとの同一条件比較が必要 | 中〜高 | PennyLane案を採る場合の第一候補 |
 | シミュレータ：Qulacs / PennyLane-Qulacs | Qulacs Python/C++回路シミュレータ。PennyLane plugin経由の選択肢もある | 既存Qiskitとは別系統の速度比較候補。CPU並列/GPU構成の選択肢 | API・ゲート対応・pluginバージョンを追加検証。今回のQSVTに特化した優位性は未確認 | 中 | 必要な規模でLightning/Aerが律速と分かった後の比較候補 |
-| 回路：PennyLane `qml.QSVT` | 与えたblock encoding (U)、projector列、角度列から特異値変換を表現。PennyLane `qml.qsvt` は行列とblock-encoding指定からの高水準入口 | projector-phase と位相列を短く記述でき、角度生成との接続も容易。独自block encodingを差し込む低水準層と、高水準行列入口を区別できる | `qml.qsvt` の自動block encodingがQCGのoracle/OAAと同じとは限らない。state prep・正規化・controlled query・ancillaコストを別に数える | 中〜高 | 手元oracleを保持しつつQSVT層のみ置換する比較案 |
+| 回路：PennyLane `qml.QSVT` | ユーザー提供block-encoding Operator `UA` と projector-controlled phase-shift Operator列（例：`PCPhase`）を交互に展開して特異値変換を表現。PennyLane `qml.qsvt(A, poly, encoding_wires, block_encoding=...)` は角度合成も呼び出し、HamiltonianのPrepSelPrep/Qubitization、または行列のBlockEncode/FABLEを組む高水準入口 | projector-phase と位相列を短く記述でき、角度生成との接続も容易。独自block encodingを差し込む低水準層と、高水準行列入口を区別できる | `qml.qsvt` の自動block encodingがQCGのoracle/OAAと同じとは限らない。state prep・正規化・controlled query・ancillaコストを別に数える | 中〜高 | 手元oracleを保持しつつQSVT層のみ置換する比較案 |
 | 回路：QETU | 既知のHamiltonian evolution (e^{-iHt}) を入力とし、固有位相に対する多項式変換を行うモデル | Hamiltonian simulation accessが自然にある場合はフィルタを直接設計しやすい | block-encoding QSVTの信号演算子・入力コストと異なる。evolution実装、時間、controlled/uncontrolled queryの費用を揃えないと比較不能 | 高（入力モデル変更時） | 研究の入力oracleがtime-evolutionなら別ベースラインとして比較 |
 | 回路：GQSP | PennyLane routineは一般ユニタリ (U) の多項式変換を表す一般化モデル | 標準QSPのparity制約外を扱えるケースがある | 標準block-encoding QSVTの置換ではない。ユニタリ入力と追加の制御・正規化・位相条件が変わる | 高 | parity制約が障害と確認された場合のみ検討 |
 
-## 段階1での提案
+## PennyLane回路APIの自動化範囲（2026-10-24追補）\n\nPennyLaneはQSVT回路を実際に生成する。`qml.qsvt(A, poly, encoding_wires, block_encoding=...)` は多項式から位相角を計算し、対応する既定block encodingを構築して高水準のQSVT operatorを返す。HamiltonianではPrepSelPrep/Qubitization、行列ではBlockEncode/FABLEが候補。ただし行列向けBlockEncodeは公式文書上hardware compatibleではなく、FABLEには規模・正規化条件と合成コストがあるため、この高水準APIだけで大規模回路の深さや効率は保証されない。\n\n低水準 `qml.QSVT(UA, projectors)` はユーザー提供のblock-encoding `Operator` とprojector-controlled phase-shift Operator列（例えば `PCPhase`）を受け取り、交互積を回路へ展開する。既存QCG oracleを包んで試す候補はこちら。角度列の生成は別途 `poly_to_angles` 等で行い、PCPhase/projector、角度の符号・順序、入力block encodingとの対応を検証する必要がある。従ってライブラリはQSVTの交互回路を生成するが、独自oracle設計・状態準備・正規化・成功確率・oraclesのgate-costまで自動で置き換えるわけではない。\n\n照合受入条件は、同一多項式・基底変換・正規化係数・oracle・位相順序/符号を固定して、(a) top-left encoded blockまたは固有値上のフィルタ応答、(b) 出力状態をglobal phaseを除いて比較、(c) ancilla postselection成功確率を比べる。full-unitaryも比較するときはglobal phaseを除去してから評価する。回路depth比較はbackend、basis gate、connectivity、transpile/decomposition/optimization条件を固定する。旧環境を再現する検査と現行Qiskitへ移植する検査は別に記録する。\n\n## 段階1での提案
 
 1. 角度合成の正準入力を「正規化済みChebyshev係数、次数、偶奇、目標誤差」として明示し、旧 `coefs.py` 出力との変換を残す。通常QSVTでは PennyLane root-finding（中低次数）と iterative（次数およそ1000超）を同じ多項式で検証し、PyQSP `laurent` を互換基準として置く。
 2. 対称位相列に理論上制約できるフィルタのみ PyQSP `sym_qsp` と QSPPACK Newton/direct NLFTを試す。位相列の短さ・最適性を一般QSVT全体の改善と見なさない。

@@ -3,21 +3,21 @@
 更新日：2026-10-24（日本時間）
 
 ## Goal
-化学・物性のエネルギー推定を対象に、深さ制約下の量子スペクトルフィルタを調査する。現在は段階1（既存法の仮定・保証・費用、過去資産の再利用条件の確認）。
+化学・物性のエネルギー推定を対象に、深さ制約下の量子スペクトルフィルタを調査する。
 
 ## 現在地
-- 文献・過去資産の重点照合を記録：[段階1レビュー](memo/research/2026-10-24_2_filter-literature-and-asset-review.md)
-- QSVT位相合成・回路・シミュレータ候補の比較を記録：[ツールチェーン比較](memo/research/2026-10-24_3_qsvt-toolchain-review.md)
-- READMEと研究計画の現在地表示は整合しているため変更していない。
-- 段階1は未完了。Booster本文の仮定・費用、FQPE robustness補遺、過去コード実行条件、同一条件のsolver比較が未確認。
-- 数値実験、過去コードの実行、Lean検証、環境構築は未実施。
-- 今回の主な移行候補：PennyLane poly_to_angles/QSVT + Lightning.qubit。ただし旧Qiskit回路/Aerを比較基準として残し、採用前に同一oracle・同一多項式で照合する。
+- 段階1（文献・過去資産の静的レビュー）完了。詳細：[文献・過去資産レビュー](memo/research/2026-10-24_2_filter-literature-and-asset-review.md)、[QSVT toolchain比較](memo/research/2026-10-24_3_qsvt-toolchain-review.md)、[残件・段階2引継ぎ](memo/research/2026-10-24_4_stage1-remainder-review.md)
+- 重点文献の仮定・費用と未確認条件、旧QCGコードのimportと現行Qiskit API差分を記録。
+- 旧依存version pinsが見つからず、旧環境の再現とコード実行は未確認。これは段階3で再現/移植を分けて検証する。
+- PennyLane QSVT high-level APIは角度合成と既定encodingを組み立て、low-level APIはcustom block encoding/projector phasesからQSVT回路を生成することを確認。移行採用は未決。
+- 実験・環境構築・Lean検証は未実施。研究仮説とフィルタ選択は未決定。
 
 ## 次回最初の一手
-対象ハミルトニアンと入力oracleを確定する。その後、旧coefs.pyの基底を特定し、同一の正規化済みChebyshev多項式でPyQSP Laurent/sym_qspとPennyLane root-finding/iterativeを比較する。AerとPennyLane QSVTで既知小例の行列・ゲート深さ・成功確率を照合する。
+本人と段階2の判断を詰める：①初期対象と入力oracle ②成功確率/深さ/最終エネルギー精度を含む主評価指標 ③比較baseline・filter仮説と棄却条件。合意後に段階3の最小検証仕様を確定する。
 
 ## Source pointers
 - `docs/project/research-plan.md`
 - `docs/project/research-direction.md`
 - `memo/research/2026-10-24_2_filter-literature-and-asset-review.md`
 - `memo/research/2026-10-24_3_qsvt-toolchain-review.md`
+- `memo/research/2026-10-24_4_stage1-remainder-review.md`

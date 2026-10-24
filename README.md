@@ -77,8 +77,8 @@ AI Agentを活用し、量子アルゴリズム・量子数値線形代数の研
 
 **化学・物性のエネルギー推定を応用先とする、深さ制約下の量子スペクトルフィルタ設計を研究の方向として確定しました。** 低エネルギー状態の抽出から下流のエネルギー推定までを扱い、回路深さと総コストを併せて評価します。本人には着想・仮定・結果の意味を共有します。
 
-[確定した研究方向](docs/project/research-direction.md)、[候補比較の小調査](memo/research/2026-10-23_filter-topic-comparison_2.md)、[終了記録と次回アクション](memo/planning/2026-10-23_research-direction-confirmed_3.md)を参照してください。
+[確定した研究方向](docs/project/research-direction.md)、[候補比較の小調査](memo/research/2026-10-23_filter-topic-comparison_2.md)、[段階1レビュー](memo/research/2026-10-24_2_filter-literature-and-asset-review.md)、[QSVTツールチェーン比較](memo/research/2026-10-24_3_qsvt-toolchain-review.md)、[段階2への引継ぎ](memo/research/2026-10-24_4_stage1-remainder-review.md)を参照してください。
 
 具体的な対象系、入力モデル、深さ上限、実験条件、モデルの通常配分、予算、評価指標の定義は今後詰めます。新規性や優位性は未確認で、数値実験・Lean検証はまだ実施していません。
 
-[研究計画](docs/project/research-plan.md)に従い、文献・過去資産の確認→理論的方向性→環境構築→予備探索→応用実験設計→比較実験→継続判断の順に進めます。現在は段階1を開始しています。
+[研究計画](docs/project/research-plan.md)に従い、文献・過去資産の確認を終え、現在は理論的方向性を本人と合意する段階です。合意後は環境構築へ進み、PennyLaneと旧実装の一致を小規模例で照合します。

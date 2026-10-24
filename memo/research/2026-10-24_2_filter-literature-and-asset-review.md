@@ -6,7 +6,7 @@
 
 ## サマリー
 
-重点4文献の一次資料を照合し、比較軸を「入力モデル、事前情報、フィルタ深さ、成功確率、下流推定、総費用」にそろえた。Lin–Tong、QET-U、Filtered QPEは本文の該当範囲を読んだ。State Preparation BoostersはarXiv書誌・要旨だけを確認したため、定理条件と費用は未確認である。
+重点4文献の一次資料を照合し、比較軸を「入力モデル、事前情報、フィルタ深さ、成功確率、下流推定、総費用」にそろえた。Lin–Tong、QET-U、Filtered QPEに加え、State Preparation Boosters本文のフィルタ・LCU・Gaussian booster数値例を確認した。FQPEは主文に加えてSupplementary Note IXのfilter/Krylov perturbation解析まで確認した。
 
 FQPEは、初期重なりを改善する利点だけでなく、フィルタ後選択確率・フィルタ回路・事前推定の費用を含めたQPE総深さを評価している。従って「浅いフィルタ」単体ではなく、同じ最終エネルギー精度・失敗確率を満たすフィルタなし推定を基準にする必要がある。既存QSVTコードは位相合成や回路組立ての参照候補だが、QCG専用実装で依存・正しさ・実深さは未検証であり、そのまま研究実装に流用できるとは判定しない。
 
@@ -77,3 +77,19 @@ FQPEは、初期重なりを改善する利点だけでなく、フィルタ後�
 - `memo/research/2026-10-24_asset-inventory_1.md`（前回の構成確認を本文/コード精査へ拡張）
 
 このmemoは確定事項を追加しないため、`README.md`と`docs/project/research-plan.md`の現在地は変更しない。段階1は未完了のまま。
+
+
+## 2026-10-24 追補：Booster本文とFQPE robustness補遺
+
+**State Preparation Boosters** は本文§2.1–2.4、§3、Appendix Dを追加確認した。入力状態にground-state成分があり、エネルギーに対して `|f|` が減少するフィルタでは、正規化後に低エネルギー側の相対振幅が増える。ただし (f(H)) は一般に非ユニタリであり、Fourier近似した時間発展のLCUで確率的に実装する。論文はoverlap増加、回路深さ、成功確率を併せて選ぶ問題としている。Gaussian N₂数値例は12 qubit/6 active electrons、初期 overlap `γ=0.72`、gapを真値の80%と仮定して設計した事例で、一般の対象系への保証やQSVT block encodingでの実測ではない。論文の深さ proxy (T) はLCUの最大時間を決め、同論文のGaussian boosterは累積controlled evolution timeが (2T)。controlled evolution 1回の深さを (D) と置くと総回路深さは (2TD) となる（同一の固定コンパイル設定に対する換算）。成功確率の低下やamplitude amplificationの追加深さも考慮が要る。著者ら自身、エネルギー推定におけるcost-benefitの定量比較をfuture workとしている。
+
+**FQPE robustness** は最新版 [arXiv:2510.04294v2](https://arxiv.org/abs/2510.04294v2) の本文II.2、Appendix/ Supplementary Note IX.1–IX.3を確認した。FQPEの期待総深さ比較は初期状態準備・フィルタ深さ・フィルタ成功確率・target overlap・QPE深さを含む。理想block encoding/Hamiltonian-evolution queryのcost式と、近似実装でのHamiltonian/filter perturbation解析は別扱いである。Note IX.2はLipschitz誤差伝播と、filterをprojectorに近似したときのDavis–Kahan型固有空間摂動を区別する。後者は実効Hamiltonian摂動がspectral gapより十分小さい前提に依存する。Note IX.3はKrylov generalized eigenvalue problemの (H,S) 摂動と (S) の条件数が状態fidelityへ及ぼす影響を扱う。これらはフィルタ実装誤差を評価する道具だが、対象系・実行回路の誤差値を与えるものではない。
+
+### 追補の読了範囲
+- Wang, Sim, Johnson, [State Preparation Boosters for Early Fault-Tolerant Quantum Computation](https://arxiv.org/pdf/2202.06978v3) — §§2.1–2.4, 3, Appendix Dを確認。Fourier truncation/LCU、success probability、depth proxy、Gaussian N₂例、著者が挙げる未解決のnoise/cost-benefitを確認。
+- Lee et al., [Filtered Quantum Phase Estimation v2](https://arxiv.org/html/2510.04294v2) — II.2 theorem/cost tradeoff、IX.1 Davis–Kahan、IX.2 basis perturbation、IX.3 Krylov state perturbationを確認。式の仮定と定性的帰結を記録し、数値実装は行っていない。
+- IBM Quantum, [Qiskit v1.0 feature changes](https://quantum.cloud.ibm.com/docs/en/guides/qiskit-1.0-features) — `qiskit.Aer` と `qiskit.execute` の削除・移行先を確認。旧コードとのAPI差分を確認するため参照。
+
+## 過去コードの静的な依存・API確認
+
+対象commit `04e8c2aec8e3c5c4a06c6d8a92d3b515cea47555` のtreeにはrequirements/lockfileが見当たらない。従って当時の厳密な依存バージョンは現時点で特定できず、旧環境の再現性も未確認である（再現不能と断定しない）。少なくとも `qCG.py` と `utils.py` は `from qiskit import execute, Aer, transpile` を使い、PyQSP、NumPy、SciPy、Matplotlib、ローカル `coefs/phases/qsvt/utils` に依存する。Qiskit 1.0公式migration guideでは `qiskit.Aer` と `qiskit.execute` は利用不可となり、`qiskit_aer` と `transpile`+backend.run() 等への移行が示される。従って「旧環境の再現」と「現在のQiskitへ移植」は別の検証経路として管理する。静的なimport確認のみで実行・移植試験は未実施。
