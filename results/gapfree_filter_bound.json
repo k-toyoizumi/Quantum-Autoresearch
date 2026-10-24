@@ -1,0 +1,224 @@
+{
+  "chain_bounds": [
+    {
+      "bias_target": 0.02,
+      "chain_steps": 2,
+      "normalized_filter_weight_at_chain_endpoint_upper": 0.008264462809917356,
+      "pure_ground_expected_herald_attempts_lower": 121,
+      "relative_weight_ratio": 0.09090909090909091,
+      "step_Delta": 0.044444444444444446
+    },
+    {
+      "bias_target": 0.01,
+      "chain_steps": 4,
+      "normalized_filter_weight_at_chain_endpoint_upper": 6.830134553650706e-05,
+      "pure_ground_expected_herald_attempts_lower": 14641,
+      "relative_weight_ratio": 0.09090909090909091,
+      "step_Delta": 0.022222222222222223
+    },
+    {
+      "bias_target": 0.005,
+      "chain_steps": 9,
+      "normalized_filter_weight_at_chain_endpoint_upper": 4.2409761837248493e-10,
+      "pure_ground_expected_herald_attempts_lower": 2357947691,
+      "relative_weight_ratio": 0.09090909090909091,
+      "step_Delta": 0.011111111111111112
+    }
+  ],
+  "cosine_power_screen": [
+    {
+      "bias_arg": [
+        -0.05,
+        1.0
+      ],
+      "endpoint_symmetric_two_level_bias": 0.09000000000000001,
+      "f_degree": 0,
+      "gridded_worst_mean_bias": 0.9450000000000001,
+      "ideal_max_evolution_time": 0.0,
+      "m": 0,
+      "min_ground_filter_weight_on_bracket": 1.0,
+      "pure_ground_worstcase_attempts_proxy": 1.0
+    },
+    {
+      "bias_arg": [
+        -0.05,
+        0.49389999999999995
+      ],
+      "endpoint_symmetric_two_level_bias": 0.09000000000000001,
+      "f_degree": 1,
+      "gridded_worst_mean_bias": 0.3823182797314667,
+      "ideal_max_evolution_time": 3.141592653589793,
+      "m": 1,
+      "min_ground_filter_weight_on_bracket": 0.9877262348344631,
+      "pure_ground_worstcase_attempts_proxy": 1.0124262824380623
+    },
+    {
+      "bias_arg": [
+        -0.05,
+        0.36265000000000003
+      ],
+      "endpoint_symmetric_two_level_bias": 0.09000000000000001,
+      "f_degree": 2,
+      "gridded_worst_mean_bias": 0.28882733567874286,
+      "ideal_max_evolution_time": 6.283185307179586,
+      "m": 2,
+      "min_ground_filter_weight_on_bracket": 0.9756031149802648,
+      "pure_ground_worstcase_attempts_proxy": 1.0250069773713553
+    },
+    {
+      "bias_arg": [
+        -0.05,
+        0.29965
+      ],
+      "endpoint_symmetric_two_level_bias": 0.09,
+      "f_degree": 3,
+      "gridded_worst_mean_bias": 0.24515786813779333,
+      "ideal_max_evolution_time": 9.42477796076938,
+      "m": 3,
+      "min_ground_filter_weight_on_bracket": 0.9636287914522307,
+      "pure_ground_worstcase_attempts_proxy": 1.0377440035731564
+    },
+    {
+      "bias_arg": [
+        -0.05,
+        0.26080000000000003
+      ],
+      "endpoint_symmetric_two_level_bias": 0.09,
+      "f_degree": 4,
+      "gridded_worst_mean_bias": 0.21869210877540754,
+      "ideal_max_evolution_time": 12.566370614359172,
+      "m": 4,
+      "min_ground_filter_weight_on_bracket": 0.9518014379591957,
+      "pure_ground_worstcase_attempts_proxy": 1.0506393036599622
+    },
+    {
+      "bias_arg": [
+        -0.05,
+        0.23349999999999999
+      ],
+      "endpoint_symmetric_two_level_bias": 0.09,
+      "f_degree": 5,
+      "gridded_worst_mean_bias": 0.20052497571843617,
+      "ideal_max_evolution_time": 15.707963267948966,
+      "m": 5,
+      "min_ground_filter_weight_on_bracket": 0.9401192506254641,
+      "pure_ground_worstcase_attempts_proxy": 1.06369484438777
+    },
+    {
+      "bias_arg": [
+        -0.05,
+        0.21355000000000002
+      ],
+      "endpoint_symmetric_two_level_bias": 0.09000000000000001,
+      "f_degree": 6,
+      "gridded_worst_mean_bias": 0.18709667023180704,
+      "ideal_max_evolution_time": 18.84955592153876,
+      "m": 6,
+      "min_ground_filter_weight_on_bracket": 0.9285804477156865,
+      "pure_ground_worstcase_attempts_proxy": 1.0769126169520433
+    },
+    {
+      "bias_arg": [
+        -0.05,
+        0.19780000000000003
+      ],
+      "endpoint_symmetric_two_level_bias": 0.09,
+      "f_degree": 7,
+      "gridded_worst_mean_bias": 0.17667318976540886,
+      "ideal_max_evolution_time": 21.991148575128552,
+      "m": 7,
+      "min_ground_filter_weight_on_bracket": 0.9171832693631151,
+      "pure_ground_worstcase_attempts_proxy": 1.0902946372914022
+    },
+    {
+      "bias_arg": [
+        -0.05,
+        0.18520000000000003
+      ],
+      "endpoint_symmetric_two_level_bias": 0.09,
+      "f_degree": 8,
+      "gridded_worst_mean_bias": 0.1682932891654762,
+      "ideal_max_evolution_time": 25.132741228718345,
+      "m": 8,
+      "min_ground_filter_weight_on_bracket": 0.9059259773011926,
+      "pure_ground_worstcase_attempts_proxy": 1.10384294639509
+    },
+    {
+      "bias_arg": [
+        -0.05,
+        0.17470000000000002
+      ],
+      "endpoint_symmetric_two_level_bias": 0.09,
+      "f_degree": 9,
+      "gridded_worst_mean_bias": 0.1613778895415937,
+      "ideal_max_evolution_time": 28.274333882308138,
+      "m": 9,
+      "min_ground_filter_weight_on_bracket": 0.8948068545984383,
+      "pure_ground_worstcase_attempts_proxy": 1.1175596106142582
+    },
+    {
+      "bias_arg": [
+        -0.05,
+        0.16525
+      ],
+      "endpoint_symmetric_two_level_bias": 0.09000000000000001,
+      "f_degree": 10,
+      "gridded_worst_mean_bias": 0.15555438830181492,
+      "ideal_max_evolution_time": 31.41592653589793,
+      "m": 10,
+      "min_ground_filter_weight_on_bracket": 0.8838242053965841,
+      "pure_ground_worstcase_attempts_proxy": 1.1314467219771223
+    },
+    {
+      "bias_arg": [
+        -0.05,
+        0.15789999999999998
+      ],
+      "endpoint_symmetric_two_level_bias": 0.09,
+      "f_degree": 11,
+      "gridded_worst_mean_bias": 0.1505682248507308,
+      "ideal_max_evolution_time": 34.55751918948772,
+      "m": 11,
+      "min_ground_filter_weight_on_bracket": 0.8729763546519294,
+      "pure_ground_worstcase_attempts_proxy": 1.1455063985080296
+    },
+    {
+      "bias_arg": [
+        -0.05,
+        0.1516
+      ],
+      "endpoint_symmetric_two_level_bias": 0.09000000000000001,
+      "f_degree": 12,
+      "gridded_worst_mean_bias": 0.14623983545085106,
+      "ideal_max_evolution_time": 37.69911184307752,
+      "m": 12,
+      "min_ground_filter_weight_on_bracket": 0.8622616478798649,
+      "pure_ground_worstcase_attempts_proxy": 1.1597407845504983
+    }
+  ],
+  "metadata": {
+    "assumptions": {
+      "all_E0_in_bracket_are_admissible": true,
+      "each_E0_may_have_its_own_adversarial_two_level_instance": true,
+      "eta_lower": 0.1,
+      "filter_bounded_by_one": true,
+      "gap": "unknown",
+      "ground_bracket": [
+        -0.05,
+        0.05
+      ],
+      "support": [
+        -0.05,
+        1.0
+      ]
+    },
+    "deterministic": true,
+    "grids": {
+      "E0_points": 201,
+      "excited_energy_points_per_E0": 1001
+    },
+    "python": "3.12.14",
+    "seed": null,
+    "warning": "gridded bias values are diagnostic, not continuous guarantees; time degree is not compiled depth"
+  }
+}
