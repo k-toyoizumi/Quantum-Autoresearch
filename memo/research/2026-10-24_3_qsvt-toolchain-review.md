@@ -14,7 +14,7 @@
 
 - `calculate_polynomial_phases(even_coefs, odd_coefs, C_max, qsp_eps, qsp_tol, method)` は偶・奇係数を `C_max` で正規化し、それぞれ PyQSP `QuantumSignalProcessingPhases(..., signal_operator="Wx", method=method, eps=qsp_eps, suc=1-qsp_eps, tolerance=qsp_tol)` に渡す。その後、Wx位相を反射型の位相へ手動変換している。
 - このAPIから係数が単項式基底かChebyshev基底かを自明には判定できない。新旧比較前に係数生成側 `coefs.py` と論文の多項式定義を照合し、必要なら power→Chebyshev 変換を明示する。
-- `qsvt.py` はQiskit回路でQCG/Poisson向けの独自 `U,U†)、制御版、アンシラ反射、`S_2/S_3`、OAA、偶多項式ゲートを組み、cos/sin位相をCSVから読む構成である。汎用のQSVT層とは分けて扱う。
+- `qsvt.py` はQiskit回路でQCG/Poisson向けの独自 `U` と `U†`、制御版、アンシラ反射、`S_2/S_3`、OAA、偶多項式ゲートを組み、cos/sin位相をCSVから読む構成である。汎用のQSVT層とは分けて扱う。
 - `gates.py` はQCG/Poisson向けの可変回転・加減算・ブロック符号化・状態準備ゲートを含む。ここが再利用できるかは対象ハミルトニアンと入力oracle次第。
 
 ## 候補比較
