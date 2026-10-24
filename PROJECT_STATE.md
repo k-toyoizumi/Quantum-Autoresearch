@@ -12,7 +12,7 @@
 - 現在は少数のパラメトリック候補を具体化。暫定HE/controlled-time-evolutionモデルの費用、downstream estimator固有のenergy biasとsignal-estimation stability、shot variance、成功確率、全深さ制約を統一し、既存filterをbaselineとして比較する。物理・信号フィルタ既存レビュー：[memo](memo/research/2026-10-24_6_physical-virtual-filter-depth.md)
 - 候補例（未採用）：bracket中心だけで設定するbounded cosine-power filter、同じ有限supportで係数を下流エネルギーriskに合わせるprior-only optimizer。いずれも新規性未確認。filter中心・gap・初期重みの真値を選択入力に用いず、既知値synthetic testはoracle-assisted sanityと明記する。
 - FQPE、QETU、QCELS内Fourier-filtered版、Lin–Tong CDF、Wang Gaussian-derivative GSEE、Kaiser/DPSS/Chebyshevと重なる可能性が強い。既存法を再発明しない棄却条件が必要。物理/virtual identityだけは低深さ性能差やenergy advantageを意味しない。
-- 係数スケーリングに依存しないよう、`z_f=Tr[rho f†f]`、`p_herald=z_f/L²)、virtual merged-coefficient norm `B_f` を区別し、physical estimatorではnormalization後の成功sample数に初期overlap factorを二重に掛けない。virtual ratio `N/z_f` は一般にunbiasedでない。
+- 係数スケーリングに依存しないよう、`z_f=Tr[rho f†f]`、`p_herald=z_f/L²`、virtual merged-coefficient norm `B_f` を区別し、physical estimatorではnormalization後の成功sample数に初期overlap factorを二重に掛けない。virtual ratio `N/z_f` は一般にunbiasedでない。
 - 今回の粗いgrid screenは `cos^6(πx/2)` が最小physical-cost候補だが、比較対象に含めた既知binomial族そのもの。no-filter filtered-mean proxyはprior bias条件で失格。新規性/優位は未確認、QCELS等強baselineとの同条件比較が残る。
 - 先行scalar sanity check（既知E0/gap、2-level）は期待信号の一致だけを検証した。今回の小探索は未知targetに使わないprior-only設計則とfinite-difference estimatorのbias/variance/depthを追加確認する。Python標準ライブラリで可能で、環境費用なし。回路・環境構築・Lean検証は未実施。
 - AGENTS.mdとagent-policy.mdに、チャット依頼起点・上位モデルの承認制を維持したまま「commitは停止点ではなく、依頼内で必要判断材料まで自律継続」と記録。
@@ -21,8 +21,7 @@
 - 2026-10-24本人認可：現在の研究目標・既存予算内の研究方向選択、比較条件の設計、仮説の採否/棄却はAgentに委任。追加予算・外部公開・Astra/Sol high以上の事前承認制は維持。新規性は保証されない。
 
 ## 次の一手
-先行gap-assumed screenを主張可能範囲と誤読せず、gap unknown・ε内近縮退を許容するworst-case mean-bias boundを解析する。bracketをまたぐ固定filterのpassband/stopband条件と成功率下界の交換則が新規・非自明かを既存FQPE weighted minimax/filter comparisonに照らして棄却判定し、継続なら同一finite-time oracle・estimator・depth/costでcosine-power/Gaussian/Chebyshev/Kaiser/最小次数trig baselineを比較する。gridは探索だけに使い、continuous guaranteeと区別する。
-prior-only design rulesで候補の少数人工スペクトル探索を行い、同じ `epsilon,delta,D) のもとに estimator-specific bias/variance, physical herald+retries, virtual `B_f/z_f` ratio-error, state-prep/HE-query costを比較する。関数係数と探索規則を分離し、設計で用いていない真値は評価時にだけ使う。強baselineに対して有望な条件が残る場合、criticレビュー後に結果をmemoへ保存する。応用系/高精度シミュレータ/実回路へ進む判断は今回の比較後に必要性を再評価する。
+gap unknown・ε内近縮退を許容するworst-case mean-bias boundを解析し、bracket上の一つの固定filterで達成できるbias/physical herald下界の交換条件を導く。FQPE weighted minimax/filter comparisonsに包含されるだけなら仮説を棄却する。継続する場合は同一finite-time oracle・estimator・depth/costでcosine-power/Gaussian/Chebyshev/Kaiser/最小次数trig baselinesを比較する。gridは探索proxyに限り、continuous guaranteeと区別する。係数選択に真のE0やvalidation spectrumを使わない。予算追加・実環境構築・公開なしで理論と小規模Python screenを進める。
 
 ## Source pointers
 - `docs/project/research-plan.md`
