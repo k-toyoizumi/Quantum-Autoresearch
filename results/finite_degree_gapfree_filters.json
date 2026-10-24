@@ -1,0 +1,377 @@
+{
+  "finite_degree_candidate_screens": [
+    {
+      "amplitude_scale": 1.0,
+      "degree": 2,
+      "grid_argmax_E0_E": [
+        -0.05,
+        0.3406
+      ],
+      "grid_max_bias_proxy": 0.26492963119847335,
+      "grid_min_bracket_transmission_after_amplitude_scale": 0.9140626737820935,
+      "grid_points": [
+        101,
+        501
+      ],
+      "guarantee": "grid only; no continuous certificate",
+      "name": "cosine-power-amplitude-m2"
+    },
+    {
+      "amplitude_scale": 1.0,
+      "degree": 4,
+      "grid_argmax_E0_E": [
+        -0.05,
+        0.23349999999999999
+      ],
+      "grid_max_bias_proxy": 0.19024078576271028,
+      "grid_min_bracket_transmission_after_amplitude_scale": 0.8355105716016701,
+      "grid_points": [
+        101,
+        501
+      ],
+      "guarantee": "grid only; no continuous certificate",
+      "name": "cosine-power-amplitude-m4"
+    },
+    {
+      "amplitude_scale": 1.0,
+      "degree": 6,
+      "grid_argmax_E0_E": [
+        -0.05,
+        0.18310000000000004
+      ],
+      "grid_max_bias_proxy": 0.15613721233398312,
+      "grid_min_bracket_transmission_after_amplitude_scale": 0.763709027051428,
+      "grid_points": [
+        101,
+        501
+      ],
+      "guarantee": "grid only; no continuous certificate",
+      "name": "cosine-power-amplitude-m6"
+    },
+    {
+      "amplitude_scale": 0.17860337592553602,
+      "degree": 2,
+      "grid_argmax_E0_E": [
+        0.05,
+        1.0
+      ],
+      "grid_max_bias_proxy": 0.2799323611701887,
+      "grid_min_bracket_transmission_after_amplitude_scale": 0.8339673930331258,
+      "grid_points": [
+        101,
+        501
+      ],
+      "guarantee": "grid only; no continuous certificate",
+      "name": "gaussian-endpoint-matched-K2"
+    },
+    {
+      "amplitude_scale": 0.31551326052498463,
+      "degree": 4,
+      "grid_argmax_E0_E": [
+        0.05,
+        1.0
+      ],
+      "grid_max_bias_proxy": 0.14878791870652625,
+      "grid_min_bracket_transmission_after_amplitude_scale": 0.5362438772709001,
+      "grid_points": [
+        101,
+        501
+      ],
+      "guarantee": "grid only; no continuous certificate",
+      "name": "gaussian-endpoint-matched-K4"
+    },
+    {
+      "amplitude_scale": 0.4427610106860932,
+      "degree": 6,
+      "grid_argmax_E0_E": [
+        0.05,
+        1.0
+      ],
+      "grid_max_bias_proxy": 0.13662422727480142,
+      "grid_min_bracket_transmission_after_amplitude_scale": 0.25155260402556007,
+      "grid_points": [
+        101,
+        501
+      ],
+      "guarantee": "grid only; no continuous certificate",
+      "name": "gaussian-endpoint-matched-K6"
+    },
+    {
+      "amplitude_scale": 0.10390190239044786,
+      "degree": 2,
+      "grid_argmax_E0_E": [
+        0.05,
+        1.0
+      ],
+      "grid_max_bias_proxy": 0.282417451755272,
+      "grid_min_bracket_transmission_after_amplitude_scale": 0.8336351328152463,
+      "grid_points": [
+        101,
+        501
+      ],
+      "guarantee": "grid only; no continuous certificate",
+      "name": "scalar-envelope-amplitude-K2"
+    },
+    {
+      "amplitude_scale": 0.18484790511587706,
+      "degree": 4,
+      "grid_argmax_E0_E": [
+        0.05,
+        1.0
+      ],
+      "grid_max_bias_proxy": 0.15493522084535888,
+      "grid_min_bracket_transmission_after_amplitude_scale": 0.5332104014275446,
+      "grid_points": [
+        101,
+        501
+      ],
+      "guarantee": "grid only; no continuous certificate",
+      "name": "scalar-envelope-amplitude-K4"
+    },
+    {
+      "amplitude_scale": 0.2623429562453085,
+      "degree": 6,
+      "grid_argmax_E0_E": [
+        0.05,
+        1.0
+      ],
+      "grid_max_bias_proxy": 0.1523984565115432,
+      "grid_min_bracket_transmission_after_amplitude_scale": 0.243298445816548,
+      "grid_points": [
+        101,
+        501
+      ],
+      "guarantee": "grid only; no continuous certificate",
+      "name": "scalar-envelope-amplitude-K6"
+    }
+  ],
+  "metadata": {
+    "model": {
+      "bias_target": 0.01,
+      "eta": 0.1,
+      "filter_weight": "w=|p|^2; candidate amplitude normalized by coefficient l1 for LCU success proxy",
+      "finite_difference_gate_applies": "algebraic polynomial amplitudes only, not trigonometric polynomials",
+      "gap": "unknown",
+      "ground_bracket": [
+        -0.05,
+        0.05
+      ],
+      "support": [
+        -0.05,
+        1.0
+      ]
+    },
+    "python": "3.12.14",
+    "seed": null,
+    "standard_library_only": true,
+    "warning": "candidate grids are screening proxies, not continuous feasibility certificates; oracle depths across CTE/Fourier and polynomial block-encoding are not equated"
+  },
+  "polynomial_finite_difference_gate": [
+    {
+      "N": 1,
+      "degree": 0,
+      "delta": 0.1,
+      "impossible_by_gate": true,
+      "meaning": "O_N(rho)<1 contradicts finite-difference identity, so no feasible polynomial of this degree",
+      "odd_sum": 0.012345679012345678,
+      "odd_sum_exact": "1/81",
+      "rho": 0.012345679012345678
+    },
+    {
+      "N": 3,
+      "degree": 1,
+      "delta": 0.03333333333333333,
+      "impossible_by_gate": true,
+      "meaning": "O_N(rho)<1 contradicts finite-difference identity, so no feasible polynomial of this degree",
+      "odd_sum": 0.14296512255695928,
+      "odd_sum_exact": "1324/9261",
+      "rho": 0.047619047619047616
+    },
+    {
+      "N": 5,
+      "degree": 2,
+      "delta": 0.02,
+      "impossible_by_gate": true,
+      "meaning": "O_N(rho)<1 contradicts finite-difference identity, so no feasible polynomial of this degree",
+      "odd_sum": 0.5692899117681925,
+      "odd_sum_exact": "33616/59049",
+      "rho": 0.1111111111111111
+    },
+    {
+      "N": 7,
+      "degree": 3,
+      "delta": 0.014285714285714285,
+      "impossible_by_gate": false,
+      "meaning": "O_N(rho)<1 contradicts finite-difference identity, so no feasible polynomial of this degree",
+      "odd_sum": 2.4494082154560304,
+      "odd_sum_exact": "25621675072/10460353203",
+      "rho": 0.25925925925925924
+    },
+    {
+      "N": 9,
+      "degree": 4,
+      "delta": 0.011111111111111112,
+      "impossible_by_gate": false,
+      "meaning": "O_N(rho)<1 contradicts finite-difference identity, so no feasible polynomial of this degree",
+      "odd_sum": 256.0,
+      "odd_sum_exact": "256",
+      "rho": 1.0
+    },
+    {
+      "N": 11,
+      "degree": 5,
+      "delta": 0.00909090909090909,
+      "impossible_by_gate": false,
+      "odd_sum": null,
+      "reason": "delta <= b",
+      "rho": null
+    },
+    {
+      "N": 13,
+      "degree": 6,
+      "delta": 0.007692307692307693,
+      "impossible_by_gate": false,
+      "odd_sum": null,
+      "reason": "delta <= b",
+      "rho": null
+    }
+  ],
+  "scalar_unconstrained_optimum": {
+    "F_W": 10.986122886681098,
+    "transmission": 1.6935087808430265e-05
+  },
+  "shifted_power_analytic_baseline": [
+    {
+      "S": 1.05,
+      "amplitude": "p(x)=(1-x/S)^n, x=E-L",
+      "bracket_min_ground_transmission": 0.6700963076084553,
+      "degree": 2,
+      "global_bound_on_support": "0<=p<=1",
+      "max_time_oracle_cost": "not comparable: polynomial/block-encoding oracle; physical depth uncompiled",
+      "passes_analytic_sufficient_condition": false,
+      "sufficient_degree_for_continuous_bias_certificate": 58
+    },
+    {
+      "S": 1.05,
+      "amplitude": "p(x)=(1-x/S)^n, x=E-L",
+      "bracket_min_ground_transmission": 0.4490290614704856,
+      "degree": 4,
+      "global_bound_on_support": "0<=p<=1",
+      "max_time_oracle_cost": "not comparable: polynomial/block-encoding oracle; physical depth uncompiled",
+      "passes_analytic_sufficient_condition": false,
+      "sufficient_degree_for_continuous_bias_certificate": 58
+    },
+    {
+      "S": 1.05,
+      "amplitude": "p(x)=(1-x/S)^n, x=E-L",
+      "bracket_min_ground_transmission": 0.3008927161002625,
+      "degree": 6,
+      "global_bound_on_support": "0<=p<=1",
+      "max_time_oracle_cost": "not comparable: polynomial/block-encoding oracle; physical depth uncompiled",
+      "passes_analytic_sufficient_condition": false,
+      "sufficient_degree_for_continuous_bias_certificate": 58
+    },
+    {
+      "S": 1.05,
+      "amplitude": "p(x)=(1-x/S)^n, x=E-L",
+      "bracket_min_ground_transmission": 1.1089473027986091e-05,
+      "degree": 57,
+      "global_bound_on_support": "0<=p<=1",
+      "max_time_oracle_cost": "not comparable: polynomial/block-encoding oracle; physical depth uncompiled",
+      "passes_analytic_sufficient_condition": false,
+      "sufficient_degree_for_continuous_bias_certificate": 58
+    },
+    {
+      "S": 1.05,
+      "amplitude": "p(x)=(1-x/S)^n, x=E-L",
+      "bracket_min_ground_transmission": 9.077777240596324e-06,
+      "degree": 58,
+      "global_bound_on_support": "0<=p<=1",
+      "max_time_oracle_cost": "not comparable: polynomial/block-encoding oracle; physical depth uncompiled",
+      "passes_analytic_sufficient_condition": true,
+      "sufficient_degree_for_continuous_bias_certificate": 58
+    }
+  ],
+  "shifted_power_grid_checks": [
+    {
+      "amplitude_scale": 1.0,
+      "degree": 2,
+      "grid_argmax_E0_E": [
+        -0.05,
+        0.3427
+      ],
+      "grid_max_bias_proxy": 0.22784554254629374,
+      "grid_min_bracket_transmission_after_amplitude_scale": 0.6700963076084554,
+      "grid_points": [
+        101,
+        501
+      ],
+      "guarantee": "grid only; no continuous certificate",
+      "name": "shifted-power-polynomial-n2"
+    },
+    {
+      "amplitude_scale": 1.0,
+      "degree": 4,
+      "grid_argmax_E0_E": [
+        -0.05,
+        0.181
+      ],
+      "grid_max_bias_proxy": 0.12755649252761042,
+      "grid_min_bracket_transmission_after_amplitude_scale": 0.44902906147048555,
+      "grid_points": [
+        101,
+        501
+      ],
+      "guarantee": "grid only; no continuous certificate",
+      "name": "shifted-power-polynomial-n4"
+    },
+    {
+      "amplitude_scale": 1.0,
+      "degree": 6,
+      "grid_argmax_E0_E": [
+        -0.05,
+        0.11170000000000001
+      ],
+      "grid_max_bias_proxy": 0.08852349288955633,
+      "grid_min_bracket_transmission_after_amplitude_scale": 0.30089271610026247,
+      "grid_points": [
+        101,
+        501
+      ],
+      "guarantee": "grid only; no continuous certificate",
+      "name": "shifted-power-polynomial-n6"
+    },
+    {
+      "amplitude_scale": 1.0,
+      "degree": 57,
+      "grid_argmax_E0_E": [
+        -0.05,
+        -0.0311
+      ],
+      "grid_max_bias_proxy": 0.010047066958636343,
+      "grid_min_bracket_transmission_after_amplitude_scale": 1.1089473027986091e-05,
+      "grid_points": [
+        101,
+        501
+      ],
+      "guarantee": "grid only; no continuous certificate",
+      "name": "shifted-power-polynomial-n57"
+    },
+    {
+      "amplitude_scale": 1.0,
+      "degree": 58,
+      "grid_argmax_E0_E": [
+        -0.05,
+        -0.0311
+      ],
+      "grid_max_bias_proxy": 0.00987592506191946,
+      "grid_min_bracket_transmission_after_amplitude_scale": 9.077777240596324e-06,
+      "grid_points": [
+        101,
+        501
+      ],
+      "guarantee": "grid only; no continuous certificate",
+      "name": "shifted-power-polynomial-n58"
+    }
+  ]
+}

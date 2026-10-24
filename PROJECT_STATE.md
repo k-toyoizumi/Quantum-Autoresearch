@@ -15,14 +15,14 @@
 - 係数スケーリングに依存しないよう、`z_f=Tr[rho f†f]`、`p_herald=z_f/L²`、virtual merged-coefficient norm `B_f` を区別し、physical estimatorではnormalization後の成功sample数に初期overlap factorを二重に掛けない。virtual ratio `N/z_f` は一般にunbiasedでない。
 - gap-free fixed-filterのchain boundを再導出した：[前memo](memo/research/2026-10-24_8_gapfree-filter-chain-bound.md)。η=.1、bracket幅=.1、b=.01でΔ=2b/(1−η)を選んだときの理想pure-ground transmission下界は1/14,641。
 - 続いてgap-free filtered-mean条件下の**任意スカラーweight**の有限W transmission optimum F(W)を手導出：[memo](memo/research/2026-10-24_9_gapfree-minimax-envelope.md)、[script](experiments/gapfree_minimax_bound.py)、[JSON](results/gapfree_minimax_bound.json)。同じη=.1,W=.1,b=.01で最適等分chainはn=5,Δ=.02、worst-case pure-ground transmission上限1/59,049。これはdegree/query depth/LCU normalizationを無視した関数レベルの厳密解で、物理herald costや一般GSEE no-goではない。新規性未確立。
-- 先行scalar sanity check（既知E0/gap、2-level）は期待信号の一致だけを検証した。今回の小探索は未知targetに使わないprior-only設計則とfinite-difference estimatorのbias/variance/depthを追加確認する。Python標準ライブラリで可能で、環境費用なし。回路・環境構築・Lean検証は未実施。
+- 有限次数への接続screenを実施：[memo](memo/research/2026-10-24_10_finite-degree-gapfree-screen.md)、[script](experiments/finite_degree_gapfree_filters.py)、[JSON](results/finite_degree_gapfree_filters.json)。η=.1,W=.1,b=.01で次数2以下の代数多項式振幅を有限差分gateで排除し、shifted-power次数58の連続bias十分条件を確認。次数3〜57は未解決。CTE cosine/Gaussian/envelope truncationのK=2/4/6 screenはgrid上すべて目標biasを超過。screenは新規性・優位性を示さず、回路とLeanは未実施。
 - AGENTS.mdとagent-policy.mdに、チャット依頼起点・上位モデルの承認制を維持したまま「commitは停止点ではなく、依頼内で必要判断材料まで自律継続」と記録。
 - 旧依存version pinsが見つからず、旧環境の再現とコード実行は未確認。これは段階3で再現/移植を分けて検証する。
 - PennyLane QSVT high-level APIは角度合成と既定encodingを組み立て、low-level APIはcustom block encoding/projector phasesからQSVT回路を生成することを確認。採用未決。
 - 2026-10-24本人認可：現在の研究目標・既存予算内の研究方向選択、比較条件の設計、仮説の採否/棄却はAgentに委任。追加予算・外部公開・Astra/Sol high以上の事前承認制は維持。新規性は保証されない。
 
 ## 次の一手
-固定filterの新規族・adaptive localization+filter単体は保留/棄却。次の条件付き問いは、scalar optimum F profileをbounded finite-degree polynomial/trigonometric filterで近似するときのweighted relative-error/slack、最小degree、worst-case ground transmissionを同時評価できるか。FQPE general-basis minimaxとwall-Cheb/Gibbsを同じoracle/hard depth/total costに置き、単なる既存minimax再パラメータ化または優位領域なしなら棄却。今回のスカラー手証明はLean未検証、新規性未確認。有限degree/強baseline比較は未実施。
+固定filterの新規族・adaptive localization+filter単体は保留/棄却。有限次数screenでは必要次数2と十分次数58の間が未解決で、FQPE general-basis minimaxへの包含も未確認。次はその包含とwall-Chebの粗い上界priorとの差を限定的に調べる。必要性gateは手証明（Lean未検証）、grid比較は連続保証でない。新規性未確認。
 
 ## Source pointers
 - `docs/project/research-plan.md`
@@ -42,3 +42,6 @@
 - `memo/research/2026-10-24_9_gapfree-minimax-envelope.md`
 - `experiments/gapfree_minimax_bound.py`
 - `results/gapfree_minimax_bound.json`
+- `memo/research/2026-10-24_10_finite-degree-gapfree-screen.md`
+- `experiments/finite_degree_gapfree_filters.py`
+- `results/finite_degree_gapfree_filters.json`
