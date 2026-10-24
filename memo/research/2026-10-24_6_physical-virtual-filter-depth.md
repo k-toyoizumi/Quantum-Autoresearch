@@ -62,9 +62,9 @@ Block encoding + QSVTも候補となるが、HE oracleとraw query数を直接�
 
 目的は期待信号恒等式、normalization/ratio error、accepted-sampleに対するretry計数のsanity checkだけである。`E_0` とgapを既知としてfilterを作るoracle-assisted toyであり、未知ground energyの推定性能を示す実験ではない。
 
-設定：`H-E_ref=diag(0,1)`、初期重み `(eta_0,1-eta_0)=(0.15,0.85)`、`f(E)=cos(pi E/2)=0.5 exp(+i pi E/2)+0.5 exp(-i pi E/2)`。ここで既知のgap `Delta=1` を使っている。よってtarget振幅は1、excited振幅は数値的に `6.1e-17`、`z_f=0.15`。時間差係数は `a_0=0.5`、`a_{+pi}=a_{-pi}=0.25`、`B_f=1`、filter-support spanは `pi` となる。物理とvirtualの `g_f(t)` は `t=0,0.17,0.61,2` で絶対差 `2.2e-16)–`5.3e-16`（浮動小数点誤差）だった。したがってこの有限スペクトル例では期待信号のidentityと重複周波数の係数集約が数値的に一致した。普遍定理や費用優位を主張しない。
+設定：`H-E_ref=diag(0,1)`、初期重み `(eta_0,1-eta_0)=(0.15,0.85)`、`f(E)=cos(pi E/2)=0.5 exp(+i pi E/2)+0.5 exp(-i pi E/2)`。ここで既知のgap `Delta=1` を使っている。よってtarget振幅は1、excited振幅は数値的に `6.1e-17`、`z_f=0.15`。時間差係数は `a_0=0.5`、`a_{+pi}=a_{-pi}=0.25`、`B_f=1`、filter-support spanは `pi` となる。物理とvirtualの `g_f(t)` は `t=0,0.17,0.61,2` で絶対差 `2.2e-16`–`5.3e-16`（浮動小数点誤差）だった。したがってこの有限スペクトル例では期待信号のidentityと重複周波数の係数集約が数値的に一致した。普遍定理や費用優位を主張しない。
 
-正規化誤差の算術例は `z_f=0.15`、`e_N=0.003`、`e_z=0.006` と置いた。ratioの誤差上界は `(e_N+e_z)/(z_f-e_z)=0.0625`、`N=z_f)、`Nhat=z_f+e_N)、`zhat=z_f+e_z` の選択例の実誤差は `0.01923`。この一例は一般ratio boundの証明ではない。さらに各時刻あたり100受理shotを3時刻から得る仮想会計では、`p_herald=z_f=0.15` のときphysical filter試行の期待値は `300/0.15=2000`。これもactual estimatorやvirtual costとの性能比較ではなく、再試行係数の確認である。virtualの信号shot、分母推定、読出し時刻の伸長を入れて初めて比較になる。
+正規化誤差の算術例は `z_f=0.15`、`e_N=0.003`、`e_z=0.006` と置いた。ratioの誤差上界は `(e_N+e_z)/(z_f-e_z)=0.0625`、`N=z_f`、`Nhat=z_f+e_N`、`zhat=z_f+e_z` の選択例の実誤差は `0.01923`。この一例は一般ratio boundの証明ではない。さらに各時刻あたり100受理shotを3時刻から得る仮想会計では、`p_herald=z_f=0.15` のときphysical filter試行の期待値は `300/0.15=2000`。これもactual estimatorやvirtual costとの性能比較ではなく、再試行係数の確認である。virtualの信号shot、分母推定、読出し時刻の伸長を入れて初めて比較になる。
 
 再現用Python（標準ライブラリのみ、回路/追加依存なし）：
 
