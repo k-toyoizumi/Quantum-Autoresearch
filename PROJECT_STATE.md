@@ -13,7 +13,8 @@
 - 候補例（未採用）：bracket中心だけで設定するbounded cosine-power filter、同じ有限supportで係数を下流エネルギーriskに合わせるprior-only optimizer。いずれも新規性未確認。filter中心・gap・初期重みの真値を選択入力に用いず、既知値synthetic testはoracle-assisted sanityと明記する。
 - FQPE、QETU、QCELS内Fourier-filtered版、Lin–Tong CDF、Wang Gaussian-derivative GSEE、Kaiser/DPSS/Chebyshevと重なる可能性が強い。既存法を再発明しない棄却条件が必要。物理/virtual identityだけは低深さ性能差やenergy advantageを意味しない。
 - 係数スケーリングに依存しないよう、`z_f=Tr[rho f†f]`、`p_herald=z_f/L²`、virtual merged-coefficient norm `B_f` を区別し、physical estimatorではnormalization後の成功sample数に初期overlap factorを二重に掛けない。virtual ratio `N/z_f` は一般にunbiasedでない。
-- gap-free fixed-filterのchain boundを再導出した：[前memo](memo/research/2026-10-24_8_gapfree-filter-chain-bound.md)。η=.1、bracket幅=.1、b=.01でΔ=2b/(1−η)を選んだときの理想pure-ground transmission下界は1/14,641。\n- 続いてgap-free filtered-mean条件下の**任意スカラーweight**の有限W transmission optimum F(W)を手導出：[memo](memo/research/2026-10-24_9_gapfree-minimax-envelope.md)、[script](experiments/gapfree_minimax_bound.py)、[JSON](results/gapfree_minimax_bound.json)。同じη=.1,W=.1,b=.01で最適等分chainはn=5,Δ=.02、worst-case pure-ground transmission上限1/59,049。これはdegree/query depth/LCU normalizationを無視した関数レベルの厳密解で、物理herald costや一般GSEE no-goではない。新規性未確立。
+- gap-free fixed-filterのchain boundを再導出した：[前memo](memo/research/2026-10-24_8_gapfree-filter-chain-bound.md)。η=.1、bracket幅=.1、b=.01でΔ=2b/(1−η)を選んだときの理想pure-ground transmission下界は1/14,641。
+- 続いてgap-free filtered-mean条件下の**任意スカラーweight**の有限W transmission optimum F(W)を手導出：[memo](memo/research/2026-10-24_9_gapfree-minimax-envelope.md)、[script](experiments/gapfree_minimax_bound.py)、[JSON](results/gapfree_minimax_bound.json)。同じη=.1,W=.1,b=.01で最適等分chainはn=5,Δ=.02、worst-case pure-ground transmission上限1/59,049。これはdegree/query depth/LCU normalizationを無視した関数レベルの厳密解で、物理herald costや一般GSEE no-goではない。新規性未確立。
 - 先行scalar sanity check（既知E0/gap、2-level）は期待信号の一致だけを検証した。今回の小探索は未知targetに使わないprior-only設計則とfinite-difference estimatorのbias/variance/depthを追加確認する。Python標準ライブラリで可能で、環境費用なし。回路・環境構築・Lean検証は未実施。
 - AGENTS.mdとagent-policy.mdに、チャット依頼起点・上位モデルの承認制を維持したまま「commitは停止点ではなく、依頼内で必要判断材料まで自律継続」と記録。
 - 旧依存version pinsが見つからず、旧環境の再現とコード実行は未確認。これは段階3で再現/移植を分けて検証する。
@@ -37,4 +38,7 @@
 - `results/stage2_filter_screen.json`
 - `memo/research/2026-10-24_8_gapfree-filter-chain-bound.md`
 - `experiments/gapfree_filter_bound.py`
-- `results/gapfree_filter_bound.json`\n- `memo/research/2026-10-24_9_gapfree-minimax-envelope.md`\n- `experiments/gapfree_minimax_bound.py`\n- `results/gapfree_minimax_bound.json`
+- `results/gapfree_filter_bound.json`
+- `memo/research/2026-10-24_9_gapfree-minimax-envelope.md`
+- `experiments/gapfree_minimax_bound.py`
+- `results/gapfree_minimax_bound.json`
