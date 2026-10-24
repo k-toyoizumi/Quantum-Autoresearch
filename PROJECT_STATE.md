@@ -3,19 +3,21 @@
 更新日：2026-10-24（日本時間）
 
 ## Goal
-化学・物性のエネルギー推定を対象に、深さ制約下の量子スペクトルフィルタを調査する。現段階は段階1（既存法の仮定・保証・費用、過去資産の再利用条件の確認）。
+化学・物性のエネルギー推定を対象に、深さ制約下の量子スペクトルフィルタを調査する。現在は段階1（既存法の仮定・保証・費用、過去資産の再利用条件の確認）。
 
 ## 現在地
-- 重点文献・過去資産の一次資料照合を記録した：[段階1レビュー](memo/research/2026-10-24_2_filter-literature-and-asset-review.md)
-- 研究計画の段階1は未完了。Booster本文の仮定・費用、FQPE robustness補遺、過去コードの実行条件が未確認。
-- 数値実験、過去コードの実行、Lean検証は未実施。
+- 文献・過去資産の重点照合を記録：[段階1レビュー](memo/research/2026-10-24_2_filter-literature-and-asset-review.md)
+- QSVT位相合成・回路・シミュレータ候補の比較を記録：[ツールチェーン比較](memo/research/2026-10-24_3_qsvt-toolchain-review.md)
 - READMEと研究計画の現在地表示は整合しているため変更していない。
-- 最終保存commit：`362583faaa678b4e54d1435a92321d0ce302fcb3`（レビューmemo）。
+- 段階1は未完了。Booster本文の仮定・費用、FQPE robustness補遺、過去コード実行条件、同一条件のsolver比較が未確認。
+- 数値実験、過去コードの実行、Lean検証、環境構築は未実施。
+- 今回の主な移行候補：PennyLane poly_to_angles/QSVT + Lightning.qubit。ただし旧Qiskit回路/Aerを比較基準として残し、採用前に同一oracle・同一多項式で照合する。
 
 ## 次回最初の一手
-Booster本文とFQPE robustness補遺の未確認条件を読み、既存レビューへ差分として記録する。その後、段階1完了条件を再評価する。深さ・総queryの比較では入力oracle、精度、失敗確率、事前情報取得をそろえる。
+対象ハミルトニアンと入力oracleを確定する。その後、旧coefs.pyの基底を特定し、同一の正規化済みChebyshev多項式でPyQSP Laurent/sym_qspとPennyLane root-finding/iterativeを比較する。AerとPennyLane QSVTで既知小例の行列・ゲート深さ・成功確率を照合する。
 
 ## Source pointers
 - `docs/project/research-plan.md`
 - `docs/project/research-direction.md`
 - `memo/research/2026-10-24_2_filter-literature-and-asset-review.md`
+- `memo/research/2026-10-24_3_qsvt-toolchain-review.md`
