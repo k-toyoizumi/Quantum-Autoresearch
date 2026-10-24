@@ -34,4 +34,7 @@
 - `memo/research/2026-10-24_6_physical-virtual-filter-depth.md`
 - `memo/research/2026-10-24_7_filter-design-screen.md`
 - `experiments/stage2_filter_screen.py`
-- `results/stage2_filter_screen.json`\n- `memo/research/2026-10-24_8_gapfree-filter-chain-bound.md`\n- `experiments/gapfree_filter_bound.py`\n- `results/gapfree_filter_bound.json`
+- `results/stage2_filter_screen.json`
+- `memo/research/2026-10-24_8_gapfree-filter-chain-bound.md`
+- `experiments/gapfree_filter_bound.py`
+- `results/gapfree_filter_bound.json`
