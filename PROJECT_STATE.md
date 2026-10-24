@@ -13,7 +13,7 @@
 - 候補例（未採用）：bracket中心だけで設定するbounded cosine-power filter、同じ有限supportで係数を下流エネルギーriskに合わせるprior-only optimizer。いずれも新規性未確認。filter中心・gap・初期重みの真値を選択入力に用いず、既知値synthetic testはoracle-assisted sanityと明記する。
 - FQPE、QETU、QCELS内Fourier-filtered版、Lin–Tong CDF、Wang Gaussian-derivative GSEE、Kaiser/DPSS/Chebyshevと重なる可能性が強い。既存法を再発明しない棄却条件が必要。物理/virtual identityだけは低深さ性能差やenergy advantageを意味しない。
 - 係数スケーリングに依存しないよう、`z_f=Tr[rho f†f]`、`p_herald=z_f/L²`、virtual merged-coefficient norm `B_f` を区別し、physical estimatorではnormalization後の成功sample数に初期overlap factorを二重に掛けない。virtual ratio `N/z_f` は一般にunbiasedでない。
-- 今回の粗いgrid screenは `cos^6(πx/2)` が最小physical-cost候補だが、比較対象に含めた既知binomial族そのもの。no-filter filtered-mean proxyはprior bias条件で失格。新規性/優位は未確認、QCELS等強baselineとの同条件比較が残る。
+- gap-free fixed-filterの二準位chain boundを導出・数値再現した：[memo](memo/research/2026-10-24_8_gapfree-filter-chain-bound.md)、[script](experiments/gapfree_filter_bound.py)、[JSON](results/gapfree_filter_bound.json)。η=.1、bracket幅=.1、mean bias≤.01なら、許容bracket targetの一つで理想herald試行数≥14,641。手証明はfiltered-mean/single fixed filterの制約であり、一般GSEE no-goではない。gridはproxyに限る。既存法包含と新規性未確認。
 - 先行scalar sanity check（既知E0/gap、2-level）は期待信号の一致だけを検証した。今回の小探索は未知targetに使わないprior-only設計則とfinite-difference estimatorのbias/variance/depthを追加確認する。Python標準ライブラリで可能で、環境費用なし。回路・環境構築・Lean検証は未実施。
 - AGENTS.mdとagent-policy.mdに、チャット依頼起点・上位モデルの承認制を維持したまま「commitは停止点ではなく、依頼内で必要判断材料まで自律継続」と記録。
 - 旧依存version pinsが見つからず、旧環境の再現とコード実行は未確認。これは段階3で再現/移植を分けて検証する。
@@ -21,7 +21,7 @@
 - 2026-10-24本人認可：現在の研究目標・既存予算内の研究方向選択、比較条件の設計、仮説の採否/棄却はAgentに委任。追加予算・外部公開・Astra/Sol high以上の事前承認制は維持。新規性は保証されない。
 
 ## 次の一手
-gap unknown・ε内近縮退を許容するworst-case mean-bias boundを解析し、bracket上の一つの固定filterで達成できるbias/physical herald下界の交換条件を導く。FQPE weighted minimax/filter comparisonsに包含されるだけなら仮説を棄却する。継続する場合は同一finite-time oracle・estimator・depth/costでcosine-power/Gaussian/Chebyshev/Kaiser/最小次数trig baselinesを比較する。gridは探索proxyに限り、continuous guaranteeと区別する。係数選択に真のE0やvalidation spectrumを使わない。予算追加・実環境構築・公開なしで理論と小規模Python screenを進める。
+固定filterの新規族・adaptive localization+filter単体は保留/棄却候補。研究価値を主張するには、FQPE two-stage Gaussian、Lin–Tong CDF、QCELS Fourier filterに対し、same CTE oracle・hard total depth capで新しいmean-bias/herald tradeoff theoremまたはcost crossoverが必要。今回の結果は評価補題として扱い、continuous proof/FQPE equivalenceを未確定とする。small screenは追加拡大しない。
 
 ## Source pointers
 - `docs/project/research-plan.md`
@@ -34,4 +34,4 @@ gap unknown・ε内近縮退を許容するworst-case mean-bias boundを解析�
 - `memo/research/2026-10-24_6_physical-virtual-filter-depth.md`
 - `memo/research/2026-10-24_7_filter-design-screen.md`
 - `experiments/stage2_filter_screen.py`
-- `results/stage2_filter_screen.json`
+- `results/stage2_filter_screen.json`\n- `memo/research/2026-10-24_8_gapfree-filter-chain-bound.md`\n- `experiments/gapfree_filter_bound.py`\n- `results/gapfree_filter_bound.json`
