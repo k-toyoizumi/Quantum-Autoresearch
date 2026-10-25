@@ -1,0 +1,97 @@
+{
+  "cases": [
+    {
+      "pilot_alpha_mean": 0.06099800525903254,
+      "profile_alpha_mean": 0.03286123416095536,
+      "results": {
+        "oracle_alpha_mle_proxy": {
+          "failure_count": 0,
+          "failure_rate": 0.0,
+          "mse_when_estimate_returned": 0.017040992026998027,
+          "worst_case_risk_with_failure_penalty": 0.017040992026998027
+        },
+        "pilot_plugin_mle": {
+          "failure_count": 0,
+          "failure_rate": 0.0,
+          "mse_when_estimate_returned": 0.03475138483434298,
+          "worst_case_risk_with_failure_penalty": 0.03475138483434298
+        },
+        "profile_mle": {
+          "failure_count": 2,
+          "failure_rate": 0.1,
+          "mse_when_estimate_returned": 0.14201884913677698,
+          "worst_case_risk_with_failure_penalty": 0.334018849136777
+        },
+        "zero_dc_ratio": {
+          "failure_count": 20,
+          "failure_rate": 1.0,
+          "mse_when_estimate_returned": 0.07325856494577841,
+          "worst_case_risk_with_failure_penalty": 2.5600000000000005
+        }
+      },
+      "true_phase": 0.0,
+      "zero_dc_ci_available_count": 11,
+      "zero_dc_ci_empirical_coverage_count": 11,
+      "zero_dc_ci_half_width_median": 1.5268268146921216
+    },
+    {
+      "pilot_alpha_mean": 0.053218409741501195,
+      "profile_alpha_mean": 0.03459941597420863,
+      "results": {
+        "oracle_alpha_mle_proxy": {
+          "failure_count": 0,
+          "failure_rate": 0.0,
+          "mse_when_estimate_returned": 0.014134697432470363,
+          "worst_case_risk_with_failure_penalty": 0.014134697432470363
+        },
+        "pilot_plugin_mle": {
+          "failure_count": 0,
+          "failure_rate": 0.0,
+          "mse_when_estimate_returned": 0.022376620933273982,
+          "worst_case_risk_with_failure_penalty": 0.022376620933273982
+        },
+        "profile_mle": {
+          "failure_count": 1,
+          "failure_rate": 0.05,
+          "mse_when_estimate_returned": 0.04928689423052128,
+          "worst_case_risk_with_failure_penalty": 0.13944189423052128
+        },
+        "zero_dc_ratio": {
+          "failure_count": 20,
+          "failure_rate": 1.0,
+          "mse_when_estimate_returned": 0.12318076507214396,
+          "worst_case_risk_with_failure_penalty": 2.5600000000000005
+        }
+      },
+      "true_phase": 0.06999999999999999,
+      "zero_dc_ci_available_count": 8,
+      "zero_dc_ci_empirical_coverage_count": 8,
+      "zero_dc_ci_half_width_median": 1.4705715397802859
+    }
+  ],
+  "metadata": {
+    "F_original_parameter": 0.3,
+    "N_statistical_samples_per_run": 2000,
+    "a0_original_parameter": 0.1,
+    "alpha_reduced_mixture": 0.0410958904109589,
+    "confidence_delta": 0.05,
+    "not_simulated": [
+      "original GDN query/depth budget",
+      "window rejection/discard counts",
+      "quantum circuits",
+      "physical gates"
+    ],
+    "numpy": "2.3.5",
+    "oracle_and_plugin_optimizer": "SciPy bounded scalar minimization on [-0.8,0.8]",
+    "phase_bound": 0.8,
+    "plugin_pilot_fraction": 0.25,
+    "profile_mle_optimizer": "SciPy L-BFGS-B, maxiter=80, ftol=1e-11; moment initialization",
+    "python": "3.12.14",
+    "replicates_per_case": 20,
+    "sampling_model": "full-circle reduced normalized mixture: alpha*wrapped_normal + (1-alpha)*uniform",
+    "scipy": "1.17.0",
+    "seed": 20261025,
+    "sigma": 0.35,
+    "target_phase_error": 0.1
+  }
+}

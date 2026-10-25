@@ -23,7 +23,9 @@
 - 2026-10-24本人認可：現在の研究目標・既存予算内の研究方向選択、比較条件の設計、仮説の採否/棄却はAgentに委任。追加予算・外部公開・Astra/Sol high以上の事前承認制は維持。新規性は保証されない。
 
 ## 次の一手
-固定filterの新規族・adaptive localization+filter単体は保留/棄却。有限次数LP exchangeでは、次数20 slack candidateがdense validationを通ったがcontinuous bias/positivityは未証明で、改善とは確定しない。次は係数を使ったpair residualと正値性の連続区間certificate、および既存FQPE/QET-U/CTE下流推定器との同一depth/error/success比較。LP値は有限grid/浮動小数のscreenであり、連続最適値の厳密境界や新規性を示さない。
+- 校正free fixed-depth zero-DC ratio単独は新algorithm候補として棄却。reduced normalized toyの95% phase-CIは目標.1を認証せず、中心対称時のFisher交差項はゼロ。詳細：[memo](memo/research/2026-10-25_2_calibration-free-fmpe-screen.md)、[script](experiments/calibration_free_fmpe_toy.py)、[JSON](results/calibration_free_fmpe_toy.json)。
+- 関数設計中心の既定方向は維持。未確定の調査候補は、known gap/initial overlap promise下でunknown nuisance finite-confidence/depth adaptationが、profile MLE・pilot plug-inと同一sample/depth/costでcoverage・failure-aware costを改善する領域。oracle nuisance既知は情報有利ceilingで、超える対象ではない。
+- 次に進む場合はnoisy GSEEのa0,Fが定理仮定かparameter choiceか確定し、original GDNでaccepted/rejected shotsとdepth/costを含む比較仕様を作る。追加証明・実験・環境構築はその後判断する。
 
 ## Source pointers
 - `docs/project/research-plan.md`
@@ -48,5 +50,8 @@
 - `results/finite_degree_gapfree_filters.json`
 - `memo/research/2026-10-24_11_gapfree-degree-minimax-exchange.md`
 - `memo/research/2026-10-25_1_publication-go-no-go.md`
+- `memo/research/2026-10-25_2_calibration-free-fmpe-screen.md`
+- `experiments/calibration_free_fmpe_toy.py`
+- `results/calibration_free_fmpe_toy.json`
 - `experiments/gapfree_degree_minimax_exchange.py`
 - `results/gapfree_degree_minimax_exchange.json`

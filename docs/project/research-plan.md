@@ -23,3 +23,7 @@
 
 ## 次の判定順（2026-10-25追記）
 次数20候補の連続certificate・回路化へ進む前に論文化可能性を評価する。実在GSEE estimatorとの接続、近年法が置くpromiseとの差、同一oracle・depth・誤差・成功率・情報取得費で測れる貢献を確認し、維持・修正・転換のgo/no-goをmemo化する。これは研究方向の確定変更ではなく作業順序の変更。次数20のdense-grid resultは連続保証・回路費を持たず、成功確定扱いしない。
+
+
+## 2026-10-25の候補screen
+校正free・固定depthのzero-DC ratioはreduced normalized toyで目標phase errorをconfidence付きで達成できず、中心対称ではprofile MLEのnuisance効率損失も手計算上ないため、新algorithm候補に採用しない。既定の研究方向（化学・物性GSEEにおけるdepth-constrained filter/estimator設計）は変えない。次の小調査候補は認証済みoverlap/gap promise下のunknown-nuisance finite-confidence/depth adaptationが、同一total sample/depth/costのprofile/plug-in baselineを改善する条件。これは未確認で、研究方向として未確定。
