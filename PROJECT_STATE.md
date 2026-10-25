@@ -23,9 +23,10 @@
 - 2026-10-24本人認可：現在の研究目標・既存予算内の研究方向選択、比較条件の設計、仮説の採否/棄却はAgentに委任。追加予算・外部公開・Astra/Sol high以上の事前承認制は維持。新規性は保証されない。
 
 ## 次の一手
-- 校正free fixed-depth zero-DC ratio単独は新algorithm候補として棄却。reduced normalized toyの95% phase-CIは目標.1を認証せず、中心対称時のFisher交差項はゼロ。詳細：[memo](memo/research/2026-10-25_2_calibration-free-fmpe-screen.md)、[script](experiments/calibration_free_fmpe_toy.py)、[JSON](results/calibration_free_fmpe_toy.json)。
-- 関数設計中心の既定方向は維持。未確定の調査候補は、known gap/initial overlap promise下でunknown nuisance finite-confidence/depth adaptationが、profile MLE・pilot plug-inと同一sample/depth/costでcoverage・failure-aware costを改善する領域。oracle nuisance既知は情報有利ceilingで、超える対象ではない。
-- 次に進む場合はnoisy GSEEのa0,Fが定理仮定かparameter choiceか確定し、original GDNでaccepted/rejected shotsとdepth/costを含む比較仕様を作る。追加証明・実験・環境構築はその後判断する。
+- filter/GSEE新規性探索はNO-GOで終了。未知nuisance等の追加algorithm案は探索しない。
+- 次の成果物はQMSVE原案を軸とする論文形式の内部技術報告。新規性・投稿は主張せず、QCGを別の既存成果として区分する。
+- 最小確認計画：(1) 正規化/cos単調区間/QSVT演算子対応、(2) 収束・読出精度・初期重なり・gap・成功率とquery/depth会計、(3) 必要な場合のみ小行列の再現。今回実行なし。
+- 詳細：[scope memo](memo/research/2026-10-25_3_qmsve-techreport-scope.md)。
 
 ## Source pointers
 - `docs/project/research-plan.md`
@@ -51,6 +52,7 @@
 - `memo/research/2026-10-24_11_gapfree-degree-minimax-exchange.md`
 - `memo/research/2026-10-25_1_publication-go-no-go.md`
 - `memo/research/2026-10-25_2_calibration-free-fmpe-screen.md`
+- `memo/research/2026-10-25_3_qmsve-techreport-scope.md`
 - `experiments/calibration_free_fmpe_toy.py`
 - `results/calibration_free_fmpe_toy.json`
 - `experiments/gapfree_degree_minimax_exchange.py`

@@ -27,3 +27,9 @@
 
 ## 2026-10-25の候補screen
 校正free・固定depthのzero-DC ratioはreduced normalized toyで目標phase errorをconfidence付きで達成できず、中心対称ではprofile MLEのnuisance効率損失も手計算上ないため、新algorithm候補に採用しない。既定の研究方向（化学・物性GSEEにおけるdepth-constrained filter/estimator設計）は変えない。次の小調査候補は認証済みoverlap/gap promise下のunknown-nuisance finite-confidence/depth adaptationが、同一total sample/depth/costのprofile/plug-in baselineを改善する条件。これは未確認で、研究方向として未確定。
+
+
+## 2026-10-25：原案ベース技術報告
+新規filter/GSEE案の新規性探索は最終判定NO-GOで終了。次の限定成果は本人の既存日本語原案2023_0311_QMSVE.pdfに基づく内部技術報告とする。採択水準の新規性・外部投稿は目標にしない。主軸は最大SVの量子べき乗法と最小SVのcos/QSVT三角反復法。QCG論文・コードは別成果として参照し、mean-envelope/zero-DCを必須主張にしない。
+
+報告順：問題・入力モデル → QSVT/cos多項式 → 最大SV/量子べき乗法 → 逆反復との比較と最小SV/三角反復 → 誤差・成功確率・query/depth → 限界/応用候補。図なし、本文作成前の確認は (1) block-encoding正規化、cos単調区間、対象演算子対応、(2) 収束・overlap・gap/第2SV・読出し・成功確率・費用式、(3) 必要なら小行列再現。今回、新証明・数値実験・新規調査なし。詳細memo: memo/research/2026-10-25_3_qmsve-techreport-scope.md
