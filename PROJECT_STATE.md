@@ -47,5 +47,6 @@
 - `experiments/finite_degree_gapfree_filters.py`
 - `results/finite_degree_gapfree_filters.json`
 - `memo/research/2026-10-24_11_gapfree-degree-minimax-exchange.md`
+- `memo/research/2026-10-25_1_publication-go-no-go.md`
 - `experiments/gapfree_degree_minimax_exchange.py`
 - `results/gapfree_degree_minimax_exchange.json`
