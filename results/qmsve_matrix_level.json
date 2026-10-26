@@ -1,0 +1,2237 @@
+{
+  "experiment": "QMSVE matrix-level filter audit",
+  "model": "exact right-Gram spectral weights with analytic cosine-Taylor proxies and Bernoulli moment readout",
+  "seed": 20261026,
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "matplotlib": "3.10.8",
+  "normalization_alpha": 1.0,
+  "beta": 1.2,
+  "beta_condition": "0 < beta < pi/2, so cos(beta*x) is positive and decreasing on x in [0,1]",
+  "iterations": [
+    0,
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "normalization_failure_case": "normalization alpha is below operator norm",
+  "cases": [
+    {
+      "name": "square_gap",
+      "description": "full-rank square matrix with a separated minimum",
+      "matrix_shape": [
+        3,
+        3
+      ],
+      "singular_values_as_returned": [
+        0.86,
+        0.48,
+        0.12
+      ],
+      "right_gram_eigenvalues": [
+        0.0144,
+        0.2304,
+        0.7395999999999999
+      ],
+      "initial_spectral_probabilities": [
+        0.4,
+        0.35,
+        0.25
+      ],
+      "initial_state_is_defined_in_exact_right_eigenbasis": true,
+      "min_eigenspace_initial_mass": 0.4,
+      "iterations": [
+        {
+          "iterations": 0,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5208646657242166,
+            "target_mass": 0.4,
+            "mean_lambda": 0.2713,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5208646657242166,
+            "target_mass": 0.25,
+            "mean_lambda": 0.2713,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5208646657242166,
+            "target_mass": 0.4,
+            "mean_lambda": 0.2713,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5208646657242166,
+            "target_mass": 0.4,
+            "mean_lambda": 0.2713,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 1,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5208646657242166,
+            "target_mass": 0.4,
+            "mean_lambda": 0.2713,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.15541443999999996,
+            "estimate_sigma": 0.8236135130810573,
+            "target_mass": 0.8799184940601401,
+            "mean_lambda": 0.678339218929721,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.8234476322579777,
+            "estimate_sigma": 0.4325802848961521,
+            "target_mass": 0.48561749024785855,
+            "mean_lambda": 0.1871257028808361,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.7037471928450341,
+            "estimate_sigma": 0.39721576951323134,
+            "target_mass": 0.556681115892098,
+            "mean_lambda": 0.15778036754998853,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 2,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5208646657242166,
+            "target_mass": 0.4,
+            "mean_lambda": 0.2713,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.07579077379093116,
+            "estimate_sigma": 0.8561387458627431,
+            "target_mass": 0.9869866480449786,
+            "mean_lambda": 0.7329735521674305,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.7392630663041343,
+            "estimate_sigma": 0.3754384687642304,
+            "target_mass": 0.5407563273939641,
+            "mean_lambda": 0.14095404382803,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.5741594461760682,
+            "estimate_sigma": 0.3184665972790549,
+            "target_mass": 0.6682728597091967,
+            "mean_lambda": 0.10142097358249975,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 4,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5208646657242166,
+            "target_mass": 0.4,
+            "mean_lambda": 0.2713,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.02238562122695046,
+            "estimate_sigma": 0.8599632440272904,
+            "target_mass": 0.9998758465788459,
+            "mean_lambda": 0.7395367810779411,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.6626053166281763,
+            "estimate_sigma": 0.32405312941130643,
+            "target_mass": 0.6029569850796596,
+            "mean_lambda": 0.1050104306812609,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.45490184482867757,
+            "estimate_sigma": 0.23870853672112374,
+            "target_mass": 0.8090865590631467,
+            "mean_lambda": 0.05698176550354009,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 8,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5208646657242166,
+            "target_mass": 0.4,
+            "mean_lambda": 0.2713,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.002003966481668367,
+            "estimate_sigma": 0.8599999967397032,
+            "target_mass": 0.9999999889872142,
+            "mean_lambda": 0.7395999943922894,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.5875827397672208,
+            "estimate_sigma": 0.2895613090654346,
+            "target_mass": 0.6791308713184652,
+            "mean_lambda": 0.08384575170768814,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.35962463304042414,
+            "estimate_sigma": 0.16431490968213727,
+            "target_mass": 0.9417073197778637,
+            "mean_lambda": 0.026999389543848933,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 16,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5208646657242166,
+            "target_mass": 0.4,
+            "mean_lambda": 0.2713,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 1.606352628479282e-05,
+            "estimate_sigma": 0.86,
+            "target_mass": 1.0,
+            "mean_lambda": 0.7395999999999999,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.49948276824750143,
+            "estimate_sigma": 0.24134136140949247,
+            "target_mass": 0.7970113458760777,
+            "mean_lambda": 0.058245652726987264,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.2879833659506806,
+            "estimate_sigma": 0.12385981075163348,
+            "target_mass": 0.9956423496114877,
+            "mean_lambda": 0.015341252719430461,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 32,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5208646657242166,
+            "target_mass": 0.4,
+            "mean_lambda": 0.2713,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 1.0321475068089192e-09,
+            "estimate_sigma": 0.86,
+            "target_mass": 1.0,
+            "mean_lambda": 0.7395999999999999,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.425566744656509,
+            "estimate_sigma": 0.17119402167745484,
+            "target_mass": 0.9309842913979092,
+            "mean_lambda": 0.02930739305810088,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.20553748834628927,
+            "estimate_sigma": 0.12001970095387798,
+            "target_mass": 0.9999781082543597,
+            "mean_lambda": 0.014404728617058299,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 64,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5208646657242166,
+            "target_mass": 0.4,
+            "mean_lambda": 0.2713,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 4.2613139032474725e-18,
+            "estimate_sigma": 0.86,
+            "target_mass": 1.0,
+            "mean_lambda": 0.7395999999999999,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.39489278057553145,
+            "estimate_sigma": 0.12549162781849388,
+            "target_mass": 0.9937585710530769,
+            "mean_lambda": 0.015748148652535387,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.10560952374159525,
+            "estimate_sigma": 0.12000000049296292,
+            "target_mass": 0.9999999994522634,
+            "mean_lambda": 0.0144000001183111,
+            "target_mode": "min"
+          }
+        }
+      ],
+      "cos_gram_taylor_proxies": [
+        {
+          "taylor_half_degree": 1,
+          "polynomial_degree": 2,
+          "uniform_error_upper_bound": 0.15905743740795286,
+          "empirical_grid_max_abs": 0.9204712812960235,
+          "t8_estimate_sigma": 0.28908628022843136,
+          "t8_target_mass": 0.6800980769296691,
+          "t8_success_probability": 0.15581699300563487
+        },
+        {
+          "taylor_half_degree": 2,
+          "polynomial_degree": 4,
+          "uniform_error_upper_bound": 0.008260143532741016,
+          "empirical_grid_max_abs": 0.9958699282336295,
+          "t8_estimate_sigma": 0.2895673927078513,
+          "t8_target_mass": 0.6791254804929908,
+          "t8_success_probability": 0.5499388127610692
+        },
+        {
+          "taylor_half_degree": 3,
+          "polynomial_degree": 6,
+          "uniform_error_upper_bound": 0.0002132618286997032,
+          "empirical_grid_max_abs": 0.9998933690856501,
+          "t8_estimate_sigma": 0.2895612343126238,
+          "t8_target_mass": 0.6791309185318849,
+          "t8_success_probability": 0.5865810285409374
+        },
+        {
+          "taylor_half_degree": 6,
+          "polynomial_degree": 12,
+          "uniform_error_upper_bound": 2.9455004145797573e-10,
+          "empirical_grid_max_abs": 0.9999999998527249,
+          "t8_estimate_sigma": 0.2895613090654517,
+          "t8_target_mass": 0.6791308713184543,
+          "t8_success_probability": 0.5875827383826494
+        }
+      ],
+      "shot_readout": {
+        "shots_are_accepted_spectral_simulator_draws": 2000,
+        "seed": 20261026,
+        "target_delta": 0.05,
+        "exact_filtered_mean_lambda": 0.08384575170768814,
+        "empirical_bernoulli_mean": 0.078,
+        "hoeffding_radius_lambda": 0.030368073095415258,
+        "interval_contains_mean": true,
+        "empirical_sigma_estimate": 0.2792848008753788,
+        "expected_filter_attempts_for_shots": 3403.775952970178,
+        "warning": "conditional shot model only; preparation attempts are counted in expectation, no circuit is simulated"
+      }
+    },
+    {
+      "name": "near_degenerate_minimum",
+      "description": "small gap between the two smallest singular values",
+      "matrix_shape": [
+        3,
+        3
+      ],
+      "singular_values_as_returned": [
+        0.8,
+        0.205,
+        0.2
+      ],
+      "right_gram_eigenvalues": [
+        0.04000000000000001,
+        0.04202499999999999,
+        0.6400000000000001
+      ],
+      "initial_spectral_probabilities": [
+        0.3,
+        0.3,
+        0.4
+      ],
+      "initial_state_is_defined_in_exact_right_eigenbasis": true,
+      "min_eigenspace_initial_mass": 0.3,
+      "iterations": [
+        {
+          "iterations": 0,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5297239847316715,
+            "target_mass": 0.3,
+            "mean_lambda": 0.28060750000000007,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5297239847316715,
+            "target_mass": 0.4,
+            "mean_lambda": 0.28060750000000007,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5297239847316715,
+            "target_mass": 0.3,
+            "mean_lambda": 0.28060750000000007,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5297239847316715,
+            "target_mass": 0.3,
+            "mean_lambda": 0.28060750000000007,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 1,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5297239847316715,
+            "target_mass": 0.3,
+            "mean_lambda": 0.28060750000000007,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.1648498301875001,
+            "estimate_sigma": 0.7977036125697341,
+            "target_mass": 0.9938742418700012,
+            "mean_lambda": 0.6363310535068045,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.8055048828506072,
+            "estimate_sigma": 0.44148600229201695,
+            "target_mass": 0.3715797843699275,
+            "mean_lambda": 0.1949098902197868,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.6968277846061357,
+            "estimate_sigma": 0.3925657154747016,
+            "target_mass": 0.4061968317995229,
+            "mean_lambda": 0.15410784096616437,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 2,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5297239847316715,
+            "target_mass": 0.3,
+            "mean_lambda": 0.28060750000000007,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.06711056773342533,
+            "estimate_sigma": 0.7999904974796688,
+            "target_mass": 0.9999746130381126,
+            "mean_lambda": 0.6399847960577679,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.7041764613258849,
+            "estimate_sigma": 0.3634499692147283,
+            "target_mass": 0.4240701980796238,
+            "mean_lambda": 0.13209588012218693,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.5758050265859378,
+            "estimate_sigma": 0.29330664012464935,
+            "target_mass": 0.46379629486397367,
+            "mean_lambda": 0.08602878514121057,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 4,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5297239847316715,
+            "target_mass": 0.3,
+            "mean_lambda": 0.28060750000000007,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.011258999073310995,
+            "estimate_sigma": 0.7999999998376338,
+            "target_mass": 0.9999999995661483,
+            "mean_lambda": 0.639999999740214,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.6228739376043739,
+            "estimate_sigma": 0.26187306722346937,
+            "target_mass": 0.4772183111484415,
+            "mean_lambda": 0.06857750333702771,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.4773303828249326,
+            "estimate_sigma": 0.21652266916995164,
+            "target_mass": 0.49804102682047824,
+            "mean_lambda": 0.04688206626448033,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 8,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5297239847316715,
+            "target_mass": 0.3,
+            "mean_lambda": 0.28060750000000007,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.00031691265005705834,
+            "estimate_sigma": 0.8,
+            "target_mass": 1.0,
+            "mean_lambda": 0.6400000000000001,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.5905286203356745,
+            "estimate_sigma": 0.20759365115871856,
+            "target_mass": 0.4987378310288628,
+            "mean_lambda": 0.043095124001407734,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.37239518656022436,
+            "estimate_sigma": 0.2027032564299584,
+            "target_mass": 0.5058748442479574,
+            "mean_lambda": 0.041088610167309476,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 16,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5297239847316715,
+            "target_mass": 0.3,
+            "mean_lambda": 0.28060750000000007,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 2.510840694154688e-07,
+            "estimate_sigma": 0.8,
+            "target_mass": 1.0,
+            "mean_lambda": 0.6400000000000001,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.577181384370902,
+            "estimate_sigma": 0.20253767207648424,
+            "target_mass": 0.5009483562273024,
+            "mean_lambda": 0.04102150861016146,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.231094984232047,
+            "estimate_sigma": 0.20245599072903622,
+            "target_mass": 0.5118969132958027,
+            "mean_lambda": 0.0409884281820756,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 32,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5297239847316715,
+            "target_mass": 0.3,
+            "mean_lambda": 0.28060750000000007,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 1.576080247855799e-13,
+            "estimate_sigma": 0.8,
+            "target_mass": 1.0,
+            "mean_lambda": 0.6400000000000001,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.555212325097161,
+            "estimate_sigma": 0.20250585766928664,
+            "target_mass": 0.5019150169170459,
+            "mean_lambda": 0.041008622390373374,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.08905853887435669,
+            "estimate_sigma": 0.202396503667433,
+            "target_mass": 0.5237803966418446,
+            "mean_lambda": 0.04096434469680122,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 64,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5297239847316715,
+            "target_mass": 0.3,
+            "mean_lambda": 0.28060750000000007,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 6.21007236920299e-26,
+            "estimate_sigma": 0.8,
+            "target_mass": 1.0,
+            "mean_lambda": 0.6400000000000001,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.5137754125961833,
+            "estimate_sigma": 0.2024962821738639,
+            "target_mass": 0.5038299781545122,
+            "mean_lambda": 0.04100474429423711,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.013248940760857367,
+            "estimate_sigma": 0.20227804319624818,
+            "target_mass": 0.5474534521959319,
+            "mean_lambda": 0.04091640675930324,
+            "target_mode": "min"
+          }
+        }
+      ],
+      "cos_gram_taylor_proxies": [
+        {
+          "taylor_half_degree": 1,
+          "polynomial_degree": 2,
+          "uniform_error_upper_bound": 0.15905743740795286,
+          "empirical_grid_max_abs": 0.9204712812960235,
+          "t8_estimate_sigma": 0.20622074060066614,
+          "t8_target_mass": 0.49921271916751225,
+          "t8_success_probability": 0.15667148919478788
+        },
+        {
+          "taylor_half_degree": 2,
+          "polynomial_degree": 4,
+          "uniform_error_upper_bound": 0.008260143532741016,
+          "empirical_grid_max_abs": 0.9958699282336295,
+          "t8_estimate_sigma": 0.20762511169708306,
+          "t8_target_mass": 0.49872691634314303,
+          "t8_success_probability": 0.5527036719418458
+        },
+        {
+          "taylor_half_degree": 3,
+          "polynomial_degree": 6,
+          "uniform_error_upper_bound": 0.0002132618286997032,
+          "empirical_grid_max_abs": 0.9998933690856501,
+          "t8_estimate_sigma": 0.20759331943388348,
+          "t8_target_mass": 0.4987379461059582,
+          "t8_success_probability": 0.5895217919308192
+        },
+        {
+          "taylor_half_degree": 6,
+          "polynomial_degree": 12,
+          "uniform_error_upper_bound": 2.9455004145797573e-10,
+          "empirical_grid_max_abs": 0.9999999998527249,
+          "t8_estimate_sigma": 0.2075936511587502,
+          "t8_target_mass": 0.49873783102885166,
+          "t8_success_probability": 0.5905286189441644
+        }
+      ],
+      "shot_readout": null
+    },
+    {
+      "name": "degenerate_minimum",
+      "description": "two-dimensional minimum-singular subspace",
+      "matrix_shape": [
+        3,
+        3
+      ],
+      "singular_values_as_returned": [
+        0.7,
+        0.2,
+        0.2
+      ],
+      "right_gram_eigenvalues": [
+        0.04000000000000001,
+        0.04000000000000001,
+        0.48999999999999994
+      ],
+      "initial_spectral_probabilities": [
+        0.15,
+        0.25,
+        0.6
+      ],
+      "initial_state_is_defined_in_exact_right_eigenbasis": true,
+      "min_eigenspace_initial_mass": 0.4,
+      "iterations": [
+        {
+          "iterations": 0,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5567764362830021,
+            "target_mass": 0.4,
+            "mean_lambda": 0.30999999999999994,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5567764362830021,
+            "target_mass": 0.6,
+            "mean_lambda": 0.30999999999999994,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5567764362830021,
+            "target_mass": 0.4,
+            "mean_lambda": 0.30999999999999994,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5567764362830021,
+            "target_mass": 0.4,
+            "mean_lambda": 0.30999999999999994,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 1,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5567764362830021,
+            "target_mass": 0.4,
+            "mean_lambda": 0.30999999999999994,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.14469999999999994,
+            "estimate_sigma": 0.6985768928257278,
+            "target_mass": 0.9955770559778853,
+            "mean_lambda": 0.4880096751900483,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.8144651649192609,
+            "estimate_sigma": 0.5191385893248477,
+            "target_mass": 0.4899891668306825,
+            "mean_lambda": 0.26950487492619285,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.6447029588838955,
+            "estimate_sigma": 0.47600112290342805,
+            "target_mass": 0.5853842910992791,
+            "mean_lambda": 0.2265770690053244,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 2,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5567764362830021,
+            "target_mass": 0.4,
+            "mean_lambda": 0.30999999999999994,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.03458982999999998,
+            "estimate_sigma": 0.6999904843390583,
+            "target_mass": 0.9999703959227322,
+            "mean_lambda": 0.4899866781652294,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.6857362963149651,
+            "estimate_sigma": 0.4782422680021505,
+            "target_mass": 0.5806318513247983,
+            "mean_lambda": 0.2287156669038407,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.4751606750120877,
+            "estimate_sigma": 0.39087066136772014,
+            "target_mass": 0.7493780579599132,
+            "mean_lambda": 0.15277987391803896,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 4,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5567764362830021,
+            "target_mass": 0.4,
+            "mean_lambda": 0.30999999999999994,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.001993975836797498,
+            "estimate_sigma": 0.6999999995774242,
+            "target_mass": 0.9999999986853201,
+            "mean_lambda": 0.48999999940839395,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.5341623537200126,
+            "estimate_sigma": 0.39511553832316026,
+            "target_mass": 0.7419638030568871,
+            "mean_lambda": 0.15611628862440072,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.3406091550551458,
+            "estimate_sigma": 0.26688304093185844,
+            "target_mass": 0.9306076499176977,
+            "mean_lambda": 0.07122655753703604,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 8,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5567764362830021,
+            "target_mass": 0.4,
+            "mean_lambda": 0.30999999999999994,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 6.626566045463509e-06,
+            "estimate_sigma": 0.7,
+            "target_mass": 1.0,
+            "mean_lambda": 0.48999999999999994,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.4243552796401244,
+            "estimate_sigma": 0.27125046178554485,
+            "target_mass": 0.9253848599580637,
+            "mean_lambda": 0.07357681301887134,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.25211155080567343,
+            "estimate_sigma": 0.20411246390898605,
+            "target_mass": 0.9963068935044509,
+            "mean_lambda": 0.041661897922997126,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 16,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5567764362830021,
+            "target_mass": 0.4,
+            "mean_lambda": 0.30999999999999994,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 7.318562925814983e-11,
+            "estimate_sigma": 0.7,
+            "target_mass": 1.0,
+            "mean_lambda": 0.48999999999999994,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.38718836495940967,
+            "estimate_sigma": 0.20479749232102457,
+            "target_mass": 0.9956844158644886,
+            "mean_lambda": 0.041942012860980114,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.15773052364252632,
+            "estimate_sigma": 0.20001030489305535,
+            "target_mass": 0.9999908398590824,
+            "mean_lambda": 0.040004122063412965,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 32,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5567764362830021,
+            "target_mass": 0.4,
+            "mean_lambda": 0.30999999999999994,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 8.926893883185595e-21,
+            "estimate_sigma": 0.7,
+            "target_mass": 1.0,
+            "mean_lambda": 0.48999999999999994,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.3715638581478171,
+            "estimate_sigma": 0.2000140888739669,
+            "target_mass": 0.9999874761153708,
+            "mean_lambda": 0.04000563574808313,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.062196155758084154,
+            "estimate_sigma": 0.2000000000629323,
+            "target_mass": 0.9999999999440602,
+            "mean_lambda": 0.04000000002517293,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 64,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5567764362830021,
+            "target_mass": 0.4,
+            "mean_lambda": 0.30999999999999994,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 1.3281572400276064e-40,
+            "estimate_sigma": 0.7,
+            "target_mass": 1.0,
+            "mean_lambda": 0.48999999999999994,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.345140606575638,
+            "estimate_sigma": 0.20000000011763874,
+            "target_mass": 0.9999999998954323,
+            "mean_lambda": 0.04000000004705549,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.009670904476627685,
+            "estimate_sigma": 0.2,
+            "target_mass": 1.0,
+            "mean_lambda": 0.04000000000000001,
+            "target_mode": "min"
+          }
+        }
+      ],
+      "cos_gram_taylor_proxies": [
+        {
+          "taylor_half_degree": 1,
+          "polynomial_degree": 2,
+          "uniform_error_upper_bound": 0.15905743740795286,
+          "empirical_grid_max_abs": 0.9204712812960235,
+          "t8_estimate_sigma": 0.2659753684042177,
+          "t8_target_mass": 0.9316824520049791,
+          "t8_success_probability": 0.1119299821073022
+        },
+        {
+          "taylor_half_degree": 2,
+          "polynomial_degree": 4,
+          "uniform_error_upper_bound": 0.008260143532741016,
+          "empirical_grid_max_abs": 0.9958699282336295,
+          "t8_estimate_sigma": 0.2713133139936015,
+          "t8_target_mass": 0.9253090792217988,
+          "t8_success_probability": 0.39719801617122197
+        },
+        {
+          "taylor_half_degree": 3,
+          "polynomial_degree": 6,
+          "uniform_error_upper_bound": 0.0002132618286997032,
+          "empirical_grid_max_abs": 0.9998933690856501,
+          "t8_estimate_sigma": 0.2712500729544003,
+          "t8_target_mass": 0.9253853287160723,
+          "t8_success_probability": 0.42363165349395965
+        },
+        {
+          "taylor_half_degree": 6,
+          "polynomial_degree": 12,
+          "uniform_error_upper_bound": 2.9455004145797573e-10,
+          "empirical_grid_max_abs": 0.9999999998527249,
+          "t8_estimate_sigma": 0.2712504617855525,
+          "t8_target_mass": 0.9253848599580545,
+          "t8_success_probability": 0.42435527864017664
+        }
+      ],
+      "shot_readout": null
+    },
+    {
+      "name": "zero_minimum_overlap",
+      "description": "initial state has no component in the minimum eigenspace",
+      "matrix_shape": [
+        3,
+        3
+      ],
+      "singular_values_as_returned": [
+        0.86,
+        0.48,
+        0.12
+      ],
+      "right_gram_eigenvalues": [
+        0.0144,
+        0.2304,
+        0.7395999999999999
+      ],
+      "initial_spectral_probabilities": [
+        0.0,
+        0.4,
+        0.6
+      ],
+      "initial_state_is_defined_in_exact_right_eigenbasis": true,
+      "min_eigenspace_initial_mass": 0.0,
+      "iterations": [
+        {
+          "iterations": 0,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.7320655708336514,
+            "target_mass": 0.0,
+            "mean_lambda": 0.53592,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.7320655708336514,
+            "target_mass": 0.6,
+            "mean_lambda": 0.53592,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.7320655708336514,
+            "target_mass": 0.0,
+            "mean_lambda": 0.53592,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.7320655708336514,
+            "target_mass": 0.0,
+            "mean_lambda": 0.53592,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 1,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.7320655708336514,
+            "target_mass": 0.0,
+            "mean_lambda": 0.53592,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.3494385599999999,
+            "estimate_sigma": 0.841818518700764,
+            "target_mass": 0.9392349144295925,
+            "mean_lambda": 0.7086584184275484,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.6093467435681865,
+            "estimate_sigma": 0.6559322713812155,
+            "target_mass": 0.0,
+            "mean_lambda": 0.4302471446393205,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.4392971671485797,
+            "estimate_sigma": 0.6430404355440743,
+            "target_mass": 0.0,
+            "mean_lambda": 0.4135010017447128,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 2,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.7320655708336514,
+            "target_mass": 0.0,
+            "mean_lambda": 0.53592,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.1806579274811135,
+            "estimate_sigma": 0.8581509018792339,
+            "target_mass": 0.9937607431188976,
+            "mean_lambda": 0.7364229703961426,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.437933151541917,
+            "estimate_sigma": 0.5841533405113274,
+            "target_mass": 0.0,
+            "mean_lambda": 0.3412351252305428,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.239457752086653,
+            "estimate_sigma": 0.5646557569801215,
+            "target_mass": 0.0,
+            "mean_lambda": 0.31883612389079397,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 4,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.7320655708336514,
+            "target_mass": 0.0,
+            "mean_lambda": 0.53592,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.053721997028559135,
+            "estimate_sigma": 0.8599824962134536,
+            "target_mass": 0.9999408754782457,
+            "mean_lambda": 0.7395698937935227,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.3085986765325913,
+            "estimate_sigma": 0.5053595784772309,
+            "target_mass": 0.0,
+            "mean_lambda": 0.2553883035586845,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.10076352307316135,
+            "estimate_sigma": 0.4949415493327164,
+            "target_mass": 0.0,
+            "mean_lambda": 0.24496713725586972,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 8,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.7320655708336514,
+            "target_mass": 0.0,
+            "mean_lambda": 0.53592,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.004809519528259876,
+            "estimate_sigma": 0.8599999984474777,
+            "target_mass": 0.9999999947558162,
+            "mean_lambda": 0.7395999973296615,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.2156712617817076,
+            "estimate_sigma": 0.48093914760151185,
+            "target_mass": 0.0,
+            "mean_lambda": 0.23130246369566881,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.02396552150706289,
+            "estimate_sigma": 0.4803064211581848,
+            "target_mass": 0.0,
+            "mean_lambda": 0.23069425820578357,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 16,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.7320655708336514,
+            "target_mass": 0.0,
+            "mean_lambda": 0.53592,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 3.8552463083502764e-05,
+            "estimate_sigma": 0.86,
+            "target_mass": 1.0,
+            "mean_lambda": 0.7395999999999999,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.11587365313508007,
+            "estimate_sigma": 0.4800011146742196,
+            "target_mass": 0.0,
+            "mean_lambda": 0.23040107008849328,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.001434206826326682,
+            "estimate_sigma": 0.48000011822469874,
+            "target_mass": 0.0,
+            "mean_lambda": 0.23040011349572476,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 32,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.7320655708336514,
+            "target_mass": 0.0,
+            "mean_lambda": 0.53592,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 2.477154016341406e-09,
+            "estimate_sigma": 0.86,
+            "target_mass": 1.0,
+            "mean_lambda": 0.7395999999999999,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.03356661764571349,
+            "estimate_sigma": 0.4800000000015616,
+            "target_mass": 0.0,
+            "mean_lambda": 0.23040000000149918,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 5.142370759335737e-06,
+            "estimate_sigma": 0.4800000000000176,
+            "target_mass": 0.0,
+            "mean_lambda": 0.23040000000001687,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 64,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.7320655708336514,
+            "target_mass": 0.0,
+            "mean_lambda": 0.53592,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 1.0227153367793934e-17,
+            "estimate_sigma": 0.86,
+            "target_mass": 1.0,
+            "mean_lambda": 0.7395999999999999,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.002816794550417224,
+            "estimate_sigma": 0.48,
+            "target_mass": 0.0,
+            "mean_lambda": 0.2304,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 6.610994256617364e-11,
+            "estimate_sigma": 0.48,
+            "target_mass": 0.0,
+            "mean_lambda": 0.2304,
+            "target_mode": "min"
+          }
+        }
+      ],
+      "cos_gram_taylor_proxies": [
+        {
+          "taylor_half_degree": 1,
+          "polynomial_degree": 2,
+          "uniform_error_upper_bound": 0.15905743740795286,
+          "empirical_grid_max_abs": 0.9204712812960235,
+          "t8_estimate_sigma": 0.480492270480511,
+          "t8_target_mass": 0.0,
+          "t8_success_probability": 0.056994756650294805
+        },
+        {
+          "taylor_half_degree": 2,
+          "polynomial_degree": 4,
+          "uniform_error_upper_bound": 0.008260143532741016,
+          "empirical_grid_max_abs": 0.9958699282336295,
+          "t8_estimate_sigma": 0.4809551507669467,
+          "t8_target_mass": 0.0,
+          "t8_success_probability": 0.20186071206719966
+        },
+        {
+          "taylor_half_degree": 3,
+          "polynomial_degree": 6,
+          "uniform_error_upper_bound": 0.0002132618286997032,
+          "empirical_grid_max_abs": 0.9998933690856501,
+          "t8_estimate_sigma": 0.48093892298922797,
+          "t8_target_mass": 0.0,
+          "t8_success_probability": 0.21530350577608923
+        },
+        {
+          "taylor_half_degree": 6,
+          "polynomial_degree": 12,
+          "uniform_error_upper_bound": 2.9455004145797573e-10,
+          "empirical_grid_max_abs": 0.9999999998527249,
+          "t8_estimate_sigma": 0.4809391476015629,
+          "t8_target_mass": 0.0,
+          "t8_success_probability": 0.2156712612735212
+        }
+      ],
+      "shot_readout": null
+    },
+    {
+      "name": "wide_full_row_rank",
+      "description": "wide full-row-rank matrix; right Gram includes a kernel",
+      "matrix_shape": [
+        2,
+        3
+      ],
+      "singular_values_as_returned": [
+        0.8,
+        0.4
+      ],
+      "right_gram_eigenvalues": [
+        0.0,
+        0.16000000000000003,
+        0.6400000000000001
+      ],
+      "initial_spectral_probabilities": [
+        0.16,
+        0.16,
+        0.68
+      ],
+      "initial_state_is_defined_in_exact_right_eigenbasis": true,
+      "min_eigenspace_initial_mass": 0.16,
+      "iterations": [
+        {
+          "iterations": 0,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.6788225099390857,
+            "target_mass": 0.16,
+            "mean_lambda": 0.4608000000000001,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.6788225099390857,
+            "target_mass": 0.68,
+            "mean_lambda": 0.4608000000000001,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.6788225099390857,
+            "target_mass": 0.16,
+            "mean_lambda": 0.4608000000000001,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.6788225099390857,
+            "target_mass": 0.16,
+            "mean_lambda": 0.4608000000000001,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 1,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.6788225099390857,
+            "target_mass": 0.16,
+            "mean_lambda": 0.4608000000000001,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.28262400000000015,
+            "estimate_sigma": 0.795640294518113,
+            "target_mass": 0.9855072463768116,
+            "mean_lambda": 0.6330434782608697,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.6660022461079136,
+            "estimate_sigma": 0.6124792469808615,
+            "target_mass": 0.2402394300244971,
+            "mean_lambda": 0.37513082798224323,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.5095507174944912,
+            "estimate_sigma": 0.5660895578513652,
+            "target_mass": 0.314002109126124,
+            "mean_lambda": 0.3204573875083541,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 2,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.6788225099390857,
+            "target_mass": 0.16,
+            "mean_lambda": 0.4608000000000001,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.11418992640000009,
+            "estimate_sigma": 0.799724470458506,
+            "target_mass": 0.9990817263544537,
+            "mean_lambda": 0.6395592286501379,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.49059402645577443,
+            "estimate_sigma": 0.534716354387971,
+            "target_mass": 0.32613523885705836,
+            "mean_lambda": 0.28592157964996223,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.332609009714529,
+            "estimate_sigma": 0.43497683020918726,
+            "target_mass": 0.48104529741189056,
+            "mean_lambda": 0.18920484281883213,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 4,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.6788225099390857,
+            "target_mass": 0.16,
+            "mean_lambda": 0.4608000000000001,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.019140367135801375,
+            "estimate_sigma": 0.7999989229121494,
+            "target_mass": 0.9999964097095814,
+            "mean_lambda": 0.6399982766605992,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.3466678247111548,
+            "estimate_sigma": 0.3919517996165721,
+            "target_mass": 0.4615369197684057,
+            "mean_lambda": 0.1536262132226695,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.2292637463098405,
+            "estimate_sigma": 0.2549571155711117,
+            "target_mass": 0.6978861794562433,
+            "mean_lambda": 0.06500313078034121,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 8,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.6788225099390857,
+            "target_mass": 0.16,
+            "mean_lambda": 0.4608000000000001,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.000538751505126514,
+            "estimate_sigma": 0.799999999983565,
+            "target_mass": 0.9999999999452163,
+            "mean_lambda": 0.6399999999737039,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.28240980609818456,
+            "estimate_sigma": 0.2743846446296362,
+            "target_mass": 0.5665525649076552,
+            "mean_lambda": 0.07528693320853173,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.183581825794725,
+            "estimate_sigma": 0.1442090720095243,
+            "target_mass": 0.8715459676215803,
+            "mean_lambda": 0.020796256449848165,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 16,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.6788225099390857,
+            "target_mass": 0.16,
+            "mean_lambda": 0.4608000000000001,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 4.26842918006297e-07,
+            "estimate_sigma": 0.8,
+            "target_mass": 1.0,
+            "mean_lambda": 0.6400000000000001,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.24840184058280998,
+            "estimate_sigma": 0.23869611592366088,
+            "target_mass": 0.644117610499994,
+            "mean_lambda": 0.05697583575704176,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.16344824309758724,
+            "estimate_sigma": 0.05809934182304422,
+            "target_mass": 0.9789031498152694,
+            "mean_lambda": 0.0033755335202709353,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 32,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.6788225099390857,
+            "target_mass": 0.16,
+            "mean_lambda": 0.4608000000000001,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 2.679336421354858e-13,
+            "estimate_sigma": 0.8,
+            "target_mass": 1.0,
+            "mean_lambda": 0.6400000000000001,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.20882321965390827,
+            "estimate_sigma": 0.19341217631059132,
+            "target_mass": 0.7661983196369394,
+            "mean_lambda": 0.03740826994519927,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.16007431432761324,
+            "estimate_sigma": 0.008618574549633046,
+            "target_mass": 0.999535751079582,
+            "mean_lambda": 7.427982726758247e-05,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 64,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.6788225099390857,
+            "target_mass": 0.16,
+            "mean_lambda": 0.4608000000000001,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 1.0557123027645084e-25,
+            "estimate_sigma": 0.8,
+            "target_mass": 1.0,
+            "mean_lambda": 0.6400000000000001,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.17489816706995223,
+            "estimate_sigma": 0.11674378842123849,
+            "target_mass": 0.9148180491566069,
+            "mean_lambda": 0.0136291121349429,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.16000003451637057,
+            "estimate_sigma": 0.0001857857989929405,
+            "target_mass": 0.9999997842727305,
+            "mean_lambda": 3.451636310744529e-08,
+            "target_mode": "min"
+          }
+        }
+      ],
+      "cos_gram_taylor_proxies": [
+        {
+          "taylor_half_degree": 1,
+          "polynomial_degree": 2,
+          "uniform_error_upper_bound": 0.15905743740795286,
+          "empirical_grid_max_abs": 0.9204712812960235,
+          "t8_estimate_sigma": 0.2708096597417234,
+          "t8_target_mass": 0.5686955208311628,
+          "t8_success_probability": 0.07471435713534955
+        },
+        {
+          "taylor_half_degree": 2,
+          "polynomial_degree": 4,
+          "uniform_error_upper_bound": 0.008260143532741016,
+          "empirical_grid_max_abs": 0.9958699282336295,
+          "t8_estimate_sigma": 0.27446475665921466,
+          "t8_target_mass": 0.5665082224418783,
+          "t8_success_probability": 0.26433560167404024
+        },
+        {
+          "taylor_half_degree": 3,
+          "polynomial_degree": 6,
+          "uniform_error_upper_bound": 0.0002132618286997032,
+          "empirical_grid_max_abs": 0.9998933690856501,
+          "t8_estimate_sigma": 0.2743838005360571,
+          "t8_target_mass": 0.5665530297797674,
+          "t8_success_probability": 0.2819281420481964
+        },
+        {
+          "taylor_half_degree": 6,
+          "polynomial_degree": 12,
+          "uniform_error_upper_bound": 2.9455004145797573e-10,
+          "empirical_grid_max_abs": 0.9999999998527249,
+          "t8_estimate_sigma": 0.2743846446297166,
+          "t8_target_mass": 0.5665525649076106,
+          "t8_success_probability": 0.28240980543273586
+        }
+      ],
+      "shot_readout": null
+    },
+    {
+      "name": "rank_deficient_square",
+      "description": "square singular matrix; zero is the smallest singular value",
+      "matrix_shape": [
+        3,
+        3
+      ],
+      "singular_values_as_returned": [
+        0.8,
+        0.4,
+        0.0
+      ],
+      "right_gram_eigenvalues": [
+        0.0,
+        0.16000000000000003,
+        0.6400000000000001
+      ],
+      "initial_spectral_probabilities": [
+        0.3,
+        0.3,
+        0.4
+      ],
+      "initial_state_is_defined_in_exact_right_eigenbasis": true,
+      "min_eigenspace_initial_mass": 0.3,
+      "iterations": [
+        {
+          "iterations": 0,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5513619500836089,
+            "target_mass": 0.3,
+            "mean_lambda": 0.30400000000000005,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5513619500836089,
+            "target_mass": 0.4,
+            "mean_lambda": 0.30400000000000005,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5513619500836089,
+            "target_mass": 0.3,
+            "mean_lambda": 0.30400000000000005,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5513619500836089,
+            "target_mass": 0.3,
+            "mean_lambda": 0.30400000000000005,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 1,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5513619500836089,
+            "target_mass": 0.3,
+            "mean_lambda": 0.30400000000000005,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.1715200000000001,
+            "estimate_sigma": 0.7864524541805228,
+            "target_mass": 0.955223880597015,
+            "mean_lambda": 0.6185074626865673,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.7960338903346128,
+            "estimate_sigma": 0.47380845999183263,
+            "target_mass": 0.37686837663895817,
+            "mean_lambda": 0.22449445675983207,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.6675980676806887,
+            "estimate_sigma": 0.4274327289681668,
+            "target_mass": 0.4493721814417977,
+            "mean_lambda": 0.18269873779317436,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 2,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5513619500836089,
+            "target_mass": 0.3,
+            "mean_lambda": 0.30400000000000005,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.06730547200000005,
+            "estimate_sigma": 0.7991231806413603,
+            "target_mass": 0.997078870496592,
+            "mean_lambda": 0.6385978578383643,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.6856287262869357,
+            "estimate_sigma": 0.4061475616357557,
+            "target_mass": 0.4375545955092464,
+            "mean_lambda": 0.16495584182267,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.5289740941407982,
+            "estimate_sigma": 0.3294363821057131,
+            "target_mass": 0.567135523880964,
+            "mean_lambda": 0.10852832985490139,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 4,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5513619500836089,
+            "target_mass": 0.3,
+            "mean_lambda": 0.30400000000000005,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.011259127917445138,
+            "estimate_sigma": 0.799996566804384,
+            "target_mass": 0.9999885560391689,
+            "mean_lambda": 0.6399945068988012,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.58729809182242,
+            "estimate_sigma": 0.31890049096387935,
+            "target_mass": 0.5108138510531894,
+            "mean_lambda": 0.10169752313700331,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.4196272475520885,
+            "estimate_sigma": 0.22576223499816567,
+            "target_mass": 0.7149202101390255,
+            "mean_lambda": 0.05096858675136698,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 8,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5513619500836089,
+            "target_mass": 0.3,
+            "mean_lambda": 0.30400000000000005,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.00031691265011239857,
+            "estimate_sigma": 0.7999999999476132,
+            "target_mass": 0.999999999825377,
+            "mean_lambda": 0.6399999999161811,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.5250248989057289,
+            "estimate_sigma": 0.2654312901934564,
+            "target_mass": 0.5714014718640356,
+            "mean_lambda": 0.07045376981376286,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.3440960328124067,
+            "estimate_sigma": 0.14345909653455716,
+            "target_mass": 0.8718496332201341,
+            "mean_lambda": 0.02058051237851139,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 16,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5513619500836089,
+            "target_mass": 0.3,
+            "mean_lambda": 0.30400000000000005,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 2.510840694154688e-07,
+            "estimate_sigma": 0.8,
+            "target_mass": 1.0,
+            "mean_lambda": 0.6400000000000001,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.4657303751725772,
+            "estimate_sigma": 0.2386355970647763,
+            "target_mass": 0.6441495251170475,
+            "mean_lambda": 0.056946948186462266,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.3064654393808393,
+            "estimate_sigma": 0.058099048150341066,
+            "target_mass": 0.9789032022863602,
+            "mean_lambda": 0.0033754993959756495,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 32,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5513619500836089,
+            "target_mass": 0.3,
+            "mean_lambda": 0.30400000000000005,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 1.576080247855799e-13,
+            "estimate_sigma": 0.8,
+            "target_mass": 1.0,
+            "mean_lambda": 0.6400000000000001,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.3915435362425087,
+            "estimate_sigma": 0.19341217388934315,
+            "target_mass": 0.766198320827828,
+            "mean_lambda": 0.03740826900860151,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.3001393393642745,
+            "estimate_sigma": 0.0086185745495949,
+            "target_mass": 0.999535751079583,
+            "mean_lambda": 7.427982726692491e-05,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 64,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5513619500836089,
+            "target_mass": 0.3,
+            "mean_lambda": 0.30400000000000005,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 6.21007236920299e-26,
+            "estimate_sigma": 0.8,
+            "target_mass": 1.0,
+            "mean_lambda": 0.6400000000000001,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.3279340632561604,
+            "estimate_sigma": 0.11674378842123849,
+            "target_mass": 0.9148180491566068,
+            "mean_lambda": 0.013629112134942898,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.3000000647181948,
+            "estimate_sigma": 0.0001857857989929405,
+            "target_mass": 0.9999997842727305,
+            "mean_lambda": 3.451636310744529e-08,
+            "target_mode": "min"
+          }
+        }
+      ],
+      "cos_gram_taylor_proxies": [
+        {
+          "taylor_half_degree": 1,
+          "polynomial_degree": 2,
+          "uniform_error_upper_bound": 0.15905743740795286,
+          "empirical_grid_max_abs": 0.9204712812960235,
+          "t8_estimate_sigma": 0.2642132436803658,
+          "t8_target_mass": 0.572237418696116,
+          "t8_success_probability": 0.13922232775384447
+        },
+        {
+          "taylor_half_degree": 2,
+          "polynomial_degree": 4,
+          "uniform_error_upper_bound": 0.008260143532741016,
+          "empirical_grid_max_abs": 0.9958699282336295,
+          "t8_estimate_sigma": 0.265457778607586,
+          "t8_target_mass": 0.5713871318683751,
+          "t8_success_probability": 0.4913972183233412
+        },
+        {
+          "taylor_half_degree": 3,
+          "polynomial_degree": 6,
+          "uniform_error_upper_bound": 0.0002132618286997032,
+          "empirical_grid_max_abs": 0.9998933690856501,
+          "t8_estimate_sigma": 0.26543101170441463,
+          "t8_target_mass": 0.57140162033756,
+          "t8_success_probability": 0.5241297365521103
+        },
+        {
+          "taylor_half_degree": 6,
+          "polynomial_degree": 12,
+          "uniform_error_upper_bound": 2.9455004145797573e-10,
+          "empirical_grid_max_abs": 0.9999999998527249,
+          "t8_estimate_sigma": 0.26543129019348294,
+          "t8_target_mass": 0.5714014718640212,
+          "t8_success_probability": 0.5250248976685727
+        }
+      ],
+      "shot_readout": null
+    },
+    {
+      "name": "rotated_tall_full_column_rank",
+      "description": "non-diagonal tall full-column-rank matrix in rotated singular bases",
+      "matrix_shape": [
+        3,
+        2
+      ],
+      "singular_values_as_returned": [
+        0.65,
+        0.15
+      ],
+      "right_gram_eigenvalues": [
+        0.0225,
+        0.4225000000000001
+      ],
+      "initial_spectral_probabilities": [
+        0.35,
+        0.65
+      ],
+      "initial_state_is_defined_in_exact_right_eigenbasis": true,
+      "min_eigenspace_initial_mass": 0.35,
+      "iterations": [
+        {
+          "iterations": 0,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5315072906367325,
+            "target_mass": 0.35,
+            "mean_lambda": 0.2825000000000001,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5315072906367325,
+            "target_mass": 0.65,
+            "mean_lambda": 0.2825000000000001,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5315072906367325,
+            "target_mass": 0.35,
+            "mean_lambda": 0.2825000000000001,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5315072906367325,
+            "target_mass": 0.35,
+            "mean_lambda": 0.2825000000000001,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 1,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5315072906367325,
+            "target_mass": 0.35,
+            "mean_lambda": 0.2825000000000001,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.11620625000000005,
+            "estimate_sigma": 0.6495306713664645,
+            "target_mass": 0.9984752326144248,
+            "mean_lambda": 0.42189009304577,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.8464973851437354,
+            "estimate_sigma": 0.5071815651721757,
+            "target_mass": 0.41316714987375536,
+            "mean_lambda": 0.2572331400504979,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.6672906821875755,
+            "estimate_sigma": 0.4684238681583283,
+            "target_mass": 0.5076976993489727,
+            "mean_lambda": 0.21942092026041096,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 2,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5315072906367325,
+            "target_mass": 0.35,
+            "mean_lambda": 0.2825000000000001,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.02071200253906252,
+            "estimate_sigma": 0.6499986674205541,
+            "target_mass": 0.9999956691212399,
+            "mean_lambda": 0.4224982676484961,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.729125424641687,
+            "estimate_sigma": 0.4803841396123097,
+            "target_mass": 0.4793276960223524,
+            "mean_lambda": 0.23076892159105905,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.49395112321081425,
+            "estimate_sigma": 0.3961674767161769,
+            "target_mass": 0.6638783259808436,
+            "mean_lambda": 0.15694866960766257,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 4,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5315072906367325,
+            "target_mass": 0.35,
+            "mean_lambda": 0.2825000000000001,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 0.0006599743591066498,
+            "estimate_sigma": 0.6499999999892819,
+            "target_mass": 0.9999999999651662,
+            "mean_lambda": 0.4224999999860666,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.5707085292658358,
+            "estimate_sigma": 0.42178816784238743,
+            "target_mass": 0.6114868536704051,
+            "mean_lambda": 0.177905258531838,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.34964737217426206,
+            "estimate_sigma": 0.26648667421805394,
+            "target_mass": 0.878712131160502,
+            "mean_lambda": 0.07101514753579923,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 8,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5315072906367325,
+            "target_mass": 0.35,
+            "mean_lambda": 0.2825000000000001,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 6.701017763813668e-07,
+            "estimate_sigma": 0.65,
+            "target_mass": 1.0,
+            "mean_lambda": 0.4225000000000001,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.4236001899229876,
+            "estimate_sigma": 0.30646660043786883,
+            "target_mass": 0.8214455570401392,
+            "mean_lambda": 0.09392177718394436,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.27246980144726546,
+            "estimate_sigma": 0.16297805583598934,
+            "target_mass": 0.9898453832898029,
+            "mean_lambda": 0.026561846684078863,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 16,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5315072906367325,
+            "target_mass": 0.35,
+            "mean_lambda": 0.2825000000000001,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 6.908252164760972e-13,
+            "estimate_sigma": 0.65,
+            "target_mass": 1.0,
+            "mean_lambda": 0.4225000000000001,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.35474199282948604,
+            "estimate_sigma": 0.1800667109456467,
+            "target_mass": 0.9751899490230423,
+            "mean_lambda": 0.03242402039078308,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.2078394767138803,
+            "estimate_sigma": 0.15007553562479575,
+            "target_mass": 0.9999433340173266,
+            "mean_lambda": 0.022522666393069338,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 32,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5315072906367325,
+            "target_mass": 0.35,
+            "mean_lambda": 0.2825000000000001,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 7.342145841834563e-25,
+            "estimate_sigma": 0.65,
+            "target_mass": 1.0,
+            "mean_lambda": 0.4225000000000001,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.3420478987088132,
+            "estimate_sigma": 0.1504638184730017,
+            "target_mass": 0.999651598326309,
+            "mean_lambda": 0.022639360669476402,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.12340672190021053,
+            "estimate_sigma": 0.15000000230561872,
+            "target_mass": 0.999999998270786,
+            "mean_lambda": 0.02250000069168562,
+            "target_mode": "min"
+          }
+        },
+        {
+          "iterations": 64,
+          "unfiltered": {
+            "success_probability": 1.0,
+            "estimate_sigma": 0.5315072906367325,
+            "target_mass": 0.35,
+            "mean_lambda": 0.2825000000000001,
+            "target_mode": "min"
+          },
+          "gram_power": {
+            "success_probability": 8.293400855810547e-49,
+            "estimate_sigma": 0.65,
+            "target_mass": 1.0,
+            "mean_lambda": 0.4225000000000001,
+            "target_mode": "max"
+          },
+          "cos_gram": {
+            "success_probability": 0.3340436089202529,
+            "estimate_sigma": 0.15000008720801586,
+            "target_mass": 0.9999999345939692,
+            "mean_lambda": 0.02250002616241236,
+            "target_mode": "min"
+          },
+          "cos_singular_value_variant": {
+            "success_probability": 0.04351205416424783,
+            "estimate_sigma": 0.15,
+            "target_mass": 1.0,
+            "mean_lambda": 0.0225,
+            "target_mode": "min"
+          }
+        }
+      ],
+      "cos_gram_taylor_proxies": [
+        {
+          "taylor_half_degree": 1,
+          "polynomial_degree": 2,
+          "uniform_error_upper_bound": 0.15905743740795286,
+          "empirical_grid_max_abs": 0.9204712812960235,
+          "t8_estimate_sigma": 0.30171719859206836,
+          "t8_target_mass": 0.828666830184386,
+          "t8_success_probability": 0.11151125688786043
+        },
+        {
+          "taylor_half_degree": 2,
+          "polynomial_degree": 4,
+          "uniform_error_upper_bound": 0.008260143532741016,
+          "empirical_grid_max_abs": 0.9958699282336295,
+          "t8_estimate_sigma": 0.3065077391634596,
+          "t8_target_mass": 0.8213825145822616,
+          "t8_success_probability": 0.39648920924683023
+        },
+        {
+          "taylor_half_degree": 3,
+          "polynomial_degree": 6,
+          "uniform_error_upper_bound": 0.0002132618286997032,
+          "empirical_grid_max_abs": 0.9998933690856501,
+          "t8_estimate_sigma": 0.30646641128792146,
+          "t8_target_mass": 0.8214458468807564,
+          "t8_success_probability": 0.4228779163850263
+        },
+        {
+          "taylor_half_degree": 6,
+          "polynomial_degree": 12,
+          "uniform_error_upper_bound": 2.9455004145797573e-10,
+          "empirical_grid_max_abs": 0.9999999998527249,
+          "t8_estimate_sigma": 0.30646660043787044,
+          "t8_target_mass": 0.8214455570401368,
+          "t8_success_probability": 0.42360018892481643
+        }
+      ],
+      "shot_readout": null
+    }
+  ],
+  "limitations": [
+    "classical diagonalization of small matrices; no quantum circuit or QSVT phase synthesis",
+    "conditional postselection probabilities are ideal spectral-model probabilities",
+    "polynomial boundedness follows from a Taylor remainder scaling argument; empirical grid maxima are diagnostic only",
+    "no end-to-end gate/query advantage is claimed",
+    "a zero initial overlap with the target eigenspace prevents convergence to that eigenspace",
+    "wide matrices target the zero eigenvalue of the right Gram unless the right kernel is excluded by an explicit promise"
+  ]
+}

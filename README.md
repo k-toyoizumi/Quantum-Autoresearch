@@ -54,8 +54,9 @@ AI Agentを活用し、量子アルゴリズム・量子数値線形代数の研
 | `memo/research/` | 文献調査・仮説・理論検討 |
 | `memo/experiments/` | 実験過程・失敗・解釈 |
 | `memo/reviews/` | 批判的レビューと対応過程 |
+| `paper/qmsve/` | QMSVE日英技術報告草稿、PDF、ビルド・再現手順 |
 
-実装・実験・Lean・論文用のディレクトリは、対応する作業を開始する際に追加します。
+実装・実験・Lean・論文用のディレクトリは、作業に応じて追加します。QMSVE技術報告の確認用草稿は `paper/qmsve/` にあります。
 
 ## 過去の研究資産
 
@@ -80,3 +81,8 @@ AI Agentを活用し、量子アルゴリズム・量子数値線形代数の研
 [確定した研究方向](docs/project/research-direction.md)、[候補比較の小調査](memo/research/2026-10-23_filter-topic-comparison_2.md)、[段階1レビュー](memo/research/2026-10-24_2_filter-literature-and-asset-review.md)、[QSVTツールチェーン比較](memo/research/2026-10-24_3_qsvt-toolchain-review.md)、[段階2への引継ぎ](memo/research/2026-10-24_4_stage1-remainder-review.md)、[段階2理論候補](memo/research/2026-10-24_5_stage2-theory-candidates.md)を参照してください。
 
 入力oracle、下流推定器、state preparation、失敗再試行、事前情報費用、精度・信頼度、全工程最大深さ、具体的な対象系は今後具体化します。研究計画に従って比較条件を整え、環境構築・互換実験は合意後に小規模から行います。
+
+
+## QMSVE技術報告草稿
+
+2026-10-26時点で、既存QMSVE原案に基づく日本語稿・英語草稿、Lean形式化、行列レベル再現実験を `paper/qmsve/` と `lean/` に保存しています。著者・所属は未確定で、英語稿は未投稿・未公開です。仮定・再現手順・形式検証の範囲は各README、主張との対応は `paper/qmsve/claim-evidence.md` を参照してください。

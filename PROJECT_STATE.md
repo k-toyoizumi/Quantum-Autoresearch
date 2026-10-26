@@ -1,6 +1,6 @@
 # Project State
 
-更新日：2026-10-24（日本時間）
+更新日：2026-10-26（UTC）
 
 ## Goal
 化学・物性のエネルギー推定を対象に、深さ制約下の量子スペクトルフィルタ関数設計を調査する。
@@ -57,3 +57,13 @@
 - `results/calibration_free_fmpe_toy.json`
 - `experiments/gapfree_degree_minimax_exchange.py`
 - `results/gapfree_degree_minimax_exchange.json`
+
+
+## 2026-10-26：QMSVE技術報告草稿と検証
+今回のユーザー依頼に基づき、QMSVE原案を中心にした確認用日本語稿・英語技術報告草稿・Lean形式化・7例の行列レベル再現実験を作成した。英語稿は内部確認用の草稿で、著者・所属が未確定、未投稿・未公開であり、新規性・高速化は主張しない。主張と証拠・制限は `paper/qmsve/claim-evidence.md`、詳細は [作業memo](memo/research/2026-10-26_1_qmsve-technical-report-draft.md)。
+
+- PDF: `paper/qmsve/QMSVE-ja.pdf`（9頁）、`paper/qmsve/QMSVE-en.pdf`（10頁）。XeLaTeX二回実行後に全ページ描画QA済み。IPAexフォントのstyle fallback警告のみ。
+- 英語ソース/再現パッケージ: `paper/qmsve/QMSVE-source.zip`。別の空ディレクトリへ展開して2回コンパイル成功。実験スクリプト・JSON・図・Lean sourceと検証記録を含む。
+- 実験: `experiments/qmsve_matrix_level.py` を再実行し、`results/qmsve_matrix_level.json` のJSON parse成功。既知右固有基底で指定した人工スペクトル重みの古典行列監査であり、量子回路/QSVT位相/未知状態準備を検証していない。
+- Lean: `lean/QMSVE.lean` SHA-256 `bc9a5a6729b813b1695519174c0ae0f87db7ec00c2c52448b7bc4e9c7e7ada75`。Lean 4.35.0 / Mathlib v4.35.0で `lake build QMSVE`, `lake env lean Audit.lean` ともexit 0。二つの有限スカラー定理のみ形式検証。行列/SVD/QSVT/測定・Hoeffding/全費用は形式化範囲外。
+- 次の確認は技術レビューと著者欄/書誌情報の確認。外部公開・投稿、回路合成、化学系での実装は未実施。
