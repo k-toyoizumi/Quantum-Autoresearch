@@ -1,0 +1,135 @@
+\section{理想回路・有限実行予算での精度}\label{sec:finite}
+前節までの方式は成功サンプル数を固定し、期待費用を評価する。
+ここでは回路・応答を理想的とし、ノイズを導入せず、全フィルタ試行を
+$T\geq1$回で打ち切る。棄却時にも読出し1を予約して1試行を
+$c_\psi+4n+1$単位と数えれば、総予算$B$から許される回数は
+$T_n(B)=\lfloor B/(c_\psi+4n+1)\rfloor$である。
+この保守的な計上を全候補に共通に課す。
+
+実装成功重みを$w$、成功確率を$z=\sum_i p_iw(\lambda_i)$、
+成功後の平均を$\mu=\sum_i p_i\lambda_iw(\lambda_i)/z$とする。
+Gram実験では$w=\kappa^2P^2$。1試行の結果は、棄却・成功かつ0・成功かつ1の
+3種類で、確率はそれぞれ$1-z,z(1-\mu),z\mu$である。よって
+\[
+ M\sim\operatorname{Bin}(T,z),\qquad
+ K\mid M=m\sim\operatorname{Bin}(m,\mu).
+\]
+$M=0$なら値を返さず、$M>0$なら$\widehat e=K/M$を返す。
+事前区間へのクリッピングはしない。値を返せない確率と、返せた場合の条件付き
+二乗誤差を別々に示し、成功数を総実行数と混同しない。
+
+\begin{proposition}[有限試行の厳密な法則]\label{prop:finite-law}
+$q=1-z$、$C_T(z)=1-q^T$とし、
+\[
+ H_T(z)=\sum_{m=1}^T\binom Tm z^mq^{T-m}/m,\qquad h_T(z)=H_T(z)/C_T(z)
+\]
+とおく。このとき
+\begin{equation}\label{eq:finite-mse}
+ \Pr(M=0)=q^T,\qquad
+ R_T=\mathbb E[(\widehat e-e)^2\mid M>0]
+ = (\mu-e)^2+\mu(1-\mu)h_T(z).
+\end{equation}
+無出力も失敗と数えた許容誤差$E$での失敗確率は厳密に
+\begin{equation}\label{eq:finite-failure}
+ q^T+\sum_{m=1}^T\binom Tm z^mq^{T-m}
+ \Pr\{\lvert\operatorname{Bin}(m,\mu)/m-e\rvert>E\}
+\end{equation}
+である。$h_T$は成功確率$z$に関して単調非増加で、
+$h_T(1)=1/T$、$z\downarrow0$で$h_T(z)\to1$。
+\end{proposition}
+\begin{proof}
+$M=m>0$で条件づけると、標本平均の平均は$\mu$、分散は
+$\mu(1-\mu)/m$。二乗誤差と失敗事象をそれぞれ$M$で平均すれば両式が得られる。
+正の二項分布は$\log(z/(1-z))$を自然母数とする指数型分布族なので、有限和を微分して
+\[
+ h_T'(z)=\frac{\operatorname{Cov}(1/M,M\mid M>0)}{z(1-z)}
+ =\frac{1-h_T(z)\mathbb E[M\mid M>0]}{z(1-z)}\leq0.
+\]
+最後はJensen不等式による。端点の極限は有限和から従う。
+\end{proof}
+
+これらの逆二項モーメントと統計的事実は既知であり\cite{Znid,Drakakis}、
+ショット雑音や$1/\sqrt T$則を新規性とはしない。
+$M$を期待値$Tz$に置き換える近似は有限回では厳密でない。
+$Tz$が小さい場合、値が返ったという条件下では成功数がほぼ1になるが、
+同時に無出力が多くなる。$T$を増やすと分散項は減る一方、
+固定フィルタのバイアス二乗は残る。MSEと固定信頼度の保証は異なる指標であり、
+後者は式\eqref{eq:finite-failure}で評価する。
+
+\begin{corollary}[固定締切での一様信頼度]\label{cor:deadline}
+全入力で$z\geq s>0$、$0\leq\mu-e\leq b<E$なら、無出力も失敗と数えて
+\begin{equation}\label{eq:deadline-confidence}
+ \Pr\{\text{無出力 または }|\widehat e-e|>E\}
+ \leq\min\{1,\,2[1-s(1-e^{-2(E-b)^2})]^T\}.
+\end{equation}
+よって信頼度$1-\delta$に十分な確定試行数は
+\[
+ T\geq\left\lceil\frac{\log(2/\delta)}
+ {-\log[1-s(1-e^{-2(E-b)^2})]}\right\rceil.
+\]
+\end{corollary}
+\begin{proof}
+$M=m>0$なら$e$から$E$を超える偏差は$\mu$から少なくとも$E-b$の偏差を必要とし、
+Hoeffding上界は$2e^{-2m(E-b)^2}$。$m=0$でも右辺は2なので失敗の上界となる。
+二項分布の母関数で平均し、$z\geq s$を使えば従う。
+\end{proof}
+これは既知の集中不等式と母関数の帰結であり、新しい集中不等式とはしない。
+バイアス・成功確率の証明書を、期待費用だけでなく固定締切での信頼度に接続する。
+
+\begin{theorem}[条件付きリスクの3固有値への縮約]\label{thm:three}
+$T,a,u$を固定し、連続な重み$0\leq w\leq1$が$[0,u]$上で正とする。
+許される全ての有限スペクトル・初期重みについての式\eqref{eq:finite-mse}の最大値は
+\begin{equation}\label{eq:three}
+ a\delta_e+(1-a)\{\theta\delta_x+(1-\theta)\delta_y\},\qquad
+ 0\leq e\leq u,\quad e\leq x,y\leq1,\quad0\leq\theta\leq1
+\end{equation}
+で達成される。固有値の重複を許すので、目標質量は$a$を超えてもよい。
+\end{theorem}
+\begin{proof}
+任意の入力から$e$での質量$a$を確保し、残りを元の有限支持上の確率測度$r$とする。
+必要なら$r$にも$e$を含める。この入力の事後平均$\mu$を固定し、
+\begin{equation}\label{eq:moment-lp}
+ \int dr=1,\qquad
+ \int(x-\mu)w(x)\,dr(x)=\frac{a}{1-a}(\mu-e)w(e),\qquad r\geq0
+\end{equation}
+の下で$\int w\,dr$を最小化する。元の測度が実行可能である。
+等式制約は高々2本なので、有限LPの最適基本解は高々2つの正の重みで表せる。
+新しい入力は$\mu$を保ち$z$を減らすため、$h_T$の単調性から条件付きMSEは減らない。
+目標の1点を加えて高々3固有値になる。逆に式\eqref{eq:three}は許される入力である。
+そのパラメータ集合はコンパクトで、$z\geq a\min_{[0,u]}w>0$よりリスクは連続。
+したがって最大値を達成する。
+\end{proof}
+
+これは既知のモーメント集合・基本解の議論\cite{Winkler,Pinelis}を、このリスクへ適用した
+正確な低次元化である。バイアス・分散・成功確率の別々の最悪例が同時に成立すると
+仮定するものではない。常に3点が必要とは主張しない。また格子性を持つ失敗確率、
+クリッピングした推定量、別の停止則に同じ縮約が成り立つとは述べない。
+
+\paragraph{計算可能な一様上界と選択.}
+全入力で$z\geq s>0$、$0\leq\mu-e\leq b$なら、
+$t_b=\min\{u+b,1/2\}$、$v_b=t_b(1-t_b)$に対し
+\begin{equation}\label{eq:finite-upper}
+ R_T\leq b^2+v_bh_T(s),\qquad \Pr(M=0)\leq(1-s)^T.
+\end{equation}
+上端零化の場合、無出力の上界は最小目標透過率と上端の2点で達成する。
+MSE上界は各最悪量が両立しない場合があり、一般に等号とはしない。
+\[
+ A_T=\frac{1-(1-s)^{T+1}}{(T+1)s},\quad
+ B_T=\frac{1-[1+(T+1)s](1-s)^{T+1}}{(T+1)(T+2)s^2}
+\]
+とおくと、厳密な計算用上界は
+\begin{equation}\label{eq:inverse-upper}
+ h_T(s)\leq\min\left\{1,
+ \frac{A_T+3B_T-\frac52(1-s)^T}{1-(1-s)^T}\right\}.
+\end{equation}
+実際、$m\geq1$で$1/m\leq1/(m+1)+3/[(m+1)(m+2)]$。
+右辺2項の全二項分布での期待値が$A_T,B_T$であり、$m=0$分を除くと
+$5(1-s)^T/2$を差し引く。実装では有理入力と外向き180bit累乗で包絡する。
+数値積分は厳密法則の照合用に限り、選択の証明書には用いない。
+
+有限候補群について$T_n(B)$でこのMSE上界を最小化し、
+無出力確率の保証上界を0.05以下に制限する。
+量子計算をしない事前中点も、最悪MSE$u^2/4$・無出力0の候補として含める。
+最適性は候補群の計算した上界に対してのみであり、一般的な量子推定の最適性ではない。
+ポストセレクションの既存議論\cite{Combes}と同様、棄却された実行を除外した
+条件付き精度だけから優位性を結論しない。

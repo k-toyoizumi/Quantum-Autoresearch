@@ -11,31 +11,31 @@
 \newcommand{\R}{\mathbb R}
 \newcommand{\ket}[1]{\lvert #1\rangle}
 \newcommand{\cP}{\mathcal P}
-\title{Prior-Robust QSVT Filter Selection\\for Gap-Free Spectral-Mean Estimation}
+\title{Prior-Robust QSVT Filter Selection:\\Gap-Free Bias and Finite-Budget Risk}
 \author{}
 \date{}
 \begin{document}
 \maketitle
 \begin{abstract}
-Selecting a spectral filter by its conditional convergence alone ignores the
-cost of rejected preparations. We study a specified alternative objective:
-minimizing the worst expected query cost of a filtered-mean estimator when
-only an interval containing the smallest normalized Gram eigenvalue and a
-lower bound on its initial probability mass are supplied. No spectral-gap
-bound or true target energy enters the design. A two-point characterization
-turns the uniform mean-bias requirement into coupled amplitude constraints.
-Our main structural result shows that imposing a zero at the upper spectral
-endpoint costs only one additional Gram-polynomial degree and a controlled
-factor in worst-case acceptance. In this class, a semi-infinite linear
-program exactly characterizes the best worst-case restart probability at
-each degree. We combine rational dual bounds, continuous Bernstein
-certificates and phase-response enclosures to select the degree and error
-allocation with a posteriori cost guarantees. Numerical experiments compare
-optimized, power, cosine-Taylor and Chebyshev responses under a common
-signal-query model. The results identify preparation-cost-dependent choices
-and quantify their distance from the restricted optimum. The contribution
-is a structural and certified design analysis of a fixed estimator and
-restart model, not a new QSVT primitive or a general quantum speedup.
+Spectral filtering must balance conditional bias against rejected preparations
+and finite measurement data. We study real QSVT filters for a specified
+spectral-mean estimator with only an interval containing the minimum and a
+lower bound on its initial mass; no spectral-gap promise enters selection.
+A two-point bias characterization and a controlled endpoint-nulling
+reduction yield an exact acceptance objective and certified polynomial
+selection in a restricted restart model. We then distinguish stopping after
+a fixed number of accepted readouts from stopping at a hard total budget.
+For ideal circuits and finite attempts, we give the conditional mean-square
+error and abstention law, and prove that the worst conditional risk is
+attained on at most three energies. Applying classical inverse-binomial
+moment bounds gives a computable prior-only finite-budget rule that includes
+the no-computation midpoint. Analytic priors for six small Ising chains
+connect the theory to a physical model. Experiments resolve sampling error,
+bias floors, abstention and budget-dependent choices, with 2.28 million
+sampling replicates. Finite sampling and moment-support arguments are
+established tools; the contribution is their explicit spectral-risk
+characterization and certified use in this fixed filter/estimator model,
+not a new QSVT primitive or a general quantum advantage.
 \end{abstract}
 
 \section{Introduction}
@@ -65,6 +65,14 @@ overlap bound. This identifies a semi-infinite linear program whose
 objective directly controls worst expected restart cost. Exact continuous
 feasibility certificates and corrected dual bounds then turn numerical
 design into a quantitatively certified selection rule.
+
+A second objective is needed when total executions are finite. Keeping
+only a prescribed number of successful readouts leaves the stopping time
+unbounded. We therefore analyze the exact ideal-circuit sampling law at a
+fixed attempt budget, prove a three-energy reduction for worst conditional
+MSE, and study a bound-based prior-only selection with abstention control.
+This extension uses classical binomial inverse moments and moment-set
+geometry, with attribution rather than claims of general statistical novelty.
 
 \paragraph{Relation to existing filtering.}
 Powers of cosine, spectral-ratio bounds, shifts and amplification already
@@ -426,6 +434,8 @@ instead cause an avoidable exponential penalty; synthesizing the whole
 polynomial once avoids that particular artifact.
 
 \input{results-en.tex}
+\input{finite-en.tex}
+\input{finite-results-en.tex}
 
 \section{Discussion and limitations}
 The selection rule answers a concrete question with supplied prior
@@ -466,6 +476,13 @@ and selected phase responses can be checked on continuous intervals.
 The framework identifies when a change in preparation cost or prior
 information warrants a different response, while exposing the regimes
 where a fixed-filter mean estimator remains expensive.
+
+The finite-attempt extension separates abstention, conditional MSE and
+confidence. Its three-energy reduction characterizes the least favorable
+risk without assuming the separate worst quantities are jointly attainable.
+The numerical selection minimizes a certified bound within a finite catalog;
+it need not improve actual error on every spectrum. Ideal circuits remove
+hardware errors, while finite sampling and fixed-filter bias remain.
 
 \appendix
 \input{verification-en.tex}

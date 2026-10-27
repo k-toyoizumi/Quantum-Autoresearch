@@ -70,6 +70,32 @@ remote CI run is claimed; the reported success is local. The supplementary
 verification record includes source hashes and logs.
 
 \section{Reproducibility and scope of computation}
+The finite-attempt extension adds:
+\begin{itemize}
+\item \texttt{finite\_sampling.py}: rational risk bounds and law audits;
+\item \texttt{selection\_finite\_budget.py}: budget-based selection;
+\item \texttt{selection\_finite\_precision.py}: fixed-filter shot sweeps;
+\item \texttt{finite\_sampling\_figures.py}: figures and summary;
+\item \texttt{check\_finite\_sampling.py}: exact-law controls;
+\item \texttt{selection\_ising\_application.py}: analytic physical priors.
+\end{itemize}
+Saved input/source hashes link the application, budget and precision data.
+The count-mixture probability sum is numerically truncated with omitted
+probability approximately $10^{-12}$; its floating evaluation and the
+inverse-moment quadrature are audits, not rational certificates.
+The certificate calculations use exact fractions and outward fixed-point
+power enclosures. The 183 controls independently enumerate small binomial
+laws, compare exact reciprocal sums and check the upper bounds.
+
+Four additional scalar lemmas in \texttt{lean/FiniteSampling.lean} were
+checked locally with the same pinned toolchain, and their axiom audit
+reports only \texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}.
+They prove the pointwise inverse-count bound, risk monotonicity given
+inverse-count order, variance--bias algebra, and moment-ratio preservation.
+They do not formalize binomial expectations, Jensen, moment LPs or the
+three-energy theorem. The corresponding local logs and source hashes
+are supplied; no successful remote CI is claimed.
+
 The source package includes these entry points:
 \begin{itemize}
 \item \texttt{filter\_selection.py}: design and continuous certification;

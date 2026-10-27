@@ -3,9 +3,31 @@
 更新日：2026-10-27（日本時間）
 
 ## Goal
-本人の追加依頼により、QSVTの関数選択を具体的な推定器・費用モデルへ落とし、理論検討・数値実験を経てarXiv向け論文を完成する。著者情報は今は不要。外部投稿・公開は実施しない。
+本人の追加依頼：回路操作は理想的・測定は有限回として精度を理論と数値実験で調べ、新規性を批判的に検討し、研究・日英論文・再現資料を更新する。著者情報は今は不要、外部投稿は行わない。
 
-## 最新のWorking Set：2026-10-27 論文完成
+## 原本PDFとGitHub反映（2026-10-27追加依頼）
+- 本人指定のGoogle Driveから、QMSVE19頁とランチョス/共役勾配法16頁のPDF本体をダウンロードし、バイナリを編集せず保存。`references/qmsve/2023_0311_QMSVE.pdf`、`references/qcg/2023_0413_QLanzos_CG.pdf`。
+- 出典、サイズ、頁数、SHA-256は `references/original-pdfs.json`。原本保存コミットは `d038c25`。
+- 本人が原本を含むcommit/pushを明示依頼し、さらに「pdf本体も保存」と確認。未送信の有限サンプリング論文改訂も併せてmainへ反映する。arXivへの投稿は行わない。
+
+## 最新Working Set：2026-10-27 有限回精度と論文化
+- 原稿題名：Prior-Robust QSVT Filter Selection: Gap-Free Bias and Finite-Budget Risk。元の受理後サンプル数固定の保証と、棄却を含む総予算固定を区別。回路は理想応答とし、測定だけ有限回とする。
+- 手証明：正の二項逆数モーメントによる厳密条件付きMSE、無出力、許容誤差違反の混合式、固定締切での信頼度系、最悪条件付きMSEの高々3固有値への縮約。逆モーメント・モーメントLP自体は既知として20文献に位置づけ。
+- 選択：厳密有理数・180bit外向き累乗でMSE上界と無出力を認証。有限候補群の上界最小化のみ。事前中点を含め、48条件中21条件で量子計算なしを選ぶ。実入力ごとの最適性や一般量子優位ではない。
+- 実験：物理模型6条件×8予算、固定応答3本×13試行数、計114独立samplingバッチ×20,000回=228万回。MSE最大差3.31 Monte Carlo標準誤差。183厳密算術/列挙controls、100支持縮約controls。入力/ソースhash保存。
+- 成果物：`paper/filter-selection/finite-{en,ja}.tex`、`finite-results-{en,ja}.tex`、改訂日英PDF、`results/finite_budget.json`、`finite_precision.json`、`finite_sampling_summary.json`、`figures/finite_{precision,budget}.png`。追加査読は `finite-novelty-review.md`。
+- Lean：追加4スカラー補題をローカル確認。全3固有値定理や二項確率の形式化ではない。実ログ・hashは `lean/verification/finite-sampling-verification.md`。remote CI未実行。
+- 検証完了：最終英語19頁・日本語16頁を全頁描画確認。両ZIPを新規展開しコンパイル、328従来/183追加チェック、Gitなしpilot成功。日英ZIPでは有限予算pilotも成功。artifact監査passed、ハッシュ/頁数は `paper/filter-selection/validation-summary.json`。今回追加分も上記の本人push依頼の反映対象。arXiv未投稿。
+- 今回の目的は完了。詳細checkpoint：`memo/research/2026-10-27_finite-sampling-paper_3.md`、全要件の監査：`memo/reviews/2026-10-27_finite-sampling-completion-audit_4.md`。新しい本人依頼まで自動継続しない。以前のWorking Setは履歴として保全する。
+
+## 履歴：2026-10-27 具体的応用の初回試験
+- 本人の追加依頼でTFIM基底エネルギー推定を実験。4/6/8スピン、2結合条件、計6条件。解析的なエネルギー・重なり事前境界だけで選択後、厳密対角化で監査。
+- 全6条件で目標精度達成。Chebyshev型の保証費用は選択応答の1.001–1.173倍、指定制限最適下界に対する選択保証は1.0012–1.0989。保存位相の連続誤差上界最大2.04e-16。200回×6のsampling違反0。
+- `paper/filter-selection/ising-application.md` に方法・結果・限界。`memo/experiments/2026-10-27_ising-application_2.md` に引継ぎ。追加データは `results/selection_ising*.json`、図は `figures/selection_ising_application.png`。
+- エネルギーHamiltonianへの偶奇QSP写像と1/2振幅損失を明示。理想正規化信号のquery比較で、物理ゲート費用・古典優位・非可積分な応用性能は未実証。元の日英PDF/ZIPには組み込まず独立追加資料。今回追加分はローカル保存、未コミット・未push。
+- この小規模実証は完了。次の依頼で本格的な非可積分模型、初期状態・費用感度、同一oracleでの既存法比較や本文への組込みを検討する。
+
+## 履歴：2026-10-27 初回論文完成
 - 成果物：`paper/filter-selection/`。英語13頁・日本語11頁、英語投稿ZIP、日英再現ZIP、README、主張対応表、先行研究比較。
 - 主結果：gap-free一様平均バイアスの二点条件、上端零化の受理損失因子 `(1-u)(1-u-b)`、零化後の厳密最悪受理確率 `a*tau²`、固定推定・再試行モデルの半無限LP特徴づけ。全体は手証明、5つのスカラー補題はLean 4.35.0で実チェック成功。
 - 本実験10条件すべて `u>4E`。連続実行可能性・厳密双対下界で費用比1.0372–1.2394。保存QSP位相の連続誤差最大3.63e-16。全行列32次元抽出回路の数値検証、1,000スカラー/2,000行列sampling、328算術チェック成功。
@@ -15,7 +37,7 @@
 - 2026-10-27追加依頼：本人がGitHubへのpushを明示認可。完成原稿・コード・データと先行する今回のQMSVE改訂をmainへ記録・送信する。arXiv投稿は認可・実施していない。
 - 今回の研究・執筆・ローカル検証は完了。次に投稿する場合の著者情報・外部公開判断は本人が行う。無人継続は設定しない。
 
-## 最新のWorking Set：2026-10-26レビュー改訂
+## 履歴：2026-10-26レビュー改訂
 - 作業先：`/home/ktoyo/projects/Quantum-Autoresearch-github`。`git pull --ff-only` で `74273e4` を取得し、その上で未コミットの原稿改善を実施。別checkoutのローカル未送信履歴は統合しない。
 - 日英原稿を「Sharp Gap-Free Bias Bounds for Cosine and Polynomial Singular-Value Filters」へ改題。関連文献7→16件。直接重なるGe–Tura–Cirac、Lin–Tong、He–Zhang–Wang等との関係を明記。
 - 主結果候補：固定応答・最小値・目標質量に対する平均バイアスの正確な二点最悪包絡、cosine-Gram / dilationの鋭いgap-free定数・率。固定次数多項式baseline、Taylor正規化の指数的受理損失、受理後摂動評価を追加。完全な手証明あり。新しい定理はLean未検証。優先性・単独論文としての重要性は未確定。

@@ -2,13 +2,15 @@
 
 AI Agentを活用し、量子アルゴリズム・量子数値線形代数の研究を進めるプロジェクトです。
 
-## 最新の成果物（2026-10-27）
+## 最新の成果物（2026-10-27：有限サンプリング拡張）
 
-事前情報に頑健なQSVTフィルタ選択を、理論・数値実験・実装証明書を含む論文 **Prior-Robust QSVT Filter Selection for Gap-Free Spectral-Mean Estimation** にまとめました。上端零化による損失の定理と、固定推定・再試行モデルに限定した費用最適化を中心にしています。広い意味の関数選択やLPを新規性とは主張しません。
+**Prior-Robust QSVT Filter Selection: Gap-Free Bias and Finite-Budget Risk** に改訂しました。理想回路でも残る有限測定の精度を扱い、ランダム成功数を含む厳密なMSE・無出力・信頼度の式、最悪条件付きリスクの3固有値縮約、有限予算での保証上界による選択を追加しています。有限ショットやモーメント法自体を新規性とはしません。
 
-[英語PDF・13頁](paper/filter-selection/Filter-selection-en.pdf)、[日本語PDF・11頁](paper/filter-selection/Filter-selection-ja.pdf)、[arXiv用ソース](paper/filter-selection/Filter-selection-arxiv.zip)、[再現手順・検証結果](paper/filter-selection/README.md)、[批判的レビュー](paper/filter-selection/novelty-review.md)を参照してください。非自明な10条件で選択費用上界は制限クラスの最適費用下界の1.04–1.24倍。一般量子優位は主張せず、著者情報は希望により空欄、未投稿です。最新の引継ぎは [PROJECT_STATE.md](PROJECT_STATE.md)。
+[英語PDF・19頁](paper/filter-selection/Filter-selection-en.pdf)、[日本語PDF・16頁](paper/filter-selection/Filter-selection-ja.pdf)、[投稿用ソース](paper/filter-selection/Filter-selection-arxiv.zip)、[再現手順](paper/filter-selection/README.md)、[追加の新規性評価](paper/filter-selection/finite-novelty-review.md)。イジング模型6条件、48予算条件と固定応答の試行数変更を含め、計228万回の集約サンプリングを実施しました。一般量子優位は主張せず、著者情報は空欄、arXiv未投稿です。
 
-以前の[QMSVE原案レビュー](paper/qmsve/README.md)も保存しています。
+本人提供の原本PDF2件は、[references/](references/README.md) にPDF本体・出典・SHA-256を保存しています。
+
+以前の[QMSVE原案レビュー](paper/qmsve/README.md)も保存しています。現在地と検証の引継ぎは [PROJECT_STATE.md](PROJECT_STATE.md)。
 
 ## 目的
 

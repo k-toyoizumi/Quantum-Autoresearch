@@ -1,10 +1,21 @@
-# Prior-Robust QSVT Filter Selection for Gap-Free Spectral-Mean Estimation
+# Prior-Robust QSVT Filter Selection: Gap-Free Bias and Finite-Budget Risk
 
-最終確認日：2026-10-27（日本時間）。QMSVE原案から発展させた、固定平均推定器に対する事前情報に頑健なフィルタ選択の論文。著者情報は本人の希望により空欄。未投稿・未公開。
+改訂日：2026-10-27（日本時間）。回路は理想的、測定データは有限という条件の理論・実験を本文へ統合。著者情報は本人希望により空欄。arXiv未投稿。
 
-- [英語PDF・13頁](Filter-selection-en.pdf)、[日本語PDF・11頁](Filter-selection-ja.pdf)
-- [arXiv用・英語ソースZIP](Filter-selection-arxiv.zip)、[日英再現ソースZIP](Filter-selection-source.zip)
-- [投稿用ファイルの説明](submission-notes.md)、[主張と根拠](claim-evidence.md)、[先行研究との重複・批判的評価](novelty-review.md)
+- [英語PDF・19頁](Filter-selection-en.pdf)、[日本語PDF・16頁](Filter-selection-ja.pdf)
+- [arXiv向け英語ソースZIP](Filter-selection-arxiv.zip)、[日英再現ソースZIP](Filter-selection-source.zip)
+- [有限サンプリングの新規性評価](finite-novelty-review.md)、[主張と根拠](claim-evidence.md)、[元の先行研究比較](novelty-review.md)
+- [物性への応用の詳説](ising-application.md)、[有限サンプリング図](../../figures/finite_precision.png)、[有限予算選択図](../../figures/finite_budget.png)
+
+## 今回追加した研究
+
+成功数が集まるまで待つ方式と、棄却を含む総実行予算で止める方式を区別した。後者の成功数Mはランダムで、条件付きMSEは厳密に `(mu-e)^2+mu(1-mu)E[1/M | M>0]`、無出力は `(1-z)^T`。平均二乗精度と95%の精度保証は異なる。
+
+最悪の条件付き有限回リスクは高々3固有値で達成されることを証明。既知の二項逆数モーメント・モーメントLPを用いた、このスペクトル推定設定への限定的な構造的追加であり、有限ショットや一般統計原理の発明ではない。有限候補群では、連続応答証明書と有理数リスク上界を用いて、無出力確率を制限しつつ関数・次数を選ぶ。少予算では量子計算なしの事前中点も選択する。
+
+4/6/8スピンのイジング模型6条件、48予算条件、39固定フィルタ試行数条件を検証。114バッチ×20,000回、計228万回の集約サンプリングで厳密法則の数値評価と照合した。事前情報は解析的に与え、選択に真の固有値を使わない。100個の支持縮約照合、183の厳密有理和・区間チェックも成功。
+
+**限界**：保証上界が小さい選択が各物理入力で常に実際の誤差を小さくするわけではない。理想的な正規化Hamiltonian信号の費用比較で、実ゲート費用・一般量子優位を示さない。3固有値定理全体は手証明。追加4補題だけをローカルLean確認し、remote CIは未実行。
 
 ## 論文の核
 
@@ -50,3 +61,20 @@ python paper/filter-selection/package_arxiv.py
 ```
 
 各ZIPは新しい一時ディレクトリで本文のコンパイル、算術チェック、Git情報のない状態でのpilot実験に成功した場合だけ更新する。日英ZIPは両言語を検証する。arXiv ZIPは英語入口を一つにし、コード・データを `anc/` に置く。ZIP内のmanifestに各同梱ファイルのSHA-256を記録する。arXiv側の実行や投稿は実施していない。
+
+## 有限サンプリング部分の再現
+
+以下はリポジトリ直下から。元の抽象実験は再処理せず、保存済みの応用データを使える。
+
+```sh
+OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/qmsve-mpl .venv/bin/python experiments/check_finite_sampling.py
+OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/qmsve-mpl .venv/bin/python experiments/selection_finite_budget.py
+OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/qmsve-mpl .venv/bin/python experiments/selection_finite_precision.py
+MPLCONFIGDIR=/tmp/qmsve-mpl .venv/bin/python experiments/finite_sampling_figures.py
+```
+
+応用データから作る場合は先に `selection_ising_application.py` を実行する。短い有限予算pilotは `selection_finite_budget.py --pilot --repeats 1000`。保存先は `results/finite_budget.json`、`finite_precision.json`、`finite_sampling_summary.json`。候補・境界・入力/ソースハッシュを保存し、既存ファイルを無断で混ぜない。集約二項分布を使うので、10^12ショットを一つずつ量子回路シミュレートしたという意味ではない。
+
+追加Lean再現は `lean/` で `lake build FiniteSampling` と `lake env lean FiniteSamplingAudit.lean`。[確認記録](../../lean/verification/finite-sampling-verification.md)に実ログとハッシュ、厳密な検証範囲を記載した。
+
+最終の[成果物整合性監査結果](validation-summary.json)はpassed。PDFと両ZIPのハッシュ、頁数、コード/データ対応を記録。リポジトリの `experiments/audit_finite_update.py` で再確認できる（PDF監査のみPyMuPDFが別途必要）。両ZIPは最新版の別フォルダ展開コンパイルと算術/Gitなしpilotを通した。

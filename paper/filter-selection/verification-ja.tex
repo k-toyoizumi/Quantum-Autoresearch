@@ -53,6 +53,26 @@ Bernsteinアルゴリズム、位相区間証明、行列還元、query実装、
 補足記録にソースhashと実行ログを含める。
 
 \section{再現性と計算の範囲}
+有限回拡張の実行入口は次の通り。
+\begin{itemize}
+\item \texttt{finite\_sampling.py}：有理リスク上界と法則の監査。
+\item \texttt{selection\_finite\_budget.py}：有限予算の選択。
+\item \texttt{selection\_finite\_precision.py}：固定応答の試行数変更。
+\item \texttt{finite\_sampling\_figures.py}：図と要約。
+\item \texttt{check\_finite\_sampling.py}：厳密法則の対照検査。
+\item \texttt{selection\_ising\_application.py}：物理模型の事前情報。
+\end{itemize}
+小さい二項分布の厳密有理列挙、逆数和、包絡上界について183チェックを通した。
+二項混合の確率和は省略確率約$10^{-12}$以下の数値評価であり、逆数モーメントの
+数値積分とともに監査用に限る。選択上界は厳密有理数と外向き累乗包絡による。
+
+\texttt{lean/FiniteSampling.lean}の4スカラー補題も同じ固定toolchainで
+ローカル確認した。逆数指数の不等式、逆モーメント順序を仮定したリスク単調性、
+分散バイアス恒等式、モーメント比保存である。axiomは
+\texttt{propext}、\texttt{Classical.choice}、\texttt{Quot.sound}だけ。
+二項期待値、Jensen、モーメントLP、3固有値定理全体の形式化ではない。
+ソースハッシュと実ログを添付する。remote CI成功は主張しない。
+
 同梱する実行入口は以下である。
 \begin{itemize}
 \item \texttt{filter\_selection.py}：設計と連続証明。

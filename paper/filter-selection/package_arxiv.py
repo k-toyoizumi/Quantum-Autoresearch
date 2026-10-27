@@ -18,7 +18,7 @@ def main():
         source = Path(temporary) / 'source'
         source.mkdir()
         article = {'main.tex', 'results-en.tex', 'verification-en.tex',
-                   'references.tex', 'generated-table.tex'}
+                   'references.tex', 'generated-table.tex', 'finite-en.tex', 'finite-results-en.tex'}
         with ZipFile(PAPER / 'Filter-selection-source.zip') as archive:
             for name in archive.namelist():
                 if name in article or name.startswith('figures/') or name in {
@@ -26,7 +26,7 @@ def main():
                 }:
                     destination = source / name
                 elif name.startswith(('experiments/', 'results/', 'lean/')) or name in {
-                    'requirements.txt', 'claim-evidence.md', 'novelty-review.md'
+                    'requirements.txt', 'claim-evidence.md', 'novelty-review.md', 'finite-novelty-review.md', 'ising-application.md'
                 }:
                     destination = source / 'anc' / name
                 else:
@@ -45,6 +45,12 @@ environment and run:
   python experiments/selection_qsp.py
   python experiments/selection_matrix_audit.py
   python experiments/selection_figures.py
+  python experiments/selection_ising_application.py
+  python experiments/selection_ising_figures.py
+  python experiments/check_finite_sampling.py
+  python experiments/selection_finite_budget.py
+  python experiments/selection_finite_precision.py
+  python experiments/finite_sampling_figures.py
 The scripts use the data paths relative to this directory. No Git checkout
 is needed. Regeneration overwrites corresponding data and figures.
 For a short design run:
@@ -54,7 +60,9 @@ copy that table to the article source if regenerating the manuscript.
 From lean/, use the pinned toolchain:
   lake build Selection
   lake env lean SelectionAudit.lean
-Only the five documented scalar lemmas were checked in Lean.
+  lake build FiniteSampling
+  lake env lean FiniteSamplingAudit.lean
+Only the nine documented scalar lemmas were checked in Lean, not the full statistics.
 Read claim-evidence.md and novelty-review.md for the restricted claim scope.
 ''')
         manifest = {str(p.relative_to(source)): hashlib.sha256(p.read_bytes()).hexdigest()
@@ -69,6 +77,7 @@ Read claim-evidence.md and novelty-review.md for the restricted claim scope.
             env['MPLCONFIGDIR'] = '/tmp/qmsve-mpl'
             for arguments in [
                 ['experiments/check_selection_certificates.py'],
+                ['experiments/check_finite_sampling.py'],
                 ['experiments/filter_selection.py', '--pilot', '--output', 'work/pilot.json']
             ]:
                 subprocess.run([str(ROOT / '.venv/bin/python'), *arguments], cwd=build / 'anc',

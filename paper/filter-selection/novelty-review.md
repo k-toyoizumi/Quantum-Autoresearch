@@ -1,5 +1,7 @@
 # Positioning and critical novelty review
 
+The finite-attempt extension is now incorporated in both manuscripts. See [its additional literature/novelty assessment](finite-novelty-review.md). This file records the positioning of the original endpoint/restart component.
+
 The paper is a focused analytical/computational preprint about a specified estimator. It does not present “use different QSVT functions for different problems” as a discovery.
 
 ## Closest primary sources inspected

@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "audit_scope": "saved artifact and evidence consistency; not formal verification",
+  "physical_cases": 6,
+  "budget_conditions": 48,
+  "sampling_batches": 114,
+  "sampling_replicates": 2280000,
+  "prior_only_choices": 21,
+  "mathematics": "complete hand proofs in bilingual manuscripts; four additional scalar Lean lemmas locally checked",
+  "remote_ci": "not run for the finite-sampling extension",
+  "pdfs": {
+    "en": {
+      "pages": 19,
+      "sha256": "54c49433aea6b4e5b3516bfdc7e8a239d1028a3efcce8f4570ead2c6be6ee257"
+    },
+    "ja": {
+      "pages": 16,
+      "sha256": "a313d5c01f7d9bf95987fd81f7c591a86c6df17fc1308516eff33e3760112c53"
+    }
+  },
+  "archives": {
+    "Filter-selection-source.zip": {
+      "sha256": "573881e56c73201abcde76d070bbeebd4642e21a4de9e5f728ed45897004d7d1",
+      "manifest_files": 66
+    },
+    "Filter-selection-arxiv.zip": {
+      "sha256": "1da308580c185389e3319e6b3ade60df5c00d37d2a7d3af2fccd32c92cdd21d9",
+      "manifest_files": 65
+    }
+  }
+}

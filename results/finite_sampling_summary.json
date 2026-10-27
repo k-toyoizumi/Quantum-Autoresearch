@@ -1,0 +1,100 @@
+{
+  "physical_cases": 6,
+  "budget_conditions": 48,
+  "candidate_counts": [
+    27,
+    27,
+    24,
+    20,
+    19,
+    15
+  ],
+  "precision_sweep_conditions": 39,
+  "sampling_settings": 114,
+  "sampling_replicates": 2280000,
+  "maximum_mse_discrepancy_in_mc_standard_errors": 3.305388589058536,
+  "prior_only_selections": 21,
+  "support_reduction_controls": 100,
+  "maximum_reduced_support": 3,
+  "maximum_support_risk_inflation": 3.9537459310571346,
+  "precision_bias_floors": {
+    "4": 0.000762780624536971,
+    "7": 0.0003680471098458064,
+    "10": 0.00015722442165836434
+  },
+  "representative_original_degree": 7,
+  "representative_rows": [
+    {
+      "budget": 100,
+      "selected_id": "prior-midpoint",
+      "selected_degree": 0,
+      "original_energy_rmse": 1.020746430425888,
+      "original_abstention": 0.7105440203546265,
+      "original_tolerance_failure_lower_numeric": 1.0,
+      "selected_energy_rmse": 0.03547806180758042
+    },
+    {
+      "budget": 1000,
+      "selected_id": "prior-midpoint",
+      "selected_degree": 0,
+      "original_energy_rmse": 0.664774875157151,
+      "original_abstention": 0.03280272246799431,
+      "original_tolerance_failure_lower_numeric": 0.9999999999995537,
+      "selected_energy_rmse": 0.03547806180758042
+    },
+    {
+      "budget": 10000,
+      "selected_id": "prior-midpoint",
+      "selected_degree": 0,
+      "original_energy_rmse": 0.18664703615508604,
+      "original_abstention": 1.0249198032309368e-15,
+      "original_tolerance_failure_lower_numeric": 0.9999997862032625,
+      "selected_energy_rmse": 0.03547806180758042
+    },
+    {
+      "budget": 100000,
+      "selected_id": "budget-LP-1/8-4",
+      "selected_degree": 4,
+      "original_energy_rmse": 0.058263575540538494,
+      "original_abstention": 1.2790833489992209e-150,
+      "original_tolerance_failure_lower_numeric": 0.670362459659898,
+      "selected_energy_rmse": 0.037068182013315444
+    },
+    {
+      "budget": 1000000,
+      "selected_id": "budget-LP-1/16-6",
+      "selected_degree": 6,
+      "original_energy_rmse": 0.01840418507501711,
+      "original_abstention": 0.0,
+      "original_tolerance_failure_lower_numeric": 0.22647308251086512,
+      "selected_energy_rmse": 0.01592534805859633
+    },
+    {
+      "budget": 10000000,
+      "selected_id": "original-optimized",
+      "selected_degree": 7,
+      "original_energy_rmse": 0.005829663614192108,
+      "original_abstention": 0.0,
+      "original_tolerance_failure_lower_numeric": 0.0001566871174730012,
+      "selected_energy_rmse": 0.005829663614192108
+    },
+    {
+      "budget": 100000000,
+      "selected_id": "budget-LP-1/32-10",
+      "selected_degree": 10,
+      "original_energy_rmse": 0.001876252624803916,
+      "original_abstention": 0.0,
+      "original_tolerance_failure_lower_numeric": 3.2407629504570917e-31,
+      "selected_energy_rmse": 0.0027035696023716706
+    },
+    {
+      "budget": 1000000000,
+      "selected_id": "budget-LP-1/32-10",
+      "selected_degree": 10,
+      "original_energy_rmse": 0.0006884361738883468,
+      "original_abstention": 0.0,
+      "original_tolerance_failure_lower_numeric": 7.919148352185155e-293,
+      "selected_energy_rmse": 0.0008678550131117203
+    }
+  ]
+}

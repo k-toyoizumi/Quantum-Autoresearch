@@ -1,0 +1,623 @@
+{
+  "metadata": {
+    "seed": 20261101,
+    "input_sha256": "d82eafe8a909a416090f9b06491f579c7f32cf12c14f5a3a8a533e96aa888185",
+    "source_sha256": "9b3b4291f5b9a9ef6d9cc841129ec50d0ca58377f00a47ff68ea714d83ff703c",
+    "replicates_per_setting": 20000,
+    "ideal_circuits": true
+  },
+  "spins": 4,
+  "interaction_norm": "4/5",
+  "energy_tolerance": 0.022222222222222223,
+  "curves": [
+    {
+      "id": "budget-LP-1/8-4",
+      "degree": 4,
+      "success": 0.16957599943836474,
+      "energy_bias_floor": 0.000762780624536971,
+      "rows": [
+        {
+          "attempts": 1,
+          "conditional_mse": 0.013743464844548742,
+          "energy_rmse": 1.0524875549700567,
+          "abstention_probability": 0.8304240005616352,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 0.17115,
+            "zero_success_fraction": 0.82885,
+            "conditional_mse_empirical": 0.010417607739147254,
+            "conditional_mse_mc_se": 0.0016955467631056013,
+            "failure_fraction": 1.0,
+            "mse_agreement_standard_errors": 1.9615248471883922
+          }
+        },
+        {
+          "attempts": 10,
+          "conditional_mse": 0.008717417256449068,
+          "energy_rmse": 0.838229166616866,
+          "abstention_probability": 0.1559548641799054,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 1.6994,
+            "zero_success_fraction": 0.15515,
+            "conditional_mse_empirical": 0.008544840279924821,
+            "conditional_mse_mc_se": 0.0005724979938972524,
+            "failure_fraction": 1.0,
+            "mse_agreement_standard_errors": 0.3014455567773052
+          }
+        },
+        {
+          "attempts": 100,
+          "conditional_mse": 0.0008553427625889058,
+          "energy_rmse": 0.26256627554991424,
+          "abstention_probability": 8.511169665738504e-09,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 16.96605,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 0.0008490579151514783,
+            "conditional_mse_mc_se": 1.5732163844598907e-05,
+            "failure_fraction": 1.0,
+            "mse_agreement_standard_errors": 0.39949033708959003
+          }
+        },
+        {
+          "attempts": 1000,
+          "conditional_mse": 8.145446765278513e-05,
+          "energy_rmse": 0.08102635569518693,
+          "abstention_probability": 1.9947684028086466e-81,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 169.6393,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 8.054747068646113e-05,
+            "conditional_mse_mc_se": 8.927364689858892e-07,
+            "failure_fraction": 0.7843,
+            "mse_agreement_standard_errors": 1.0159739159690744
+          }
+        },
+        {
+          "attempts": 10000,
+          "conditional_mse": 8.115792599792576e-06,
+          "energy_rmse": 0.025576100002582418,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 1695.60475,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 8.121111296049358e-06,
+            "conditional_mse_mc_se": 8.280799528753761e-08,
+            "failure_fraction": 0.38435,
+            "mse_agreement_standard_errors": 0.06422925996836133
+          }
+        },
+        {
+          "attempts": 100000,
+          "conditional_mse": 8.177185056968918e-07,
+          "energy_rmse": 0.00811840596242743,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 16959.2892,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 8.125331488249753e-07,
+            "conditional_mse_mc_se": 8.210579656671259e-09,
+            "failure_fraction": 0.0068,
+            "mse_agreement_standard_errors": 0.6315457724965062
+          }
+        },
+        {
+          "attempts": 1000000,
+          "conditional_mse": 8.826514720160906e-08,
+          "energy_rmse": 0.0026672484796465257,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 169571.56585,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 8.833287945088333e-08,
+            "conditional_mse_mc_se": 8.957738715606905e-10,
+            "failure_fraction": 0.0,
+            "mse_agreement_standard_errors": 0.07561311110387935
+          }
+        },
+        {
+          "attempts": 10000000,
+          "conditional_mse": 1.5323348041098154e-08,
+          "energy_rmse": 0.001111336771279509,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 1695758.5432,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 1.5261786034358048e-08,
+            "conditional_mse_mc_se": 1.3451195692583798e-10,
+            "failure_fraction": 0.0,
+            "mse_agreement_standard_errors": 0.45766940089978553
+          }
+        },
+        {
+          "attempts": 100000000,
+          "conditional_mse": 8.029203488123284e-09,
+          "energy_rmse": 0.0008044611651170592,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 16957625.0515,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 8.033935907143218e-09,
+            "conditional_mse_mc_se": 3.5181245008777636e-11,
+            "failure_fraction": 0.0,
+            "mse_agreement_standard_errors": 0.13451539360683876
+          }
+        },
+        {
+          "attempts": 1000000000,
+          "conditional_mse": 7.299789386452746e-09,
+          "energy_rmse": 0.0007670506041861621,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 169575927.6215,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 7.292024059390802e-09,
+            "conditional_mse_mc_se": 1.0763308034586084e-11,
+            "failure_fraction": 0.0,
+            "mse_agreement_standard_errors": 0.7214628659693811
+          }
+        },
+        {
+          "attempts": 10000000000,
+          "conditional_mse": 7.2268479798219575e-09,
+          "energy_rmse": 0.0007632086975313286,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 1695760342.97625,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 7.227827238216988e-09,
+            "conditional_mse_mc_se": 3.419203363978084e-12,
+            "failure_fraction": 0.0,
+            "mse_agreement_standard_errors": 0.28639957638886454
+          }
+        },
+        {
+          "attempts": 100000000000,
+          "conditional_mse": 7.219553839194241e-09,
+          "energy_rmse": 0.0007628234426463493,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 16957600502.1084,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 7.219930700191108e-09,
+            "conditional_mse_mc_se": 1.094754355593473e-12,
+            "failure_fraction": 0.0,
+            "mse_agreement_standard_errors": 0.3442425188274459
+          }
+        },
+        {
+          "attempts": 1000000000000,
+          "conditional_mse": 7.2188244251318235e-09,
+          "energy_rmse": 0.0007627849064560684,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 169575997834.49756,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 7.219393224120163e-09,
+            "conditional_mse_mc_se": 3.403302705431728e-13,
+            "failure_fraction": 0.0,
+            "mse_agreement_standard_errors": 1.6713147127096204
+          }
+        }
+      ]
+    },
+    {
+      "id": "original-optimized",
+      "degree": 7,
+      "success": 0.10766006459708295,
+      "energy_bias_floor": 0.0003680471098458064,
+      "rows": [
+        {
+          "attempts": 1,
+          "conditional_mse": 0.01370071515399961,
+          "energy_rmse": 1.0508493741719742,
+          "abstention_probability": 0.892339935402917,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 0.1087,
+            "zero_success_fraction": 0.8913,
+            "conditional_mse_empirical": 0.012714550945055124,
+            "conditional_mse_mc_se": 0.0023518103467806474,
+            "failure_fraction": 1.0,
+            "mse_agreement_standard_errors": 0.4193213157236209
+          }
+        },
+        {
+          "attempts": 10,
+          "conditional_mse": 0.010429442036687038,
+          "energy_rmse": 0.9168523209867125,
+          "abstention_probability": 0.32011298896713986,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 1.0708,
+            "zero_success_fraction": 0.3208,
+            "conditional_mse_empirical": 0.010201803250545241,
+            "conditional_mse_mc_se": 0.000759804448868139,
+            "failure_fraction": 1.0,
+            "mse_agreement_standard_errors": 0.2996018073872874
+          }
+        },
+        {
+          "attempts": 100,
+          "conditional_mse": 0.0014045722520890896,
+          "energy_rmse": 0.3364657740904825,
+          "abstention_probability": 1.1298816752707981e-05,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 10.7656,
+            "zero_success_fraction": 0.0001,
+            "conditional_mse_empirical": 0.0013628288626026793,
+            "conditional_mse_mc_se": 3.155999007518956e-05,
+            "failure_fraction": 1.0,
+            "mse_agreement_standard_errors": 1.3226680169087326
+          }
+        },
+        {
+          "attempts": 1000,
+          "conditional_mse": 0.00012833452472015266,
+          "energy_rmse": 0.10170460199773775,
+          "abstention_probability": 3.3910145398749436e-50,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 107.69785,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 0.00012661557080492436,
+            "conditional_mse_mc_se": 1.4304458022798351e-06,
+            "failure_fraction": 0.97405,
+            "mse_agreement_standard_errors": 1.2016910479856306
+          }
+        },
+        {
+          "attempts": 10000,
+          "conditional_mse": 1.2738148283997615e-05,
+          "energy_rmse": 0.03204217598937071,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 1076.6883,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 1.2680043772371208e-05,
+            "conditional_mse_mc_se": 1.2892342822324743e-07,
+            "failure_fraction": 0.4923,
+            "mse_agreement_standard_errors": 0.45069009122059656
+          }
+        },
+        {
+          "attempts": 100000,
+          "conditional_mse": 1.2743762374842482e-06,
+          "energy_rmse": 0.010134858364221434,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 10765.6707,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 1.2633216263749537e-06,
+            "conditional_mse_mc_se": 1.2768053452764385e-08,
+            "failure_fraction": 0.02955,
+            "mse_agreement_standard_errors": 0.8658023832835017
+          }
+        },
+        {
+          "attempts": 1000000,
+          "conditional_mse": 1.289406854243502e-07,
+          "energy_rmse": 0.003223768434552206,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 107657.6504,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 1.2902265518807117e-07,
+            "conditional_mse_mc_se": 1.3049313089120143e-09,
+            "failure_fraction": 0.0,
+            "mse_agreement_standard_errors": 0.06281538588364956
+          }
+        },
+        {
+          "attempts": 10000000,
+          "conditional_mse": 1.4406530193231428e-08,
+          "energy_rmse": 0.0010775775832441723,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 1076606.30215,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 1.439195060003655e-08,
+            "conditional_mse_mc_se": 1.423786257039562e-10,
+            "failure_fraction": 0.0,
+            "mse_agreement_standard_errors": 0.10240015397531041
+          }
+        },
+        {
+          "attempts": 100000000,
+          "conditional_mse": 2.953208653360851e-09,
+          "energy_rmse": 0.0004878832604584095,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 10766039.9673,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 2.9494561222676064e-09,
+            "conditional_mse_mc_se": 2.4096651899579352e-11,
+            "failure_fraction": 0.0,
+            "mse_agreement_standard_errors": 0.155728318974887
+          }
+        },
+        {
+          "attempts": 1000000000,
+          "conditional_mse": 1.8078774391897035e-09,
+          "energy_rmse": 0.00038172740847058965,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 107660126.9983,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 1.8134767652945927e-09,
+            "conditional_mse_mc_se": 6.65332978341124e-12,
+            "failure_fraction": 0.0,
+            "mse_agreement_standard_errors": 0.8415825289240882
+          }
+        },
+        {
+          "attempts": 10000000000,
+          "conditional_mse": 1.6933443271707312e-09,
+          "energy_rmse": 0.0003694379365866231,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 1076600645.43195,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 1.6917787469442593e-09,
+            "conditional_mse_mc_se": 2.0741102930659922e-12,
+            "failure_fraction": 0.0,
+            "mse_agreement_standard_errors": 0.7548201422585048
+          }
+        },
+        {
+          "attempts": 100000000000,
+          "conditional_mse": 1.6818910160628154e-09,
+          "energy_rmse": 0.00036818642894344663,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 10766005558.2378,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 1.6830177294445353e-09,
+            "conditional_mse_mc_se": 6.575397581782401e-13,
+            "failure_fraction": 0.0,
+            "mse_agreement_standard_errors": 1.7135289048399716
+          }
+        },
+        {
+          "attempts": 1000000000000,
+          "conditional_mse": 1.6807456849529637e-09,
+          "energy_rmse": 0.00036806104412865807,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 107660068242.3081,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 1.6807941802088225e-09,
+            "conditional_mse_mc_se": 2.0846261473630727e-13,
+            "failure_fraction": 0.0,
+            "mse_agreement_standard_errors": 0.2326328676253355
+          }
+        }
+      ]
+    },
+    {
+      "id": "budget-LP-1/32-10",
+      "degree": 10,
+      "success": 0.06810326666543254,
+      "energy_bias_floor": 0.00015722442165836434,
+      "rows": [
+        {
+          "attempts": 1,
+          "conditional_mse": 0.013677883029679467,
+          "energy_rmse": 1.0499733933306612,
+          "abstention_probability": 0.9318967333345675,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 0.06465,
+            "zero_success_fraction": 0.93535,
+            "conditional_mse_empirical": 0.012975353058462761,
+            "conditional_mse_mc_se": 0.003081185470882636,
+            "failure_fraction": 1.0,
+            "mse_agreement_standard_errors": 0.22800638840331144
+          }
+        },
+        {
+          "attempts": 10,
+          "conditional_mse": 0.011590782340354662,
+          "energy_rmse": 0.9665520060895413,
+          "abstention_probability": 0.49394420387924565,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 0.67495,
+            "zero_success_fraction": 0.50265,
+            "conditional_mse_empirical": 0.010394773155211602,
+            "conditional_mse_mc_se": 0.0009262460257859636,
+            "failure_fraction": 1.0,
+            "mse_agreement_standard_errors": 1.2912435269324798
+          }
+        },
+        {
+          "attempts": 100,
+          "conditional_mse": 0.002406365012439757,
+          "energy_rmse": 0.440402325528653,
+          "abstention_probability": 0.0008645277465550664,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 6.7991,
+            "zero_success_fraction": 0.00075,
+            "conditional_mse_empirical": 0.002295518217260676,
+            "conditional_mse_mc_se": 7.543194542109951e-05,
+            "failure_fraction": 1.0,
+            "mse_agreement_standard_errors": 1.4694940526891853
+          }
+        },
+        {
+          "attempts": 1000,
+          "conditional_mse": 0.00020367033223272734,
+          "energy_rmse": 0.12812466333965397,
+          "abstention_probability": 2.3323265861495354e-31,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 68.1054,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 0.00020678344496253688,
+            "conditional_mse_mc_se": 2.6307841028599566e-06,
+            "failure_fraction": 0.7075,
+            "mse_agreement_standard_errors": 1.183340254498742
+          }
+        },
+        {
+          "attempts": 10000,
+          "conditional_mse": 2.011190039129169e-05,
+          "energy_rmse": 0.040262005704395455,
+          "abstention_probability": 4.763143088450135e-307,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 681.09935,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 1.9857622824944515e-05,
+            "conditional_mse_mc_se": 2.048065012849426e-07,
+            "failure_fraction": 0.57455,
+            "mse_agreement_standard_errors": 1.2415502669683605
+          }
+        },
+        {
+          "attempts": 100000,
+          "conditional_mse": 2.0089849166698507e-06,
+          "energy_rmse": 0.012724982372282754,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 6810.5984,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 2.0368414599202126e-06,
+            "conditional_mse_mc_se": 2.073007544309403e-08,
+            "failure_fraction": 0.08245,
+            "mse_agreement_standard_errors": 1.3437743305291265
+          }
+        },
+        {
+          "attempts": 1000000,
+          "conditional_mse": 2.011497727185826e-07,
+          "energy_rmse": 0.004026508538962615,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 68106.52835,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 2.0330991774236175e-07,
+            "conditional_mse_mc_se": 2.035936384072501e-09,
+            "failure_fraction": 0.0,
+            "mse_agreement_standard_errors": 1.0610081143391166
+          }
+        },
+        {
+          "attempts": 10000000,
+          "conditional_mse": 2.0390752636681216e-08,
+          "energy_rmse": 0.001281992485166735,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 681028.50975,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 2.0591418459089286e-08,
+            "conditional_mse_mc_se": 2.0557311033809334e-10,
+            "failure_fraction": 0.0,
+            "mse_agreement_standard_errors": 0.976128746011809
+          }
+        },
+        {
+          "attempts": 100000000,
+          "conditional_mse": 2.315095502198436e-09,
+          "energy_rmse": 0.00043196972201096695,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 6810339.38115,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 2.293729486282906e-09,
+            "conditional_mse_mc_se": 2.2838697246768704e-11,
+            "failure_fraction": 0.0,
+            "mse_agreement_standard_errors": 0.9355181552027048
+          }
+        },
+        {
+          "attempts": 1000000000,
+          "conditional_mse": 5.075322374178369e-10,
+          "energy_rmse": 0.00020225565250217686,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 68103225.6938,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 5.012388396654999e-10,
+            "conditional_mse_mc_se": 3.994019771399524e-12,
+            "failure_fraction": 0.0,
+            "mse_agreement_standard_errors": 1.575705207421085
+          }
+        },
+        {
+          "attempts": 10000000000,
+          "conditional_mse": 3.2677593542638433e-10,
+          "energy_rmse": 0.0001622907938430239,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 681032517.14555,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 3.2607516167309854e-10,
+            "conditional_mse_mc_se": 1.124089353462281e-12,
+            "failure_fraction": 0.0,
+            "mse_agreement_standard_errors": 0.6234146343681206
+          }
+        },
+        {
+          "attempts": 100000000000,
+          "conditional_mse": 3.087003054721051e-10,
+          "energy_rmse": 0.00015773838171366845,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 6810326640.8377,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 3.0915888879673103e-10,
+            "conditional_mse_mc_se": 3.524201970567145e-13,
+            "failure_fraction": 0.0,
+            "mse_agreement_standard_errors": 1.3012401912712384
+          }
+        },
+        {
+          "attempts": 1000000000000,
+          "conditional_mse": 3.068927424791258e-10,
+          "energy_rmse": 0.00015727589324428945,
+          "abstention_probability": 0.0,
+          "simulation": {
+            "replicates": 20000,
+            "accepted_count_mean": 68103265674.57535,
+            "zero_success_fraction": 0.0,
+            "conditional_mse_empirical": 3.06894120214702e-10,
+            "conditional_mse_mc_se": 1.0986660015997517e-13,
+            "failure_fraction": 0.0,
+            "mse_agreement_standard_errors": 0.01254007654880397
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+\section{Ideal circuits with a finite attempt budget}\label{sec:finite}
+The preceding stopping rule fixes the number of accepted readouts and
+controls expected cost. It does not impose a deterministic deadline.
+We now hold the ideal response exactly fixed, introduce no gate noise,
+and instead stop after $T\geq1$ independent whole-filter attempts.
+Every attempt reserves $c_\psi+4n+1$ query units, including readout on a
+rejected attempt. Thus a hard budget $B$ permits
+$T_n(B)=\lfloor B/(c_\psi+4n+1)\rfloor$ attempts without overspending.
+This conservative reservation is common to all candidates.
+
+Let $w(x)$ be the implemented success weight, $z=\sum_i p_iw(\lambda_i)$
+and $\mu=\sum_i p_i\lambda_iw(\lambda_i)/z$.
+For the Gram experiment $w=\kappa^2P^2$.
+The three outcomes of an attempt have probabilities
+$1-z,z(1-\mu),z\mu$: rejection, accepted zero and accepted one.
+Consequently
+\[
+ M\sim\operatorname{Bin}(T,z),\qquad K\mid M=m\sim\operatorname{Bin}(m,\mu).
+\]
+If $M=0$, the algorithm reports no estimate. Otherwise it returns
+$\widehat e=K/M$, without clipping to the prior interval.
+We report abstention and conditional risk separately; successful trials
+are not silently substituted for a fixed number of executions.
+
+\begin{proposition}[Finite-attempt law]\label{prop:finite-law}
+For $0<z\leq1$, set $q=1-z$, $C_T(z)=1-q^T$ and
+\[
+ H_T(z)=\sum_{m=1}^T\binom Tm z^m q^{T-m}/m,\qquad
+ h_T(z)=H_T(z)/C_T(z).
+\]
+Then
+\begin{equation}\label{eq:finite-mse}
+ \Pr(M=0)=q^T,\qquad
+ R_T(z,\mu,e):=\mathbb E[(\widehat e-e)^2\mid M>0]
+ = (\mu-e)^2+\mu(1-\mu)h_T(z).
+\end{equation}
+The failure probability at tolerance $E$, counting abstention as failure,
+is exactly
+\begin{equation}\label{eq:finite-failure}
+ q^T+\sum_{m=1}^T\binom Tm z^m q^{T-m}
+ \Pr\{\lvert\operatorname{Bin}(m,\mu)/m-e\rvert>E\}.
+\end{equation}
+The function $h_T$ is nonincreasing on $(0,1]$, with
+$h_T(1)=1/T$ and $\lim_{z\downarrow0}h_T(z)=1$.
+\end{proposition}
+\begin{proof}
+Condition on $M=m>0$. The sample mean has mean $\mu$ and variance
+$\mu(1-\mu)/m$. Averaging its squared error proves
+\eqref{eq:finite-mse}; conditioning the error event proves
+\eqref{eq:finite-failure}. The positive-binomial probabilities form an
+exponential family in $\log(z/(1-z))$. Differentiating a finite sum gives
+\[
+ h_T'(z)=\frac{\operatorname{Cov}(1/M,M\mid M>0)}{z(1-z)}
+ =\frac{1-h_T(z)\mathbb E[M\mid M>0]}{z(1-z)}\leq0,
+\]
+where Jensen's inequality gives the last step. The endpoint limits
+follow from the finite sum, since at small $z$ a nonzero count is
+asymptotically one.
+\end{proof}
+
+These binomial facts and inverse moments are classical
+\cite{Znid,Drakakis}; we do not claim to discover shot noise or its
+$1/\sqrt T$ regime. In particular, replacing $M$ by $Tz$ is not an exact
+finite-sample analysis. When $Tz$ is small, conditioning on a nonempty
+sample makes $h_T$ approach one, while abstention approaches one too.
+As $T$ grows at fixed $z$, sampling error vanishes but the squared bias
+$(\mu-e)^2$ remains. MSE and a fixed-confidence error guarantee are
+different criteria; \eqref{eq:finite-failure} evaluates the latter.
+
+\begin{corollary}[Uniform confidence at a hard deadline]\label{cor:deadline}
+If $z\geq s>0$ and $0\leq\mu-e\leq b<E$ uniformly, counting abstention
+as failure gives
+\begin{equation}\label{eq:deadline-confidence}
+ \Pr\{\text{no output or }|\widehat e-e|>E\}
+ \leq\min\{1,\,2[1-s(1-e^{-2(E-b)^2})]^T\}.
+\end{equation}
+Thus a sufficient deterministic attempt count at confidence $1-\delta$ is
+\[
+ T\geq\left\lceil\frac{\log(2/\delta)}
+ {-\log[1-s(1-e^{-2(E-b)^2})]}\right\rceil.
+\]
+\end{corollary}
+\begin{proof}
+For $M=m>0$, a deviation of size $E$ from $e$ requires one of size
+at least $E-b$ from $\mu$. Hoeffding bounds its probability by
+$2e^{-2m(E-b)^2}$. At $m=0$, the same expression is two and hence
+upper bounds the failure indicator. Average over the binomial count
+and use $z\geq s$ in its generating function.
+\end{proof}
+This is a standard concentration/PGF consequence, not a new concentration
+inequality. It translates a supplied bias/success certificate to a
+hard-deadline confidence statement, which the expected-cost stopping
+analysis alone does not provide.
+
+\begin{theorem}[Three-energy reduction for conditional risk]\label{thm:three}
+Fix $T$, $a$, $u$, and a continuous weight $0\leq w\leq1$ that is
+positive on $[0,u]$. The maximum of \eqref{eq:finite-mse} over all finite
+compatible spectra and initial weights is attained by a measure
+\begin{equation}\label{eq:three}
+ a\delta_e+(1-a)\{\theta\delta_x+(1-\theta)\delta_y\},
+ \quad 0\leq e\leq u,\quad e\leq x,y\leq1,\quad0\leq\theta\leq1.
+\end{equation}
+Repeated energies are allowed, so the actual target mass can exceed $a$.
+\end{theorem}
+\begin{proof}
+For any input with minimum $e$ and target mass at least $a$, reserve mass
+$a$ at $e$ and write the remainder as a probability measure $r$ on the
+original finite support, including $e$ if necessary. Hold its resulting
+conditional mean $\mu$ fixed. Among remainder weights minimize
+$\int w\,dr$ subject to
+\begin{equation}\label{eq:moment-lp}
+ \int dr=1,\qquad
+ \int (x-\mu)w(x)\,dr(x)
+ =\frac{a}{1-a}(\mu-e)w(e),\qquad r\geq0.
+\end{equation}
+The original measure is feasible. This finite linear program has an
+optimal basic solution with at most two positive remainder weights,
+because it has at most two independent equality constraints. The new
+input preserves $\mu$, decreases $z$, and therefore cannot decrease
+$R_T$ by Proposition~\ref{prop:finite-law}. It has at most three energies.
+Conversely every measure in \eqref{eq:three} is allowed. The parameter
+set in \eqref{eq:three} is compact and $z\geq a\min_{[0,u]}w>0$, so its
+continuous risk attains its maximum.
+\end{proof}
+
+This is a task-specific application of established moment-set and
+basic-solution arguments \cite{Winkler,Pinelis}. It supplies an exact
+low-dimensional characterization for this finite-risk objective, rather
+than equating the separate worst bias, variance and acceptance witnesses.
+It does not assert that three energies are always necessary, or that the
+same reduction holds for the lattice-valued failure probability in
+\eqref{eq:finite-failure}, a clipped estimator, or a different stopping rule.
+
+\paragraph{A computable uniform selection bound.}
+Suppose $z\geq s>0$ and $0\leq\mu-e\leq b$ uniformly. With
+$v_b=t_b(1-t_b)$, $t_b=\min\{u+b,1/2\}$, one has
+\begin{equation}\label{eq:finite-upper}
+ R_T\leq b^2+v_bh_T(s),\qquad
+ \Pr(M=0)\leq(1-s)^T.
+\end{equation}
+For endpoint-nulling polynomials the abstention bound is attained at the
+minimum target transmission and the upper endpoint. The MSE bound need
+not be attained, since its separate worst quantities can be incompatible.
+To evaluate a rigorous upper bound without summing $T$ terms, put
+\[
+ A_T=\frac{1-(1-s)^{T+1}}{(T+1)s},\quad
+ B_T=\frac{1-[1+(T+1)s](1-s)^{T+1}}{(T+1)(T+2)s^2}.
+\]
+Then
+\begin{equation}\label{eq:inverse-upper}
+ h_T(s)\leq\min\left\{1,
+ \frac{A_T+3B_T-\frac52(1-s)^T}{1-(1-s)^T}\right\}.
+\end{equation}
+Indeed, $1/m\leq1/(m+1)+3/[(m+1)(m+2)]$ for $m\geq1$;
+the full binomial expectations of these shifted inverse powers are
+$A_T,B_T$, and removing $m=0$ subtracts $5(1-s)^T/2$.
+All inputs in the implementation are rational. Directed 180-bit repeated
+squaring encloses powers in \eqref{eq:inverse-upper}; numerical quadrature
+is used only for auditing the exact law, never for certified selection.
+
+For a finite candidate catalog, minimize this certified risk bound at
+$T_n(B)$ subject to certified abstention at most $0.05$.
+Include the deterministic prior midpoint, whose worst MSE is $u^2/4$
+and whose abstention probability is zero. This gives a prior-only
+finite-budget rule that can select no quantum work at small budgets.
+It is optimal only for the computed bound within the supplied catalog,
+not a new globally optimal quantum estimation algorithm.
+The resource cautions of postselected metrology remain applicable
+\cite{Combes}: conditional precision alone is not an advantage if the
+discarded executions are omitted.

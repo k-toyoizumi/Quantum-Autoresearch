@@ -16,3 +16,15 @@
 | Sampling is consistent with confidence bounds. | 1,000 held-out scalar examples and 2,000 full-matrix aggregate sampling replicates; zero failures. | Confidence guarantee is from the proof; finite zero failures are not its proof. |
 | The source is self-contained and buildable. | Package validation compiles both languages and runs exact arithmetic controls / no-Git pilot in fresh directories. | See actual validation output; no preprint upload or remote CI has been performed. |
 | A general new QSVT primitive, speedup over FQPE/QET-U, or hardware advantage is established. | No such evidence. | Not claimed. |
+
+## Finite-sampling extension (2026-10-27)
+
+| Claim | Evidence | Exact scope |
+|---|---|---|
+| Fixed total attempts give a binomial accepted count, an exact conditional MSE law and explicit failure mixture. | Full hand derivation in `finite-en.tex` / `finite-ja.tex`; 183 independent exact-sum/arithmetic controls. | Ideal exact response and i.i.d. Bernoulli readout; no gate noise. The inverse moments and elementary statistical law are established background. |
+| Worst conditional finite-attempt MSE is attained on at most three energies. | Full finite-moment-LP proof and compactness; 100 numerical support-reduction controls. | Same fixed filter, attempt count, prior and overlap promise. Not a reduction for confidence failure or clipped estimates; three energies need not be necessary. Full theorem is not Lean-formalized. |
+| The finite-budget selector has a uniform conditional-MSE upper bound and abstention control. | Continuous polynomial certificates plus rational shifted-inverse moment bound with outward 180-bit power enclosures. | Minimum computed upper bound within a finite catalog; not exact risk optimality over all quantum procedures. Prior midpoint included. |
+| Ideal finite data and theory agree on physical models. | Six Ising cases, 48 budget conditions, 39 fixed-filter count settings; 114 stochastic settings with 20,000 replicates each. | 2.28 million aggregate ideal binomial replicates; no physical-gate compilation. Largest MSE discrepancy is 3.31 Monte Carlo standard errors. |
+| Finite budget can change the preferred response or favor no quantum work. | `finite_budget.json`: 21/48 midpoint choices; degrees/bias allocations change at larger budgets. | Certificate-based catalog choice; a stronger bound need not reduce actual RMSE on each instance. |
+| More shots remove every error source. | Contradicted by fixed-filter law and shot sweep. | Sampling variance vanishes; squared filtered bias remains. RMSE below tolerance does not imply 95% confidence. |
+| Four additional scalar ingredients were locally checked in Lean. | `FiniteSampling.lean`, `FiniteSamplingAudit.lean` and actual saved local logs. | Inverse-index inequality, risk monotonicity given inverse-moment order, variance/bias algebra and ratio preservation. Not probability theory or support-LP formalization; remote CI not run. |

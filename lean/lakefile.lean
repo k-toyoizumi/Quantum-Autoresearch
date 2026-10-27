@@ -9,3 +9,5 @@ require mathlib from git
 lean_lib QMSVE
 
 lean_lib Selection
+
+lean_lib FiniteSampling

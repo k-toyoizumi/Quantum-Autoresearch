@@ -1,0 +1,4 @@
+'inverse_count_upper' depends on axioms: [propext, Classical.choice, Quot.sound]
+'finite_risk_antitone_in_inverse_count' depends on axioms: [propext, Classical.choice, Quot.sound]
+'variance_bias_decomposition' depends on axioms: [propext, Classical.choice, Quot.sound]
+'moment_ratio_preserved' depends on axioms: [propext, Classical.choice, Quot.sound]
