@@ -10,32 +10,81 @@
 \newtheorem{lemma}{Lemma}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\ket}[1]{\lvert #1\rangle}
-\title{Power and Cosine Filtering for Extreme Singular-Value Estimation:\\
-An Assumption-Aware Technical Reassessment of a QSVT Proposal}
+\title{Sharp Gap-Free Bias Bounds for\\
+Cosine and Polynomial Singular-Value Filters}
 \author{[Author name and affiliation to be supplied]}
 \date{Internal technical-report draft\\26 October 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
-We reassess an unpublished proposal for quantum maximum/minimum singular-value estimation, focusing on its cosine-based triangular iteration. For a rectangular matrix $A$, we formulate the method on the normalized right Gram operator $G=(A/\alpha)^\dagger(A/\alpha)$, where $\alpha\geq\|A\|$ is an available normalization bound. A bounded even polynomial approximation to $\cos(\beta G)$ is a candidate target for a polynomial eigenvalue transformation, subject to an explicit QSP completion and normalization convention. We prove a finite-spectrum filtering bound: if the input has weight $a>0$ on the minimum-eigenvalue eigenspace and the largest non-target filter response is at most $r<1$ times the target response, then the conditional leakage is at most $(1-a)r^{2t}/a$ after $t$ iterations. A Bernoulli block-encoding readout estimates the filtered Gram expectation and converts its additive error into a singular-value error bound. The result depends on target overlap, spectral separation, postselection success, normalization, and readout precision; it is not a circuit-level or end-to-end complexity theorem. Small matrix-level simulations reproduce the predicted convergence and its failures for zero overlap, narrow gaps, and right kernels. We also compare the original $\cos(\beta(\sigma/\alpha)^2)$ response with a distinct dilation-based $\cos(\beta\sigma/\alpha)$ variant. No QSVT phases or quantum circuits are synthesized, and no quantum speedup or novelty claim is made.
+We analyze minimum-singular-value estimation by repeated spectral filtering on the normalized right Gram operator $G=(A/\alpha)^\dagger(A/\alpha)$. Rather than assume a gap to control eigenstate fidelity, we derive the exact worst-case bias of the filtered Gram mean over finite spectra with a given minimum and initial target mass. The extremizer has only two eigenvalues. This yields uniform gap-free bounds with asymptotically sharp constants: the cosine-Gram response $\cos(\beta G)$ has mean bias of order $t^{-1/2}$, whereas the distinct dilation response $\cos(\beta\sqrt G)$ has order $t^{-1}$ at $t$ scalar iterations. The corresponding worst-case noiseless singular-value errors are of orders $t^{-1/4}$ and $t^{-1/2}$. Fixed-degree polynomial baselines attain the same rates. We also identify an exponential restart penalty caused by repeated global Taylor normalization and propagate success-block error through postselection and Bernoulli readout. Classical spectral audits check the sharp envelopes and the scaling penalty. These results refine the analysis of an existing proposal; they do not introduce a new quantum filtering primitive or establish a circuit-level advantage. Priority of the combined sharp analysis remains subject to further literature review.
 \end{abstract}
 \section{Introduction}
 Extreme singular values arise in numerical linear algebra and in spectral questions connected to ground-state energy estimation. An earlier manuscript, \emph{Quantum maximum/minimum singular-value estimation algorithms} (author and publication metadata not stated in the source file; hereafter QMSVE) proposes quantum power iteration for the largest singular value, an inverse-iteration baseline for the smallest, and a cosine-based triangular iteration that avoids explicitly applying a matrix inverse \cite{QMSVE}. This report makes that proposal precise on a right-space operator, records the conditions needed for convergence, and checks a small set of finite-dimensional examples.
 
 The main correction is about the operator being transformed. For a general rectangular matrix, applying $\cos(A)$ is not a valid singular-value prescription. We instead set $B=A/\alpha$ and $G=B^\dagger B$ on the right singular-vector space. The QMSVE cosine rule is then $C=\cos(\beta G)$, whose eigenvalues are $\cos(\beta\sigma_i^2/\alpha^2)$. This function is positive and decreasing on the normalized spectrum when $0<\beta<\pi/2$. A Hermitian-dilation construction gives a different response, $\cos(\beta\sigma_i/\alpha)$; we keep it separate.
 
-Our contribution is a careful statement and finite-spectrum proof of conditional filter convergence, its measurement-to-energy conversion, and a reproducible matrix-level audit. It does not establish that the original proposal is new, that its full resource estimate is correct, or that it outperforms existing algorithms. In particular, a gap and nonzero initial overlap remain essential, while each successful filtered sample may require many fresh attempts.
-\section{Related work and scope}
-Quantum singular-value transformation (QSVT) implements bounded polynomial transformations of singular values of a block-encoded matrix, and the Hermitian specialization implements polynomial eigenvalue transformations \cite{Gilyen}. It supplies a possible implementation primitive for the polynomial cosine filters considered here; the present work does not synthesize its phase angles. Quantum power methods and quantum inverse iteration already have substantial prior literature \cite{SekiYunoki,Kyriienko,Nghiem}. These works differ in input and implementation models, but they rule out treating power iteration or QSVT-based powers as new in themselves.
+The main question is whether a useful filtered-mean error bound survives without a spectral-gap promise. We answer it for specified responses by an exact two-point worst-case reduction and sharp asymptotic constants (Section~\ref{sec:gapfree}). A second outcome is a normalization audit and a finite-precision transfer bound (Section~\ref{sec:normalization}). The original geometric leakage bound is retained as background. These contributions improve the proposal's analysis rather than establish a new quantum algorithm.
 
-The QMSVE manuscript is an unpublished source document with no author or venue metadata in the copy examined. Its triangular iteration is marked provisional. We therefore treat it as the origin of the algorithmic idea being reassessed, not as a verified theorem or a published result. The author's separate QCG work is cited only as prior project context and is not conflated with this method \cite{QCG2023,QCG2024}.
+\section{Related work and positioning}
+\paragraph{Quantum linear algebra and power iteration.}
+QSVT provides polynomial transformations of block-encoded singular values
+\cite{Gilyen}. Quantum power iteration, inverse iteration, and QSVT-based
+power methods already exist \cite{SekiYunoki,Kyriienko,Nghiem}; neither
+iteration nor polynomial filtering is proposed as a new primitive here.
+Nghiem et al. explicitly analyze small success probabilities and modify the
+transformation to improve them. Their oracle construction differs from ours,
+so our scalar restart analysis is not a rebuttal of their complexity result.
+
+\paragraph{Cosine and Gaussian filters.}
+Ge, Tura, and Cirac already use powers of $\cos H$, response-ratio bounds,
+energy shifts, and amplitude amplification for ground-state preparation
+\cite{GeTuraCirac}, notably Eqs.~(7)--(22) of their arXiv version.
+Lu, Ba\~nuls, and Cirac use cosine filtering for finite-energy observables,
+including reconstruction without physical filtered-state preparation
+\cite{LuBanulsCirac}. He, Zhang, and Wang analyze a Gaussian filter and
+explicitly compare it to cosine filtering in Appendix C \cite{HeZhangWang}.
+Thus the cosine-to-Gaussian local approximation is established background.
+A recent preprint also uses repeated power-cosine filtering with a
+single-ancilla time-evolution construction \cite{Jo}. Its shifted/resonant
+response and implementation assumptions differ from the unshifted Gram
+response studied here; its performance claims are not adopted without audit.
+
+\paragraph{Optimized projectors and input models.}
+Lin and Tong optimize a polynomial projector for a known, isolated target
+\cite{LinTongFilter}, and study near-optimal preparation and energy estimation
+under additional information \cite{LinTongGround}. Dong, Lin, and Tong use
+controlled time evolution via QET-U \cite{DongLinTong}. Their gap, energy
+information, coherent depth, and amplification assumptions must be retained
+when making resource comparisons. Our maximization over spectra for a fixed
+response is distinct from minimax optimization over polynomials. Preserving
+unit response at the target is already explicit in Lin and Tong's
+construction; our normalization audit applies that principle to the Taylor
+proxy of the QMSVE draft.
+
+\paragraph{Classical context and the contribution claimed here.}
+Gap-independent accuracy guarantees also occur in classical power and Krylov
+methods \cite{MuscoMusco}; gap-free approximation is not a new concept.
+The two-point extremization below is a simple linear-fractional argument
+\cite{CharnesCooper}. The analytical contribution developed in this report is
+the exact fixed-response mean-bias envelope, its asymptotically sharp
+cosine-Gram versus dilation constants, and a joint audit of normalization and
+accepted-state perturbations. We did not identify this combined statement in
+the selected primary references; this bounded literature comparison does not
+establish priority over all classical or quantum filtering literature.
+The result is a modest analysis of specified estimators, not a new quantum
+algorithm or an advantage over optimized projectors.
+
+The unpublished QMSVE source is treated as provenance of the proposal, with
+unconfirmed author and venue metadata \cite{QMSVE}. The separate prior
+projects \cite{QCG2023,QCG2024} are not QMSVE implementations.
 \section{Model and algorithm}
-Let $A\in\C^{m\times n}$, $m\geq n$, and choose a known $\alpha\geq\|A\|_2>0$. Define
+Let $A\in\C^{m\times n}$, with arbitrary positive $m,n$, and choose a known $\alpha\geq\|A\|_2>0$. Define
 \[
  B=A/\alpha,\qquad G=B^\dagger B,\qquad
  0\leq \lambda_0\leq\lambda_1\leq\cdots\leq\lambda_{n-1}\leq1,
 \]
-where $\lambda_i=\sigma_i(A)^2/\alpha^2$ are the eigenvalues of $G$ in increasing order. The target is the smallest singular value over the full right space, including zero modes. Estimating the smallest nonzero singular value requires an additional promise or access to the kernel-orthogonal subspace. For wide matrices ($m<n$), the right Gram operator necessarily has a kernel, so the same distinction applies.
+where $\lambda_i=\sigma_i(A)^2/\alpha^2$ are the eigenvalues of $G$ in increasing order. Define the right minimum by $\sigma_0(A)=\min_{\|v\|=1}\|Av\|$. This includes right-kernel zero modes. For wide matrices it differs from the smallest entry of the conventional thin SVD, which may be positive. Estimating the smallest nonzero singular value requires an additional promise or access to the kernel-orthogonal subspace. For wide matrices ($m<n$), the right Gram operator necessarily has a kernel, so the same distinction applies.
 
 Let $\ket{\psi}=\sum_i c_i\ket{v_i}$ be a normalized input state in a right singular basis and set $p_i=|c_i|^2$. For $0<\beta<\pi/2$, the ideal cosine-Gram filter is
 \[
@@ -55,7 +104,7 @@ For an integer $m_0\geq0$, let
  \delta_{m_0}=\frac{\beta^{2m_0+2}}{(2m_0+2)!},\qquad
  \widetilde P_{m_0}(x)=\frac{P_{m_0}(x)}{1+\delta_{m_0}}.
 \]
-The polynomial $P_{m_0}$ is the Maclaurin polynomial of $\cos(\beta x)$ through degree $2m_0+1$ (the odd coefficient vanishes). Taylor's theorem and the bound on every derivative of cosine give $|P_{m_0}(x)-\cos(\beta x)|\leq\delta_{m_0}$ for $|x|\leq1$. Hence $|\widetilde P_{m_0}(x)|\leq1$ on $[-1,1]$ and $\|\widetilde P_{m_0}-\cos(\beta\,\cdot)\|_\infty\leq2\delta_{m_0}/(1+\delta_{m_0})$; $\widetilde P_{m_0}$ is even of degree $2m_0$. It is therefore within the standard bounded-polynomial Hermitian-QSVT class for a block-encoding of $G$ \cite{Gilyen}. This establishes an admissible polynomial response, not a phase sequence, gate synthesis, or a compiled circuit. As a polynomial in the singular value $\sigma/\alpha$, the response $\widetilde P_{m_0}((\sigma/\alpha)^2)$ has degree $4m_0$.
+The polynomial $P_{m_0}$ is the Maclaurin polynomial of $\cos(\beta x)$ through degree $2m_0+1$ (the odd coefficient vanishes). Taylor's theorem and the bound on every derivative of cosine give $|P_{m_0}(x)-\cos(\beta x)|\leq\delta_{m_0}$ for $|x|\leq1$. Hence $|\widetilde P_{m_0}(x)|\leq1$ on $[-1,1]$ and $\|\widetilde P_{m_0}-\cos(\beta\,\cdot)\|_\infty\leq2\delta_{m_0}/(1+\delta_{m_0})$; $\widetilde P_{m_0}$ is even of degree $2m_0$. It meets the boundedness and parity conditions for a real-polynomial Hermitian-QSVT response on a block-encoding of $G$; the completion and real-part extraction convention must still be fixed \cite{Gilyen}. This establishes an admissible polynomial response, not a phase sequence, gate synthesis, or a compiled circuit. As a polynomial in the singular value $\sigma/\alpha$, the response $\widetilde P_{m_0}((\sigma/\alpha)^2)$ has degree $4m_0$.
 
 If a block-encoding of $B$ is available, a product construction can encode $G=B^\dagger B$ using two calls to the $B$ encoding, up to ancilla and reflection costs. We write $d_G$ for the actual oracle-query cost of one implemented cosine-polynomial transform of $G$, and $c_\psi$ for state preparation. Neither is numerically estimated here. A coherent implementation of $t$ transforms has query depth proportional to $t d_G$; a hard depth cap therefore constrains $t$ as well as the polynomial degree. The normalization bound $\alpha$ and its acquisition cost are inputs, not free outputs of this method.
 
@@ -79,7 +128,7 @@ If $\mu_t=\langle C^t\psi|G|C^t\psi\rangle/Z_t$, then
 \]
 \end{theorem}
 
-\noindent The proof is given in Appendix~\ref{app:proof}. Lean formalization is in progress; Appendix~\ref{app:lean} will state its exact scope and checker status. The identification of the finite weights with a matrix eigenbasis, the block-encoding implementation, and the readout interpretation are finite-dimensional mathematical derivations, not part of the scalar Lean theorem.
+\noindent The proof is given in Appendix~\ref{app:proof}. The inherited scalar Lean verification record is summarized in Appendix~\ref{app:lean}; the new sharp-envelope and stability theorems are hand-proved here and are not Lean-verified. The identification of the finite weights with a matrix eigenbasis, the block-encoding implementation, and the readout interpretation are finite-dimensional mathematical derivations, not part of the scalar Lean theorem.
 
 \paragraph{Finite-degree transfer condition.}
 The leakage theorem also applies to a bounded polynomial response $\widetilde q_i=\widetilde P(\lambda_i)$, but boundedness alone does not ensure that it orders the target eigenvalue correctly. Let $q_{\mathrm{out}}=\max_{i\notin T}q_i$ and let $E$ be a uniform error bound $|\widetilde P(x)-\cos(\beta x)|\leq E$ on $[0,1]$. If $E<(q_*-q_{\mathrm{out}})/2$, then $|\widetilde q_*|\geq q_*-E>0$ and $|\widetilde q_i|/|\widetilde q_*|\leq(q_{\mathrm{out}}+E)/(q_*-E)<1$. The generic finite-weight bound therefore transfers with this ratio. This sufficient condition can be conservative and is not evaluated as a degree-optimal filter here.
@@ -108,7 +157,9 @@ For the exact ideal cosine response, the target component alone gives $Z_t\geq a
 \]
 where $d_B$ is the cost of one Bernoulli readout using the $B$ block-encoding. This proxy is symbolic; finite-degree experiments below report only idealized spectral response probabilities and do not measure $\widetilde Z_t$ from a compiled circuit. Amplitude amplification, coherent recycling, and compiler-level gate costs are outside this accounting. In particular, when $\lambda_0>0$, $q_*<1$ and the success probability can decay exponentially in $t$; a small conditional leakage does not by itself imply low total cost.
 
-\section{Numerical results}
+\input{gapfree-en.tex}
+
+\section{Additional matrix-level checks}
 We ran a deterministic matrix-level simulation using exact classical eigendecompositions of seven right Gram matrices and fixed initial spectral weights. For each case, the input state is defined in the computed right-eigenvector basis; the calculation propagates the exact spectral weights rather than simulating a quantum state vector or circuit. The figure reports the exact $\cos(\beta G)$ response at $\beta=1.2$. A separate Bernoulli sample uses seed 20261026 and 2,000 accepted spectral-model draws. The script and full JSON output are in \texttt{experiments/qmsve\_matrix\_level.py} and \texttt{results/qmsve\_matrix\_level.json}.
 
 \begin{figure}[t]
@@ -162,14 +213,14 @@ The distinct dilation response $\cos(\beta\sigma)$ concentrates faster on the se
 
 
 \section{Discussion and limitations}
-The finite-spectrum argument isolates the mechanism behind the triangular iteration: a strictly largest filter response on the target eigenspace yields geometric suppression of all other spectral weight. The same calculation applies to other diagonalizable filters under the same response-ratio condition, so the leakage inequality itself should be read as an elementary filter bound, not as a new quantum algorithmic primitive. The practical question is whether a chosen response can be implemented at a useful polynomial degree and whether enough accepted samples can be obtained within the available depth and query budget. This report does not answer that end-to-end optimization problem.
+The sharp envelope clarifies a limitation that eigenstate leakage alone conceals: a gap-free mean guarantee can hold even when no uniform target-fidelity guarantee is possible. Its exact leading constants expose the slower boundary behavior of the unshifted cosine-Gram response. The normalization example also shows why two identical conditional estimators can have exponentially different restart costs. These are estimator-specific analytical findings, not complexity lower bounds for general singular-value estimation.
 
-The result has several explicit assumptions. The target component must have nonzero initial mass; a useful guarantee requires a quantitative lower bound on that mass. A strict response ratio $r<1$ is needed, which for the cosine-Gram filter follows from a nonzero spectral gap above the minimum eigenvalue. Repeated postselection incurs expected overhead $1/Z_t$, and the success probability can shrink exponentially with $t$ when the target eigenvalue is positive. The normalization $\alpha$ must be known and its acquisition cost is not included. The polynomial Taylor proxy is bounded on the assumed block-encoding spectrum, but no QSVT phases are generated and no finite-precision or synthesis error is propagated through $t$ iterations. The readout analysis assumes ideal independent Bernoulli trials and a prepared accepted state.
+The numerical audits use exact classical spectral information and ideal scalar success responses. They do not implement unknown singular-vector preparation, synthesize QSVT phases, or include physical noise. Positive target energy can cause exponential restart cost even when the scalar bias is small. Bernoulli/Hoeffding readout is only one readout model, and its precision dependence need not be optimal. A fair resource comparison must include state preparation, the normalization bound, block-encoding, polynomial degree, success amplification or restart, and readout. The power branch remains background; the new sharp results concern the minimum branch.
 
-The numerical examples are deliberately small and chosen to expose degeneracy, small gaps, zero overlap, and kernel effects. They do not establish performance on chemistry instances, large sparse matrices, or hardware. In particular, no speedup, improved query complexity, or novelty over existing power methods and polynomial filtering is claimed. A resource comparison would need to fix a common input model and include state preparation, normalization, block-encoding, filter degree, success amplification or restart, readout shots, and finite-precision errors.
+The two-point proof and polynomial baselines are elementary and overlap with established tools. The selected literature comparison supports a narrow analytical positioning, not a universal priority claim. Further review against classical weighted power-iteration analyses and additional cosine-filter papers is necessary before presenting the combined result as publishable novelty. Author metadata and original-source provenance also remain to be completed.
 
 \section{Conclusion}
-We gave an assumption-explicit formulation of a cosine-based minimum-singular-value iteration on the normalized right Gram operator and stated its conditional finite-spectrum convergence and Bernoulli readout guarantees. We separated the $\cos(\beta\sigma^2/\alpha^2)$ Gram response from a distinct $\cos(\beta\sigma/\alpha)$ response, and audited both on seven small spectral examples. The examples confirm the role of gap, target overlap, degeneracy, and right-kernel support. They also show why conditional convergence alone is insufficient to establish an efficient algorithm: success probability and implementation cost must be counted. Establishing a useful end-to-end resource advantage remains open in this study.
+We derived an exact two-point envelope for filtered-mean bias and obtained sharp gap-free rates for specified cosine and polynomial responses on the right Gram spectrum. The analysis separates state fidelity, scalar estimation error, and acceptance cost. It identifies a concrete exponential penalty from repeated global normalization and supplies a postselection-aware perturbation bound. These results support a focused analytical paper draft; circuit realization, matched resource comparisons, and independent novelty assessment remain open.
 
 \appendix
 \section{Proof of the finite-spectrum bounds}\label{app:proof}
@@ -195,17 +246,15 @@ Every eigenvalue outside $T$ lies in $[\lambda_0,1]$, so the filtered mean satis
 For a readout estimate with $|\widehat\mu_t-\mu_t|\leq\zeta$, clipping to $[0,1]$ cannot increase its distance from $\lambda_0\in[0,1]$. Thus $|\widehat\mu_t-\lambda_0|\leq\mu_t-\lambda_0+\zeta$. For nonnegative $x,y$, $|\sqrt{x}-\sqrt{y}|\leq\sqrt{|x-y|}$, giving the stated singular-value error bound after multiplication by $\alpha$.
 
 \section{Lean formalization status}\label{app:lean}
-The exact finite-weight postselection inequality and its posterior-moment consequence are checked in Lean 4. The formal source is reproduced in Appendix~\ref{app:lean-source}; it was checked with Lean 4.35.0 and Mathlib v4.35.0 using \texttt{lake build QMSVE} and \texttt{lake env lean Audit.lean}, both with exit code 0. The matrix spectral decomposition, identification of filter weights with matrix eigencomponents, QSVT implementation, and Bernoulli concentration remain outside the scalar formalization.
+The exact finite-weight postselection inequality and its posterior-moment consequence are checked in Lean 4. The unchanged formal source is included in the supplementary archive. Its inherited verification log records successful checks with Lean 4.35.0 and Mathlib v4.35.0 using \texttt{lake build QMSVE} and \texttt{lake env lean Audit.lean}, both with exit code 0. The matrix spectral decomposition, identification of filter weights with matrix eigencomponents, QSVT implementation, and Bernoulli concentration remain outside the scalar formalization.
 
 \section{Source manuscript metadata}
 The QMSVE source used for this reassessment is the supplied manuscript titled \emph{Quantum maximum/minimum singular-value estimation algorithms}. The copy examined does not state author, venue, or publication metadata, and labels the triangular iteration as provisional. The manuscript's author field is consequently left as a placeholder in the main file; no identity or affiliation is inferred.
 
-\section{Lean source code}\label{app:lean-source}
-The following is the complete formal source used for the two scalar statements above. Its imports are pinned by the adjacent Lean project files.
-\VerbatimInput[fontsize=\tiny,breaklines=true]{../../lean/QMSVE.lean}
+\section{Reproducibility and verification scope}
+The supplementary source archive includes both experiment scripts, full JSON outputs and figures, dependency versions, and the unchanged scalar Lean project. The original Lean checker success is an inherited verification record, not a new CI run of this revision. The sharp-envelope, rate, polynomial-baseline and perturbation proofs have not been checked in Lean; finite numerical checks are reported separately. Full Lean source is distributed as \texttt{lean/QMSVE.lean}, rather than printed in the article.
 
-% Reference tail (merge with the integrated bibliography and retain the keys).
-\begin{thebibliography}{9}
+\begin{thebibliography}{99}
 \bibitem{QMSVE} \emph{Quantum maximum/minimum singular-value estimation algorithms}. Unpublished manuscript supplied as \texttt{2023\_0311\_QMSVE.pdf}; author and publication metadata unstated in the copy examined.
 \bibitem{Gilyen} A. Gily\'en, Y. Su, G. H. Low, and N. Wiebe, ``Quantum singular value transformation and beyond: exponential improvements for quantum matrix arithmetics,'' in \emph{Proceedings of the 51st Annual ACM SIGACT Symposium on Theory of Computing}, pp. 193--204 (2019), doi:10.1145/3313276.3316366; arXiv:1806.01838.
 \bibitem{SekiYunoki} K. Seki and S. Yunoki, ``Quantum Power Method by a Superposition of Time-Evolved States,'' \emph{PRX Quantum} \textbf{2}, 010333 (2021), doi:10.1103/PRXQuantum.2.010333; arXiv:2008.03661.
@@ -213,5 +262,14 @@ The following is the complete formal source used for the two scalar statements a
 \bibitem{Nghiem} N. A. Nghiem, H. Sukeno, S. Zhang, and T.-C. Wei, ``Improved Quantum Power Method and Numerical Integration Using Quantum Singular Value Transformation,'' \emph{Physical Review A} \textbf{111}, 012434 (2025), doi:10.1103/PhysRevA.111.012434; arXiv:2407.11744.
 \bibitem{QCG2023} K. Toyoizumi, S. Yamamoto, and Y. Hoshino, ``Hamiltonian simulation using quantum singular value transformation: complexity analysis and application to the linearized Vlasov-Poisson equation,'' arXiv:2304.08937, version 2 (2023).
 \bibitem{QCG2024} K. Toyoizumi, K. Wada, S. Yamamoto, and Y. Hoshino, ``Quantum conjugate gradient method using the positive-side quantum eigenvalue transformation,'' arXiv:2404.02713, version 2 (2024).
+\bibitem{GeTuraCirac} Y. Ge, J. Tura, and J. I. Cirac, ``Faster ground state preparation and high-precision ground energy estimation with fewer qubits,'' \emph{Journal of Mathematical Physics} \textbf{60}, 022202 (2019), doi:10.1063/1.5027484; arXiv:1712.03193.
+\bibitem{LinTongFilter} L. Lin and Y. Tong, ``Optimal polynomial based quantum eigenstate filtering with application to solving quantum linear systems,'' \emph{Quantum} \textbf{4}, 361 (2020), doi:10.22331/q-2020-11-11-361; arXiv:1910.14596.
+\bibitem{LinTongGround} L. Lin and Y. Tong, ``Near-optimal ground state preparation,'' \emph{Quantum} \textbf{4}, 372 (2020), doi:10.22331/q-2020-12-14-372; arXiv:2002.12508.
+\bibitem{DongLinTong} Y. Dong, L. Lin, and Y. Tong, ``Ground state preparation and energy estimation on early fault-tolerant quantum computers via quantum eigenvalue transformation of unitary matrices,'' \emph{PRX Quantum} \textbf{3}, 040305 (2022), doi:10.1103/PRXQuantum.3.040305; arXiv:2204.05955.
+\bibitem{LuBanulsCirac} S. Lu, M. C. Ba\~nuls, and J. I. Cirac, ``Algorithms for Quantum Simulation at Finite Energies,'' \emph{PRX Quantum} \textbf{2}, 020321 (2021), doi:10.1103/PRXQuantum.2.020321; arXiv:2006.03032.
+\bibitem{HeZhangWang} M.-Q. He, D.-B. Zhang, and Z. D. Wang, ``Quantum Gaussian filter for exploring ground-state properties,'' \emph{Physical Review A} \textbf{106}, 032420 (2022), doi:10.1103/PhysRevA.106.032420; arXiv:2112.06026.
+\bibitem{Jo} J. Jo, ``Deterministic Ground State Preparation via Power-Cosine Filtering of Time Evolution Operators,'' preprint, arXiv:2602.19556 (2026). The comparison here concerns its stated scalar response, not independent verification of its resource claims.
+\bibitem{CharnesCooper} A. Charnes and W. W. Cooper, ``Programming with linear fractional functionals,'' \emph{Naval Research Logistics Quarterly} \textbf{9}, 181--186 (1962), doi:10.1002/nav.3800090303.
+\bibitem{MuscoMusco} C. Musco and C. Musco, ``Randomized Block Krylov Methods for Stronger and Faster Approximate Singular Value Decomposition,'' in \emph{Advances in Neural Information Processing Systems} \textbf{28} (2015); arXiv:1504.05477.
 \end{thebibliography}
 \end{document}

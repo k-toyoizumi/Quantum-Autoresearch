@@ -1,0 +1,79 @@
+\section{厳密演算と連続証明}
+$p(x)=\sum_{j=0}^na_jx^j$を$[0,L]$で表すBernstein係数は
+\[
+ b_i=\sum_{j=0}^i a_jL^j\frac{\binom ij}{\binom nj}
+\]
+である。基底が非負で和が1なので、値は係数の最小・最大の間にある。
+de Casteljau中点分割の各下端を下向き、上端を上向きに$2^{-220}$単位の整数へ丸め、
+包囲の包含を分割ごとの帰納法で維持する。保存十進係数・位相は厳密有理数であり、
+浮動小数最適化の出力そのものを厳密証明とはしない。
+
+結合残差には$w=P^2\geq0$と$A_b=ab/(1-a)$を用いる。
+$e\in[e_0,e_1]$、$x\in[x_0,x_1]$のboxで
+\[
+ (x-e-b)w(x)-A_bw(e)\leq(x-e_0-b)w(x)-A_bw(e)
+\]
+とし、$xw(x)$と$w(x)$を同じ次数のBernstein基底で包囲して差を取る。
+$A_bw(e)$の下界を引いた値が非正ならbox全体で成立する。
+$x_1\leq e_0+b$なら追加検査不要である。
+node数・深さ上限で解けなければ未証明として棄却し、格子の成功で置き換えない。
+この手順の全候補に対する終了・最適化収束は主張しない。
+
+位相検証ではQSPの上段を$(P(s),i\sqrt{1-s^2}Q(s))$と書くと、1stepの漸化式は
+\[
+ P_{\rm new}=e^{i\phi}[sP-(1-s^2)Q],\qquad
+ Q_{\rm new}=e^{-i\phi}[P+sQ]
+\]
+となる。偶signal次数では対角応答が偶多項式なので、虚部を$s^2$の多項式として扱える。
+各sin/cosを有理Taylor余剰で包み、複素区間演算後の誤差多項式を同じBernstein法で評価する。
+したがって位相誤差境界は連続区間を覆い、別途行う行列格子検査だけに依存しない。
+
+$\delta=.05$の標本数には$\log40=\log5+3\log2$の有理上界を使う。
+\[
+ \log x=2\sum_{j=0}^{m-1}\frac{z^{2j+1}}{2j+1}+R_m,\quad
+ z=\frac{x-1}{x+1},\quad
+ 0\leq R_m\leq\frac{2z^{2m+1}}{(2m+1)(1-z^2)}
+\]
+を用いて有理数の要求標本数を上向きに整数化し、未検査の浮動小数ceilingに頼らない。
+
+\section{形式検証の範囲}
+\texttt{lean/Selection.lean}はLean 4.35.0 / Mathlib v4.35.0で
+\texttt{lake build Selection}に成功し、
+\texttt{lake env lean SelectionAudit.lean}にも成功した。
+検証対象の5補題は、二点分母払いの同値性、目標質量がちょうど$a$の有限混合への十分性、
+順序付き減衰係数による二点条件の保存、二つの入力境界からの上端受理係数の代数、
+およびstationarity補正付きweak dualityである。
+使用公理は\texttt{propext}、\texttt{Classical.choice}、\texttt{Quot.sound}のみで、
+該当証明に\texttt{sorry}、\texttt{admit}、独自axiom、\texttt{native\_decide}はない。
+
+実際の質量$p_0\geq a$への拡張、関数空間・最適化の議論、事前区間幅の包絡、
+Bernsteinアルゴリズム、位相区間証明、行列還元、query実装、集中不等式は、
+手証明または計算証明であり、全体をLean形式化したものではない。
+同じtarget用のworkflowは用意したが、遠隔CI成功は主張せず、今回報告する成功はローカルである。
+補足記録にソースhashと実行ログを含める。
+
+\section{再現性と計算の範囲}
+同梱する実行入口は以下である。
+\begin{itemize}
+\item \texttt{filter\_selection.py}：設計と連続証明。
+\item \texttt{selection\_qsp.py}：位相合成と応答包囲。
+\item \texttt{selection\_matrix\_audit.py}：全block行列監査。
+\item \texttt{selection\_figures.py}：表・図・summary生成。
+\item \texttt{check\_selection\_certificates.py}：厳密算術の対照検査。
+\end{itemize}
+共有算術moduleは\texttt{selection\_certificates.py}である。
+設計JSONはソースhash、取得可能なら基準Git版、厳密係数・dual境界、証明診断、
+パラメータ、依存版を記録する。位相JSONは入力設計のhash、行列JSONは設計と位相の
+hashを記録する。厳密費用の有理数と表示用近似値を併記し、ソースmanifestも含める。
+
+本実験は小さな人工prior格子に限定される。既存族のパラメータ探索も有限であり、
+各族の任意調整に対する最適値と比較したものではない。
+証明付き候補が返らない族について架空の性能値を報告しない。
+全本実験は$u>4E$を満たす。
+この非自明性を満たさなかった初期診断条件は本実験から除外し、研究記録に棄却した
+評価設計として残した。
+
+今回の確認用原稿では本人の指定により著者情報を省略する。
+候補導出、執筆、実装にはAI支援を使用しており、生成と検証を同一視せず、
+実際の検査範囲を上記のとおり明示する。
+preprint serverへのupload・投稿は行っていない。

@@ -1,0 +1,473 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fontspec}
+\setmonofont[Path=../qmsve/fonts/]{DejaVuSansMono.ttf}
+\usepackage{amsmath,amssymb,amsthm,mathtools,booktabs,graphicx,hyperref}
+\hypersetup{hidelinks}
+\emergencystretch=3em
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\R}{\mathbb R}
+\newcommand{\ket}[1]{\lvert #1\rangle}
+\newcommand{\cP}{\mathcal P}
+\title{Prior-Robust QSVT Filter Selection\\for Gap-Free Spectral-Mean Estimation}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+Selecting a spectral filter by its conditional convergence alone ignores the
+cost of rejected preparations. We study a specified alternative objective:
+minimizing the worst expected query cost of a filtered-mean estimator when
+only an interval containing the smallest normalized Gram eigenvalue and a
+lower bound on its initial probability mass are supplied. No spectral-gap
+bound or true target energy enters the design. A two-point characterization
+turns the uniform mean-bias requirement into coupled amplitude constraints.
+Our main structural result shows that imposing a zero at the upper spectral
+endpoint costs only one additional Gram-polynomial degree and a controlled
+factor in worst-case acceptance. In this class, a semi-infinite linear
+program exactly characterizes the best worst-case restart probability at
+each degree. We combine rational dual bounds, continuous Bernstein
+certificates and phase-response enclosures to select the degree and error
+allocation with a posteriori cost guarantees. Numerical experiments compare
+optimized, power, cosine-Taylor and Chebyshev responses under a common
+signal-query model. The results identify preparation-cost-dependent choices
+and quantify their distance from the restricted optimum. The contribution
+is a structural and certified design analysis of a fixed estimator and
+restart model, not a new QSVT primitive or a general quantum speedup.
+\end{abstract}
+
+\section{Introduction}
+Quantum singular-value transformation (QSVT) implements polynomial responses
+of a block-encoded matrix \cite{Gilyen,Martyn}. This flexibility motivates
+choosing different functions for different spectral problems. Such a choice
+is useful only when the input information used to select it is available
+and the preparation, normalization, readout and rejection costs are counted.
+A low-degree filter with a small accepted-state error can still be an
+expensive estimator if its acceptance probability is small.
+
+We make this choice precise for one deliberately restricted, verifiable
+setting: a nonadaptive real polynomial filter followed by independent
+Bernoulli measurements of the normalized right Gram operator. The minimum
+lies in a supplied interval, its initial mass is lower bounded, and no
+gap is promised. The design must work for every finite spectrum compatible
+with this information, rather than selecting a filter after examining the
+true eigenvalues. The estimator is not intended to replace phase estimation
+or modern ground-energy estimators in general.
+
+Three results organize the analysis. First, the robust mean-bias condition
+is equivalent to a two-energy inequality. Second, multiplying an admissible
+filter by $1-x$ preserves this condition and gives an explicit acceptance
+comparison with an endpoint-nulling filter. Third, endpoint nulling makes
+the worst acceptance exactly the minimum target transmission times the
+overlap bound. This identifies a semi-infinite linear program whose
+objective directly controls worst expected restart cost. Exact continuous
+feasibility certificates and corrected dual bounds then turn numerical
+design into a quantitatively certified selection rule.
+
+\paragraph{Relation to existing filtering.}
+Powers of cosine, spectral-ratio bounds, shifts and amplification already
+appear in ground-state preparation \cite{Ge}. Optimal polynomial projectors
+with a known isolated target are established \cite{LinTong}.
+Cosine and Gaussian filtering and virtual filtered observables have also
+been studied \cite{Lu,He}. Filtered quantum phase estimation explicitly
+balances filter cost and overlap, considers different bases, and gives
+known-center minimax constructions \cite{FQPE}. Wall-Chebyshev work analyzes
+robustness to coarse energy information together with success costs
+\cite{Wall}. Recent constrained QSP minimax work addresses the distinction
+between sampled and continuous feasibility and connects optimization to
+phase synthesis \cite{Constrained}. Linear programming, minimax design,
+Bernstein subdivision and QSP synthesis are therefore background tools
+\cite{Charnes,Farouki,DongPhase}, not claimed inventions here.
+
+Our narrower contribution is the endpoint-nulling reduction with its
+acceptance factor, the exact restart interpretation of the unknown-minimum
+coupled constraints, and certified selections for this particular
+gap-free mean estimator. Unlike a fixed-center rejection-band objective,
+our constraint couples every possible target in the prior interval to
+every larger possible eigenvalue. Unlike fidelity guarantees, it allows
+nearby unwanted eigenvalues to remain. These differences define the task;
+they do not establish superiority over existing estimators or universal
+priority for all the component arguments.
+
+\section{Information, oracle and estimator model}\label{sec:model}
+Let $B=A/\alpha$, where a known $\alpha\geq\|A\|_2>0$ is part of the input,
+and $G=B^\dagger B$ has eigenvalues in $[0,1]$. Let $e=\lambda_{\min}(G)$.
+The supplied information is
+\begin{equation}\label{eq:prior}
+ 0\leq e\leq u<1,\qquad p_0\geq a,\quad 0<a<1,
+\end{equation}
+where $p_0$ is total initial probability on the minimum eigenspace.
+All other eigenvalues may be arbitrarily close to $e$. Degeneracy is
+included by combining weights in the target eigenspace. There is no
+assumption that the spectrum or its weights can be read classically.
+The numerical generator knows them only to audit the resulting guarantees.
+
+A real amplitude $P$ obeys $|P(x)|\leq1$ on $[0,1]$ and is nonzero on
+$[0,u]$. For polynomials we choose its sign so $P>0$ there. The accepted
+state has weights proportional to $p_iP(\lambda_i)^2$, success
+$Z_P=\sum_i p_iP(\lambda_i)^2$, and mean
+\[
+ \mu_P=\frac{\sum_i p_iP(\lambda_i)^2\lambda_i}{Z_P}.
+\]
+For robustness let $\mathfrak I(a,u)$ denote all such finite spectra and
+weights, and define
+\[
+ S(P)=\inf_{I\in\mathfrak I(a,u)}Z_P(I),\qquad
+ P\text{ admissible at }b\iff \mu_P(I)-e(I)\leq b\quad\forall I.
+\]
+Success is physically implemented with amplitude $\kappa P$, for the common
+margin $\kappa=19/20$, applied once to the entire polynomial. This changes
+success by $\kappa^2$ and leaves conditional means unchanged.
+
+For a degree-$n$ polynomial in $x=\lambda$, $P(s^2)$ is an even degree-$2n$
+polynomial in the normalized singular value $s$. We assume an ideal
+controlled singular-value signal and its inverse, with the standard QSVT
+reflections available. A conservative serial implementation of real-valued
+response extraction uses a controlled QSP unitary and its inverse: $4n$ signal calls
+per complete filter attempt. This convention is used for every candidate.
+It includes neither a hardware gate compilation nor a T-count claim.
+State preparation costs $c_\psi$ query units, with serial depth $d_\psi$
+specified separately if needed. The depth restriction is
+$d_\psi+4n+1\leq D$; the last call performs readout. In the numerical model
+we conservatively set $d_\psi=c_\psi$. Thus all methods within a given
+problem obey the same full serial-query cap.
+
+Given an accepted state, the success flag of a block-encoding of $B$ is a
+Bernoulli variable of mean $\mu_P$. For total normalized Gram error $E$,
+allocate $0<b<E$ to bias and $E-b$ to sampling. With
+\begin{equation}\label{eq:shots}
+ M(b)=\left\lceil\frac{\log(2/\delta)}{2(E-b)^2}\right\rceil
+\end{equation}
+independent accepted copies, Hoeffding's inequality yields
+$|\widehat\mu-e|\leq E$ with probability at least $1-\delta$.
+Our restart protocol discards every failed whole-filter attempt, prepares
+the input again, and uses no amplitude amplification or intermediate
+recycling. Its worst expected query cost is exactly
+\begin{equation}\label{eq:cost}
+ J(P,n,b)=M(b)\left[\frac{c_\psi+4n}{\kappa^2 S(P)}+1\right].
+\end{equation}
+Independence of fresh attempts justifies the geometric waiting time and
+the identical conditional distribution of accepted readouts.
+
+The right minimum singular value is
+$\sigma_R(A)=\min_{\|v\|=1}\|Av\|=\alpha\sqrt e$. Clipping readout to
+$[0,1]$ and taking a square root gives error at most $\alpha\sqrt E$.
+For wide matrices this right minimum is zero and need not equal the
+smallest entry of the thin SVD. Prior acquisition cost is an additional
+common input cost, not included in the optimization; acquiring a tighter
+prior adaptively is outside the model.
+
+\paragraph{The no-computation baseline.}
+Returning $u/2$ already estimates $e$ to $u/2$; returning
+$\alpha\sqrt u/2$ estimates $\sigma_R$ to $\alpha\sqrt u/2$.
+These strategies must be preferred whenever the requested error allows
+them. Our main numerical tests impose $u>4E$, so neither midpoint solves
+even the singular-value task with tolerance $\alpha\sqrt E$.
+The unfiltered mean has worst bias $1-a$ and is feasible only if its
+allocated bias is at least that large. These observations concern this
+mean estimator, not every possible unfiltered quantum algorithm.
+
+\section{Two-point characterization and endpoint reduction}
+\begin{proposition}[Uniform mean-bias condition]\label{prop:pair}
+An amplitude $P$ nonzero on $[0,u]$ is admissible at $b>0$ if and only if
+for every $0\leq e\leq u$ and $e+b<x\leq1$,
+\begin{equation}\label{eq:pair}
+ (1-a)(x-e-b)P(x)^2\leq abP(e)^2.
+\end{equation}
+\end{proposition}
+\begin{proof}
+Necessity follows by placing mass $a$ at $e$ and $1-a$ at $x$ and
+cross-multiplying the positive posterior denominator. For sufficiency,
+let actual target mass be $p_0\geq a$. Equation~\eqref{eq:pair} implies
+$(x-e-b)P(x)^2\leq abP(e)^2/(1-a)$ when $x-e>b$; if $x-e\leq b$, the
+left side is nonpositive. Averaging over the non-target conditional
+distribution gives
+\[
+ \sum_{i>0}p_i(\lambda_i-e-b)P(\lambda_i)^2
+ \leq \frac{(1-p_0)ab}{1-a}P(e)^2
+ \leq p_0bP(e)^2.
+\]
+This is exactly the bias inequality after cross-multiplication.
+\end{proof}
+
+For a fixed $e$ and exact mass $a$, the same averaging argument gives the
+exact worst mean bias
+\begin{equation}\label{eq:two-point}
+ \max_{e\leq x\leq1}
+ \frac{(1-a)(x-e)P(x)^2}{aP(e)^2+(1-a)P(x)^2}.
+\end{equation}
+Thus finite examples can attain, rather than merely suggest, the
+worst-case bounds. This is a simple linear-fractional extremization;
+the general principle is classical \cite{Charnes}.
+
+\begin{theorem}[Controlled endpoint nulling]\label{thm:null}
+Let $u+b<1$ and let $P$ be continuous and admissible at $b$, with $|P|\leq1$.
+Then $Q(x)=(1-x)P(x)$ is admissible, $|Q|\leq1$, $Q(1)=0$, and
+\begin{equation}\label{eq:null-factor}
+ S(Q)\geq (1-u)(1-u-b)S(P).
+\end{equation}
+If $P$ has degree at most $n$, $Q$ has degree at most $n+1$ in $\lambda$.
+\end{theorem}
+\begin{proof}
+For $x\geq e$, $0\leq1-x\leq1-e$. Multiplying
+\eqref{eq:pair} by $(1-e)^2$ therefore proves the condition for $Q$.
+Let $m=\min_{[0,u]}P^2>0$, attained at $e_*$. Every permitted input gives
+$Z_Q\geq a(1-u)^2m$.
+For $P$, use the allowed witness with masses $a,1-a$ at $e_*,1$.
+Equation~\eqref{eq:pair} bounds its endpoint contribution, giving
+\[
+ S(P)\leq am+(1-a)P(1)^2
+ \leq am\frac{1-e_*}{1-e_*-b}
+ \leq am\frac{1-u}{1-u-b}.
+\]
+Combining the two inequalities proves \eqref{eq:null-factor}.
+\end{proof}
+
+\begin{corollary}[Cost of the restriction]\label{cor:restriction}
+For the same $b,M,\kappa$, transforming a degree-$n$ filter to an
+endpoint-nulling degree-$(n+1)$ filter increases the worst expected cost
+by at most
+\begin{equation}\label{eq:restriction-cost}
+ \frac{c_\psi+4(n+1)}{c_\psi+4n}
+ \frac{1}{(1-u)(1-u-b)}.
+\end{equation}
+The additional degree must fit the depth cap. Consequently the restriction
+is quantitatively controlled, but is not cost-free at a tight cap.
+\end{corollary}
+
+\begin{theorem}[Exact restart probability after endpoint nulling]\label{thm:success}
+If $P$ is continuous, $P(1)=0$ and $P>0$ on $[0,u]$, let
+$\tau(P)=\min_{[0,u]}P$. Then
+\begin{equation}\label{eq:success}
+ S(P)=a\tau(P)^2.
+\end{equation}
+\end{theorem}
+\begin{proof}
+The target component gives the lower bound. Take a minimizer $e_*$ of
+$P$ on $[0,u]$ and put mass $a$ there and the remaining mass at $1$.
+This witness attains the bound exactly.
+\end{proof}
+
+The factor in Theorem~\ref{thm:null} is the main structural reason to use
+endpoint-nulling polynomials. It gives a meaningful comparison to the
+larger real-polynomial class while making acceptance optimization exact.
+It does not compare to amplitude-amplified or adaptive filtering protocols.
+
+\section{The polynomial selection problem}\label{sec:design}
+For $n\geq1$ let $\tau_n^*(a,u,b)$ be the optimum of
+\begin{align}\label{eq:lp}
+ \text{maximize }&\ \tau\quad\text{over real }P\in\cP_n,\ \tau\geq0,\nonumber\\
+ \text{subject to }&\ |P(x)|\leq1\quad(0\leq x\leq1),\nonumber\\
+ &P(1)=0,\quad P(e)\geq\tau\quad(0\leq e\leq u),\\
+ &\pm P(x)\leq
+   \sqrt{\frac{ab}{(1-a)(x-e-b)}}P(e)
+   \quad(0\leq e\leq u,\ e+b<x\leq1).\nonumber
+\end{align}
+All constraints are linear in the polynomial coefficients and $\tau$.
+The square-root coefficient is fixed by the supplied prior and error.
+Signed response outside the target interval is allowed.
+For positive $\tau$, Proposition~\ref{prop:pair} makes these constraints
+equivalent to admissibility in the endpoint-nulling class. Compactness of
+bounded degree-$n$ polynomials gives attainment; an optimum of zero means
+no positive uniformly accepting design is supplied at that degree.
+
+\begin{theorem}[Restricted optimum and certified selection]\label{thm:selection}
+For fixed $n,b$, the smallest worst expected cost in this class is
+\begin{equation}\label{eq:optcost}
+ J_n^*(b)=M(b)\left[\frac{c_\psi+4n}{\kappa^2 a(\tau_n^*)^2}+1\right].
+\end{equation}
+Suppose a certified feasible polynomial gives $\ell_{n,b}\leq\tau_n^*$
+and a valid relaxation gives $\tau_n^*\leq U_{n,b}$. Define $J^{\rm up}$
+by replacing $\tau_n^*$ with $\ell_{n,b}$, and $J^{\rm lo}$ by replacing
+it with $U_{n,b}$. For any finite allocation set $\mathcal B\subset(0,E)$,
+selecting the feasible $(n,b)$ with smallest $J^{\rm up}$ gives
+\begin{equation}\label{eq:gap}
+ \frac{J_{\rm selected}}{\min_{n\leq N,\ b\in\mathcal B}J_n^*(b)}
+ \leq \frac{\min J^{\rm up}}{\min J^{\rm lo}}.
+\end{equation}
+This is an a posteriori approximation factor for the stated degree,
+allocation, restart and readout model.
+\end{theorem}
+\begin{proof}
+Equation~\eqref{eq:optcost} follows from Theorem~\ref{thm:success} and
+monotonicity of cost in $\tau$. Every valid upper/lower transmission
+bound gives the corresponding reverse cost bound. Taking minima proves
+\eqref{eq:gap}. A comparison family with its own continuous certificate
+may supply the selected upper bound as well.
+\end{proof}
+
+With fixed $M,b$, the cost of candidate $i$ is affine in preparation cost,
+$J_i(c)=M[(c+4n_i)/s_i+1]$, where $s_i$ is its worst implemented success.
+Two candidates with $s_j>s_i$ and $n_j>n_i$ exchange order at
+\begin{equation}\label{eq:crossover}
+ c_* =\frac{4(n_j s_i-n_i s_j)}{s_j-s_i}.
+\end{equation}
+Transmission intervals turn this point into a certified transition
+interval: an upper cost for one candidate below a lower cost for the
+other proves its ordering. This explains why maximizing acceptance alone
+and minimizing degree alone need not select the same response.
+
+\section{A filter-independent prior-width limitation}\label{sec:prior-limit}
+The paired requirement also limits what any fixed response can achieve,
+even without a polynomial or degree restriction. This provides a useful
+early rejection test for proposed acceptance budgets.
+Set $A_b=ab/(1-a)$ and $\Delta_0=b/(1-a)$. For $z\geq0$ define
+\begin{equation}\label{eq:F}
+ F_b(z)=\max\left(\{0\}\cup
+ \left\{n\log\frac{z/n-b}{A_b}:
+ n\in\mathbb N_{>0},\ z/n>\Delta_0\right\}\right).
+\end{equation}
+Only finitely many integers contribute.
+
+\begin{proposition}[Exact unrestricted target transmission]\label{prop:prior}
+For measurable weights $0\leq w\leq1$, positive on $[0,u]$ and obeying
+the paired mean-bias condition, one has
+\begin{equation}\label{eq:priorbound}
+ \sup_w\inf_{0\leq e\leq u}w(e)=e^{-F_b(u)}.
+\end{equation}
+In particular, some permitted pure-target input has expected restart
+overhead at least $e^{F_b(u)}$ for any one fixed filter.
+\end{proposition}
+\begin{proof}
+Applying the ratio form of \eqref{eq:pair} along a partition of $[0,u]$
+with step lengths $d_j>\Delta_0$ gives
+$w(u)\leq\prod_j A_b/(d_j-b)$. For a fixed number $n$ of steps,
+concavity of $\log(d-b)$ makes the equally spaced partition strongest,
+giving the upper bound in \eqref{eq:priorbound}.
+For completeness, allowing arbitrary step lengths with total length at
+most $z$ gives exactly \eqref{eq:F}: leftover length can be added to a
+step, and equal spacing maximizes its logarithmic attenuation. Concatenating
+partitions shows that $F_b$ is superadditive; it is also nondecreasing.
+Thus $w_*(x)=e^{-F_b(x)}$ satisfies
+$w_*(e+d)/w_*(e)\leq A_b/(d-b)$ when $d>\Delta_0$.
+For $b<d\leq\Delta_0$ the required ratio bound is at least one and
+monotonicity suffices. Therefore $w_*$ is feasible on the entire support
+and attains the minimum at $u$, proving equality. A pure eigenstate at
+$u$ has acceptance $w(u)$, proving the restart statement.
+\end{proof}
+
+The large-width exponential rate is $r_a/b$, where
+$r_a=W_0((1-a)/(a\mathrm e))$ and $W_0$ is the nonnegative Lambert branch.
+Indeed, maximizing $\log((d-b)/A_b)/d$ gives
+$d_*=b(1+1/r_a)$. The exponential weight $\exp(-r_a x/b)$ satisfies
+the pair condition and provides a familiar imaginary-time comparison.
+Equation~\eqref{eq:priorbound} is a function-level bound, not a general
+quantum-query lower bound. It does not apply to algorithms that adapt the
+filter after learning more about the minimum, use a different estimator,
+or amplify/recycle successes. It is also not a proof that no polynomial
+can attain the same value: nonanalyticity of the displayed optimizer
+alone would not establish such a statement.
+
+\section{Continuous and phase-realization certificates}\label{sec:cert}
+We use Chebyshev coefficients $P(x)=\sum_{k=0}^n c_kT_k(2x-1)$.
+Finite-grid linear programming and a few exchange rounds produce
+candidates, but no grid result is called a continuous certificate.
+All saved decimal coefficients are interpreted as exact rationals, with
+$P(1)=0$ enforced algebraically. Bernstein coefficients and outward
+integer subdivision at 220-bit fixed-point precision enclose the
+polynomial on whole intervals \cite{Farouki}. They certify boundedness,
+positive target transmission and \eqref{eq:pair} on the full
+$(e,x)\in[0,u]\times[0,1]$ rectangle. Nonphysical or already-small
+separations are harmless. Exact normalization by the computed global
+bound is applied once to the composite polynomial.
+
+For an upper transmission bound, pair square roots in the grid relaxation
+are rounded upward to rational numbers, which weakens the constraints.
+Floating solver multipliers are converted to nonnegative rational
+weights. If $y$ is this vector, $r$ is its exact stationarity residual,
+and $d$ is the objective vector, weak duality gives
+\begin{equation}\label{eq:dual}
+ d^Tz\leq y^T h+\sum_j |r_j|B_j,\qquad r=d-A^Ty,
+\end{equation}
+because the true coefficient bounds are $|c_0|\leq1$, $|c_k|\leq2$
+for $k>0$, and $0\leq\tau\leq1$. These Chebyshev bounds follow directly
+from the cosine-integral formula for their coefficients. The stationarity
+correction is kept even when numerically small. Thus an imperfect solver
+dual is not silently treated as an exact optimum.
+
+The entire even polynomial $\kappa P(s^2)$ is synthesized once with
+symmetric QSP using the \texttt{pyqsp} implementation of a Newton solver
+\cite{Symmetric}. The signal convention is
+\[
+ W(s)=\begin{pmatrix}s&i\sqrt{1-s^2}\\i\sqrt{1-s^2}&s\end{pmatrix},\qquad
+ U_\Phi=e^{i\phi_0Z}\prod_{j=1}^{2n}[W(s)e^{i\phi_jZ}].
+\]
+The desired response is $\operatorname{Im}(U_\Phi)_{00}$, obtained using
+the success block of $(-iU_\Phi+iU_\Phi^\dagger)/2$. Controlled branches
+implemented serially justify the $4n$ accounting. Saved phase decimals
+define exact real angles. Rational Taylor remainder enclosures for each
+sine/cosine, an interval polynomial recurrence for the top row of
+$U_\Phi$, and Bernstein subdivision give a uniform response error
+$\eta$ on the whole singular-value interval. This is stronger than a
+floating grid agreement, while remaining a certificate for the ideal
+signal oracle rather than a hardware error bound.
+
+\begin{proposition}[Accepted-state error transfer]\label{prop:phase}
+Let the ideal filter success probability be at least $s>0$, and let
+the implemented success block differ by operator norm at most $\eta<\sqrt s$.
+Then its success probability is at least $(\sqrt s-\eta)^2$ and its
+accepted Gram mean differs from the ideal mean by at most
+$2\eta/\sqrt s$.
+\end{proposition}
+\begin{proof}
+The unnormalized state error is at most $\eta$. Reverse triangle
+inequality proves the success bound. Normalizing changes vector error
+by at most a factor $2/\sqrt s$; pure-state trace distance is no greater
+than vector distance, and the expectation of $0\leq G\leq I$ changes
+by at most trace distance.
+\end{proof}
+Our polynomial certificate reserves $0.01b$ of the bias allocation for
+this transfer, and every synthesized selected response must satisfy it.
+Encoding errors would also have to be included in $\eta$ before applying
+the proposition. Applying a safety scale at every scalar iteration would
+instead cause an avoidable exponential penalty; synthesizing the whole
+polynomial once avoids that particular artifact.
+
+\input{results-en.tex}
+
+\section{Discussion and limitations}
+The selection rule answers a concrete question with supplied prior
+information: which real polynomial degree, response and finite bias
+allocation minimize a guaranteed worst restart cost? The endpoint
+reduction makes the restriction explicit and controls the price of using
+the class in which the convex objective has an exact operational meaning.
+The dual/continuous certificates distinguish proximity to a restricted
+optimum from improvement over a small list of named filters.
+
+The estimator and restart protocol are substantial restrictions.
+Amplitude amplification, coherent recycling, virtual filtering,
+phase-estimation-based readout and adaptive prior acquisition can change
+the resource dependence. Modern QET-U and other ground-energy estimators
+address different information/readout regimes \cite{QETU,Accurate}; our
+results are not lower bounds on those algorithms. A supplied overlap
+bound can itself be costly to obtain. Gate-level depth, error correction,
+chemistry block-encodings and hardware noise are not modeled here.
+Optimization over continuous bias allocations is not certified by a
+finite allocation grid. Numerical near-optimality factors must always be
+read with this scope attached.
+
+The worst-case model can be conservative for a particular spectrum, and
+the total costs can be large when prior width is large compared with the
+bias allowance. That behavior is informative: filter flexibility alone
+does not remove the price of weak prior information. The theory does not
+claim a new family of optimal QSVT polynomials or a general quantum
+advantage. Its contribution is the structural reduction and a
+reproducible, certified answer for the specified robust selection problem.
+
+\section{Conclusion}
+We formulated prior-only gap-free filter selection for a spectral-mean
+estimator with a full restart/readout query accounting. A controlled
+endpoint-nulling reduction connects general real responses to a class
+whose worst acceptance is exactly characterized. This yields a convex
+polynomial formulation with rigorous lower and upper cost certificates,
+and selected phase responses can be checked on continuous intervals.
+The framework identifies when a change in preparation cost or prior
+information warrants a different response, while exposing the regimes
+where a fixed-filter mean estimator remains expensive.
+
+\appendix
+\input{verification-en.tex}
+\input{references.tex}
+\end{document}

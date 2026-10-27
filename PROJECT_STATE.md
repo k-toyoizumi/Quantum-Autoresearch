@@ -1,9 +1,28 @@
 # Project State
 
-更新日：2026-10-26（UTC）
+更新日：2026-10-27（日本時間）
 
 ## Goal
-化学・物性のエネルギー推定を対象に、深さ制約下の量子スペクトルフィルタ関数設計を調査する。
+本人の追加依頼により、QSVTの関数選択を具体的な推定器・費用モデルへ落とし、理論検討・数値実験を経てarXiv向け論文を完成する。著者情報は今は不要。外部投稿・公開は実施しない。
+
+## 最新のWorking Set：2026-10-27 論文完成
+- 成果物：`paper/filter-selection/`。英語13頁・日本語11頁、英語投稿ZIP、日英再現ZIP、README、主張対応表、先行研究比較。
+- 主結果：gap-free一様平均バイアスの二点条件、上端零化の受理損失因子 `(1-u)(1-u-b)`、零化後の厳密最悪受理確率 `a*tau²`、固定推定・再試行モデルの半無限LP特徴づけ。全体は手証明、5つのスカラー補題はLean 4.35.0で実チェック成功。
+- 本実験10条件すべて `u>4E`。連続実行可能性・厳密双対下界で費用比1.0372–1.2394。保存QSP位相の連続誤差最大3.63e-16。全行列32次元抽出回路の数値検証、1,000スカラー/2,000行列sampling、328算術チェック成功。
+- 検証：日英全頁描画、未定義参照・欠字・overfullなし。日英ZIPは新規フォルダで両PDFとGitなしpilotを検証。英語投稿ZIPも新規展開コンパイル・算術・pilot成功。arXiv側実行/受理やremote CI成功は主張しない。
+- 批判的対応：初期の自明prior例を本実験から除外、旧メモの非解析性から非達成を推論する誤りを不採用、反復正規化の不要な損失を排除。LP/交換法/関数選択を発明としない。一般量子優位なし。
+- 記録：`memo/reviews/2026-10-27_filter-selection-paper-review_1.md`。作業先・baseは引き続き下記checkoutと `74273e4`。新成果は未コミット。別checkout・既存草稿は保全。追加モデル/サブエージェント/定期実行なし。
+- 2026-10-27追加依頼：本人がGitHubへのpushを明示認可。完成原稿・コード・データと先行する今回のQMSVE改訂をmainへ記録・送信する。arXiv投稿は認可・実施していない。
+- 今回の研究・執筆・ローカル検証は完了。次に投稿する場合の著者情報・外部公開判断は本人が行う。無人継続は設定しない。
+
+## 最新のWorking Set：2026-10-26レビュー改訂
+- 作業先：`/home/ktoyo/projects/Quantum-Autoresearch-github`。`git pull --ff-only` で `74273e4` を取得し、その上で未コミットの原稿改善を実施。別checkoutのローカル未送信履歴は統合しない。
+- 日英原稿を「Sharp Gap-Free Bias Bounds for Cosine and Polynomial Singular-Value Filters」へ改題。関連文献7→16件。直接重なるGe–Tura–Cirac、Lin–Tong、He–Zhang–Wang等との関係を明記。
+- 主結果候補：固定応答・最小値・目標質量に対する平均バイアスの正確な二点最悪包絡、cosine-Gram / dilationの鋭いgap-free定数・率。固定次数多項式baseline、Taylor正規化の指数的受理損失、受理後摂動評価を追加。完全な手証明あり。新しい定理はLean未検証。優先性・単独論文としての重要性は未確定。
+- 新実験：`experiments/qmsve_gapfree_envelope.py`、`results/qmsve_gapfree_envelope.json`、`figures/qmsve_gapfree_envelope.png`。1,000ランダム分布・密格子・漸近定数を照合し違反なし。数値確認と普遍命題の手証明を区別。
+- 改訂PDF：`paper/qmsve/QMSVE-en.pdf`（12頁）、`QMSVE-ja.pdf`（10頁）。Tectonic 0.17.0で成功し全頁描画QA済み。既存Lean source/logは保全し、新規CI成功とは扱わない。未知状態準備・QSVT位相・実回路・量子優位は未検証。
+- 評価・文献対応：`paper/qmsve/literature-comparison.md`、`paper/qmsve/claim-evidence.md`、`memo/reviews/2026-10-26_qmsve-critical-review_2.md`。
+- 次の一手：正確な包絡・定数を古典weighted power-iterationと追加cosine文献へ独立照合。既出なら再現・整理へ格下げ。原案PDF・著者情報の確認、新定理の形式検証、必要なら同一oracle費用での比較を進める。
 
 ## 現在地
 - 段階1（文献・過去資産の静的レビュー）完了。詳細：[文献・過去資産レビュー](memo/research/2026-10-24_2_filter-literature-and-asset-review.md)、[QSVT toolchain比較](memo/research/2026-10-24_3_qsvt-toolchain-review.md)、[残件・段階2引継ぎ](memo/research/2026-10-24_4_stage1-remainder-review.md)
@@ -23,10 +42,7 @@
 - 2026-10-24本人認可：現在の研究目標・既存予算内の研究方向選択、比較条件の設計、仮説の採否/棄却はAgentに委任。追加予算・外部公開・Astra/Sol high以上の事前承認制は維持。新規性は保証されない。
 
 ## 次の一手
-- filter/GSEE新規性探索はNO-GOで終了。未知nuisance等の追加algorithm案は探索しない。
-- 次の成果物はQMSVE原案を軸とする論文形式の内部技術報告。新規性・投稿は主張せず、QCGを別の既存成果として区分する。
-- 最小確認計画：(1) 正規化/cos単調区間/QSVT演算子対応、(2) 収束・読出精度・初期重なり・gap・成功率とquery/depth会計、(3) 必要な場合のみ小行列の再現。今回実行なし。
-- 詳細：[scope memo](memo/research/2026-10-25_3_qmsve-techreport-scope.md)。
+今回の依頼は成果物作成とローカル検証まで完了。新しいチャット依頼があれば、最新Working Setと論文READMEから再開する。過去の下記Working Set・探索メモは履歴として扱い、未完タスクを自動再開しない。
 
 ## Source pointers
 - `docs/project/research-plan.md`

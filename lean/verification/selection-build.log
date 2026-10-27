@@ -1,0 +1,7 @@
+⚠ [1027/1028] Built Selection (2.1s)
+warning: Selection.lean: imports `Mathlib.Basic.Real.Basic` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Selection.lean: imports `Mathlib.Algebra.Order.BigOperators.Group.Finset` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Selection.lean: imports `Mathlib.Algebra.BigOperators.Ring.Finset` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Selection.lean: imports `Mathlib.Tactic.Linarith` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+warning: Selection.lean: imports `Mathlib.Tactic.Ring` from package `mathlib`, which is designed for use with the module system; consider adding `module` to the start of this file
+Build completed successfully (1028 jobs).

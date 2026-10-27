@@ -1,0 +1,102 @@
+\section{Exact arithmetic and certificate construction}
+For $p(x)=\sum_{j=0}^n a_jx^j$ on $[0,L]$, its degree-$n$ Bernstein
+coefficients are
+\[
+ b_i=\sum_{j=0}^i a_j L^j\frac{\binom ij}{\binom nj}.
+\]
+Because the Bernstein basis is nonnegative and sums to one, the
+polynomial lies between the smallest and largest coefficients. Midpoint
+subdivision uses de Casteljau averaging. The verifier rounds each lower
+endpoint downward and each upper endpoint upward to integer multiples
+of $2^{-220}$. Induction on subdivision proves containment.
+All saved coefficient and phase decimals are exact rational inputs;
+the floating optimization outputs themselves are not exact certificates.
+
+To certify the coupled residual, write $w=P^2$ and $A_b=ab/(1-a)$.
+On a box $e\in[e_0,e_1]$, $x\in[x_0,x_1]$, use $w(x)\geq0$ to bound
+\[
+ (x-e-b)w(x)-A_bw(e)
+ \leq (x-e_0-b)w(x)-A_bw(e).
+\]
+The verifier encloses $xw(x)$ and $w(x)$ in the same elevated Bernstein
+basis, subtracts $(e_0+b)w(x)$, and subtracts a lower bound for $A_bw(e)$.
+Boxes with $x_1\leq e_0+b$ need no further check. If a box cannot be
+resolved within the recorded node/depth cap, the candidate is rejected
+as uncertified, even if dense-grid tests pass. This is a certificate
+method, not a guaranteed optimizer or guaranteed-termination theorem.
+
+For the phase-response recurrence write the top row as
+$(P(s),i\sqrt{1-s^2}Q(s))$. One further signal/phase step gives
+\[
+ P_{\rm new}=e^{i\phi}[sP-(1-s^2)Q],\qquad
+ Q_{\rm new}=e^{-i\phi}[P+sQ].
+\]
+For even signal degree the diagonal polynomial has even parity, so its
+imaginary part is a polynomial in $s^2$. Rational Taylor remainders for
+$\sin\phi,\cos\phi$ enclose each complex multiplication. The resulting
+error polynomial in $\lambda=s^2$ is bounded with the same Bernstein
+method. The stated phase bound covers a continuous interval, not only
+the grid used for the separate numerical matrix check.
+
+At $\delta=0.05$, the implementation obtains an upper rational bound
+for $\log40=\log5+3\log2$ using
+\[
+ \log x=2\sum_{j=0}^{m-1}\frac{z^{2j+1}}{2j+1}+R_m,
+ \quad z=\frac{x-1}{x+1},\quad
+ 0\leq R_m\leq\frac{2z^{2m+1}}{(2m+1)(1-z^2)}.
+\]
+It then rounds the rational shot requirement upward. Thus the integer
+sample count is not based on an unchecked floating rounding at a ceiling.
+
+\section{Formal verification scope}
+\texttt{lean/Selection.lean} was checked locally with Lean 4.35.0 and
+Mathlib v4.35.0 by \texttt{lake build Selection}.
+\texttt{lake env lean SelectionAudit.lean} also succeeded.
+The five checked scalar lemmas concern: the two-point cross-multiplication
+equivalence; sufficiency for a normalized finite outside mixture with
+target mass exactly $a$; preservation of the pair inequality under ordered
+attenuation factors; the algebraic endpoint acceptance factor from its
+two input bounds; and weak duality with a stationarity residual correction.
+The audit reports only \texttt{propext}, \texttt{Classical.choice}, and
+\texttt{Quot.sound}. No \texttt{sorry}, \texttt{admit}, custom axiom, or
+\texttt{native\_decide} is used in those proofs.
+
+The proof for actual target mass $p_0\geq a$, the optimization/function-space
+arguments, the prior-width envelope, Bernstein algorithm, phase-realization
+enclosures, matrix reduction, query implementation, and concentration
+theorem are hand proofs or computational certificates, not fully formalized
+Lean theorems. A workflow for the same Lean target is provided, but no
+remote CI run is claimed; the reported success is local. The supplementary
+verification record includes source hashes and logs.
+
+\section{Reproducibility and scope of computation}
+The source package includes these entry points:
+\begin{itemize}
+\item \texttt{filter\_selection.py}: design and continuous certification;
+\item \texttt{selection\_qsp.py}: phase synthesis and response enclosure;
+\item \texttt{selection\_matrix\_audit.py}: full block-matrix audit;
+\item \texttt{selection\_figures.py}: tables, figures and summary;
+\item \texttt{check\_selection\_certificates.py}: exact arithmetic controls.
+\end{itemize}
+Their shared arithmetic module is \texttt{selection\_certificates.py}.
+The design entry point records source
+hashes, base Git revision when available, rational coefficients, exact
+dual bounds, certificate diagnostics, parameters and software versions.
+The QSP JSON links to its design input by hash, and the matrix JSON links
+to both design and phase inputs. Exact-cost rationals are provided along
+with rounded displays. A complete source/hash manifest is included.
+
+The main experiments use a small synthetic prior grid. Named baseline
+parameters are searched on a finite documented grid, so comparisons are
+to those certified candidates, not to every possible tuning of a named
+family. Some families fail the degree/bias/certificate requirements; no
+performance value is invented for them. Every main case has $u>4E$.
+Earlier diagnostic cases that violated this nontriviality condition were
+excluded from the reported study; they are recorded as a rejected
+evaluation design in the research notes.
+
+Author information is intentionally omitted in this review copy.
+AI assistance was used for candidate derivations, drafting and numerical
+implementation; the verification scopes above identify the actual checks
+rather than equating generation with verification. The package has not
+been uploaded or submitted to a preprint server.

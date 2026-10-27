@@ -1,0 +1,365 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=24mm]{geometry}
+\usepackage{fontspec}
+\setmainfont[Path=../qmsve/fonts/]{ipaexg.ttf}
+\setmonofont[Path=../qmsve/fonts/]{DejaVuSansMono.ttf}
+\XeTeXlinebreaklocale "ja"
+\XeTeXlinebreakskip=0pt plus 1pt
+\usepackage{amsmath,amssymb,amsthm,mathtools,booktabs,graphicx,hyperref}
+\hypersetup{hidelinks}
+\emergencystretch=3em
+\newtheorem{theorem}{定理}
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{corollary}[theorem]{系}
+\newcommand{\R}{\mathbb R}
+\newcommand{\ket}[1]{\lvert #1\rangle}
+\newcommand{\cP}{\mathcal P}
+\title{ギャップなしスペクトル平均推定における\\事前情報に頑健なQSVTフィルタ選択}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+条件付き収束だけでスペクトルフィルタを選ぶと、棄却された状態準備の費用を見落とす。
+本稿では、最小正規化Gram固有値を含む区間と初期目標質量の下界だけを入力として、
+フィルタ後平均による推定の最悪期待query費用を最小化する問題を扱う。
+ギャップ下界や真の目標固有値は設計に用いない。
+二点スペクトルによる特徴づけから、一様平均バイアス条件を結合振幅制約へ変換する。
+中心となる構造的結果は、上端で零となる制約を加えても、Gram多項式次数を1だけ増やし、
+最悪受理確率の損失を明示的な係数で制御できることである。
+このクラスでは、各次数の最良最悪再試行確率を半無限線形計画で正確に特徴づけられる。
+有理数双対境界、連続Bernstein証明、位相応答の包囲評価を組み合わせ、次数と誤差配分を
+事後的な費用保証付きで選ぶ。数値実験では、同一signal-queryモデルのもとで、
+最適化・べき乗・cosine-Taylor・Chebyshev応答を比較する。
+状態準備費用によって選択が変わる例と、制限したクラス内の最適値からの距離を示す。
+成果は特定推定器と再試行モデルの構造・証明付き設計解析であり、
+新しいQSVT原理や一般的な量子高速化ではない。
+\end{abstract}
+
+\section{はじめに}
+量子特異値変換（QSVT）はブロックエンコードされた行列に多項式応答を実装する
+\cite{Gilyen,Martyn}。問題に合う関数を選ぶ柔軟性は、選択に用いる情報が実際に
+利用可能であり、準備・正規化・読出し・棄却の費用を算入した場合に意味を持つ。
+低次数で条件付き誤差が小さい関数でも、受理確率が小さければ推定器全体は高価になり得る。
+
+本稿は、非適応の実多項式フィルタと正規化右Gram作用素の独立Bernoulli測定という、
+検証可能な設定に限定して関数選択を具体化する。最小値を含む区間とその初期質量下界は
+与えられるが、ギャップは仮定しない。設計は、その情報と整合するすべての有限
+スペクトルで働く必要があり、真の固有値を見てから都合のよい関数を選ばない。
+位相推定や現代的な基底energy推定器全般を置き換える方法とは位置づけない。
+
+解析は三段階からなる。一様平均バイアスを二energy間の不等式で特徴づけ、
+応答に$1-x$を掛けることで上端零化しても受理確率の損失が制御できることを示す。
+上端零化後は、最悪受理確率が目標区間の最小透過率と重なり下界の積に一致するため、
+再試行費用を直接制御する半無限線形計画が得られる。
+最後に、連続区間の可行性証明と補正付き双対境界を用いて選択の精度を保証する。
+
+\paragraph{既存研究との関係}
+cosineべき乗、応答比、shift、振幅増幅による基底状態準備は既存手法である\cite{Ge}。
+既知の孤立目標に対する最適多項式projector\cite{LinTong}、cosine・Gaussian
+フィルタと仮想的なフィルタ後期待値\cite{Lu,He}も研究されている。
+Filtered QPEはフィルタ費用と重なりを明示的に扱い、複数基底と既知中心のminimax構成を
+含む\cite{FQPE}。wall-Chebyshev研究は粗いenergy情報への頑健性と受理費用を評価する
+\cite{Wall}。最近の制約付きQSP minimax研究も、有限点と連続可行性の差、最適化と
+位相合成の接続を扱う\cite{Constrained}。
+したがって線形計画、minimax、多項式のBernstein分割、QSP合成自体は背景技術であり
+\cite{Charnes,Farouki,DongPhase}、本稿の発明とはしない。
+
+限定した貢献は、上端零化の受理係数、未知最小値の結合制約と正確な再試行解釈、
+および特定のgap-free平均推定器に対する証明付き選択である。
+既知中心のrejection bandと異なり、事前区間の全目標とそれより大きい全固有値を
+結ぶ制約を課す。忠実度保証と異なり、近接した目標外成分が残ることを許す。
+これは問題設定の違いを示すもので、既存推定器への優位性や各構成要素の普遍的な
+優先性を意味しない。
+
+\section{情報・oracle・推定器モデル}\label{sec:model}
+既知の$\alpha\geq\|A\|_2>0$に対し$B=A/\alpha$、$G=B^\dagger B$とし、
+スペクトルを$[0,1]$に置く。最小固有値$e=\lambda_{\min}(G)$に関する入力は
+\begin{equation}\label{eq:prior}
+ 0\leq e\leq u<1,\qquad p_0\geq a,\quad 0<a<1
+\end{equation}
+であり、$p_0$は最小固有空間への初期総質量である。
+目標外固有値は$e$へ任意に近づいてよく、縮退は目標質量を合算して扱う。
+真のスペクトルや重みを古典的に読めるとは仮定しない。
+数値生成器は検証のためにそれらを知るが、フィルタ選択には渡さない。
+
+実振幅$P$は$[0,1]$上$|P|\leq1$、$[0,u]$上非零とする。
+多項式では符号を選び目標区間上$P>0$とできる。
+受理確率と事後平均は
+\[
+ Z_P=\sum_i p_iP(\lambda_i)^2,\qquad
+ \mu_P=\frac{\sum_i p_iP(\lambda_i)^2\lambda_i}{Z_P}
+\]
+である。入力条件を満たす全有限スペクトル・重みの集合を$\mathfrak I(a,u)$とし、
+\[
+S(P)=\inf_{I\in\mathfrak I(a,u)}Z_P(I)
+\]
+と定める。
+全入力で$\mu_P-e\leq b$なら、$P$はバイアス$b$で可行と呼ぶ。
+実装時は共通余裕$\kappa=19/20$を多項式全体に一度だけ掛ける。
+条件付き平均は変わらず、受理確率が$\kappa^2$倍になる。
+
+$x=\lambda$で次数$n$の$P$は、正規化特異値$s$では$P(s^2)$という偶次数$2n$の
+応答である。controlled singular-value signal、その逆、および標準QSVT反射が
+利用可能とする。QSPユニタリと逆のcontrolled分枝を直列に実行する保守的な
+実数応答の抽出規約では、フィルタ試行一回に$4n$ signal呼出しを数える。
+全候補でこの規約を共通化し、物理ゲートやT-countの評価とは区別する。
+状態準備の費用を$c_\psi$、直列深さを$d_\psi$とすれば、深さ上限は
+$d_\psi+4n+1\leq D$である。最後の1回は読出しである。
+数値モデルでは保守的に$d_\psi=c_\psi$と置く。
+
+受理状態上の$B$ block-encodingのsuccess flagは、平均$\mu_P$のBernoulli変数となる。
+全正規化Gram誤差$E$をバイアス$0<b<E$と標本誤差$E-b$に分ける。
+\begin{equation}\label{eq:shots}
+ M(b)=\left\lceil\frac{\log(2/\delta)}{2(E-b)^2}\right\rceil
+\end{equation}
+個の独立受理コピーで、Hoeffdingから確率$1-\delta$以上で
+$|\widehat\mu-e|\leq E$となる。
+失敗時は試行全体を捨てて初期状態からやり直し、振幅増幅や途中再利用は行わない。
+幾何待ち時間と受理分布の独立性により、最悪期待query費用は正確に
+\begin{equation}\label{eq:cost}
+ J(P,n,b)=M(b)\left[\frac{c_\psi+4n}{\kappa^2S(P)}+1\right]
+\end{equation}
+となる。
+
+右空間の最小特異値を$\sigma_R(A)=\min_{\|v\|=1}\|Av\|=\alpha\sqrt e$と定義する。
+読出しを$[0,1]$へclipして平方根を取れば、誤差は$\alpha\sqrt E$以下である。
+横長行列では右核により零となり、通常のthin SVDの最小値と異なり得る。
+事前情報の取得費用は共通の追加入力費であり、ここでは最適化しない。
+追加測定で事前区間を狭める適応法も対象外である。
+
+\paragraph{計算しないbaseline}
+$u/2$を返せば$e$を$u/2$以内に、$\alpha\sqrt u/2$を返せば$\sigma_R$を
+$\alpha\sqrt u/2$以内に推定できる。
+要求精度がこれで満たされるなら、それを選ぶべきである。
+本実験は$u>4E$とし、特異値誤差$\alpha\sqrt E$で見ても事前中点だけでは解けない。
+また非フィルタ平均の最悪バイアスは$1-a$であり、その配分以上を許す場合だけ可行である。
+これは特定平均推定器についての事実で、非フィルタ量子アルゴリズム全般の下界ではない。
+
+\section{二点条件と上端零化}
+\begin{proposition}[一様平均バイアスの条件]\label{prop:pair}
+目標区間で非零の$P$がバイアス$b>0$で可行である必要十分条件は、
+全$0\leq e\leq u$、$e+b<x\leq1$について
+\begin{equation}\label{eq:pair}
+ (1-a)(x-e-b)P(x)^2\leq abP(e)^2
+\end{equation}
+が成り立つことである。
+\end{proposition}
+\begin{proof}
+必要性は、$e,x$に質量$a,1-a$を置いて正の事後分母を掛ければ得られる。
+十分性では実際の目標質量$p_0\geq a$を考える。
+$x-e\leq b$の左辺は非正なので、目標外条件付き分布で平均して
+\[
+ \sum_{i>0}p_i(\lambda_i-e-b)P(\lambda_i)^2
+ \leq\frac{(1-p_0)ab}{1-a}P(e)^2\leq p_0bP(e)^2
+\]
+を得る。これはバイアス条件を分母で払った式に一致する。
+\end{proof}
+固定$e$、目標質量がちょうど$a$の場合、最大バイアスは同じ平均議論から
+\begin{equation}\label{eq:two-point}
+ \max_{e\leq x\leq1}
+ \frac{(1-a)(x-e)P(x)^2}{aP(e)^2+(1-a)P(x)^2}
+\end{equation}
+に一致する。最大点に目標外全質量を置く二準位例が達成する。
+この線形分数の極値原理自体は古典的である\cite{Charnes}。
+
+\begin{theorem}[制御された上端零化]\label{thm:null}
+$u+b<1$とし、連続$P$がバイアス$b$で可行、$|P|\leq1$とする。
+$Q(x)=(1-x)P(x)$も可行、$|Q|\leq1$、$Q(1)=0$であり、
+\begin{equation}\label{eq:null-factor}
+ S(Q)\geq(1-u)(1-u-b)S(P)
+\end{equation}
+を満たす。$P$の次数が$n$以下なら、$Q$のGram次数は$n+1$以下である。
+\end{theorem}
+\begin{proof}
+$x\geq e$なら$0\leq1-x\leq1-e$なので、式\eqref{eq:pair}に
+$(1-e)^2$を掛ければ$Q$の条件を得る。
+$m=\min_{[0,u]}P^2>0$、最小点を$e_*$とする。
+全入力で$Z_Q\geq a(1-u)^2m$。
+一方、$P$には$e_*,1$に質量$a,1-a$を置く許容入力を使え、式\eqref{eq:pair}から
+\[
+ S(P)\leq am+(1-a)P(1)^2
+ \leq am\frac{1-e_*}{1-e_*-b}
+ \leq am\frac{1-u}{1-u-b}.
+\]
+二つの式を組み合わせればよい。
+\end{proof}
+
+\begin{corollary}[制約の費用]\label{cor:restriction}
+同じ$b,M,\kappa$のもとで、次数$n$の応答を上端零化した次数$n+1$の応答へ変えると、
+最悪期待費用の増加率は
+\begin{equation}\label{eq:restriction-cost}
+ \frac{c_\psi+4(n+1)}{c_\psi+4n}\frac1{(1-u)(1-u-b)}
+\end{equation}
+以下である。ただし追加次数が深さ上限内に収まる必要がある。
+\end{corollary}
+
+\begin{theorem}[上端零化後の正確な受理確率]\label{thm:success}
+$P$が連続で、$P(1)=0$、$[0,u]$上$P>0$なら、
+$\tau(P)=\min_{[0,u]}P$について
+\begin{equation}\label{eq:success}
+ S(P)=a\tau(P)^2
+\end{equation}
+である。
+\end{theorem}
+\begin{proof}
+目標成分が下界を与える。$P$の最小点に質量$a$、$1$に残りの質量を置けば等号となる。
+\end{proof}
+この受理確率の一致と上端零化の損失係数が、制限したクラスを使う構造的な理由である。
+振幅増幅や適応フィルタとの比較ではない。
+
+\section{多項式の選択問題}\label{sec:design}
+次数$n\geq1$での最適目標振幅$\tau_n^*(a,u,b)$を、次の半無限線形計画で定義する。
+\begin{align}\label{eq:lp}
+ \text{最大化 }&\ \tau\quad(P\in\cP_n\text{ は実多項式},\ \tau\geq0),\nonumber\\
+ \text{制約 }&\ |P(x)|\leq1\quad(0\leq x\leq1),\nonumber\\
+ &P(1)=0,\quad P(e)\geq\tau\quad(0\leq e\leq u),\\
+ &\pm P(x)\leq\sqrt{\frac{ab}{(1-a)(x-e-b)}}P(e)
+ \quad(0\leq e\leq u,\ e+b<x\leq1).\nonumber
+\end{align}
+平方根の係数は入力情報から固定され、全制約は係数と$\tau$について線形である。
+目標外では負の応答も許す。$\tau>0$なら命題\ref{prop:pair}により、このクラスの
+可行性と同値になる。次数固定の有界多項式のコンパクト性から最適値は達成される。
+最適値零では、一様に正の受理を保証する設計は得られない。
+
+\begin{theorem}[制限クラスの最適費用と証明付き選択]\label{thm:selection}
+固定$n,b$の最小最悪期待費用は
+\begin{equation}\label{eq:optcost}
+ J_n^*(b)=M(b)\left[\frac{c_\psi+4n}{\kappa^2a(\tau_n^*)^2}+1\right]
+\end{equation}
+である。可行応答から$\ell_{n,b}\leq\tau_n^*$、緩和から$\tau_n^*\leq U_{n,b}$が
+証明されれば、$\tau_n^*$をそれぞれ置換した費用を$J^{\rm up},J^{\rm lo}$として、
+有限誤差配分集合$\mathcal B\subset(0,E)$で最小上界の候補を選んだとき
+\begin{equation}\label{eq:gap}
+ \frac{J_{\rm selected}}{\min_{n\leq N,\ b\in\mathcal B}J_n^*(b)}
+ \leq\frac{\min J^{\rm up}}{\min J^{\rm lo}}
+\end{equation}
+を得る。これは指定次数・有限配分・再試行・読出しモデルに対する事後的係数である。
+\end{theorem}
+\begin{proof}
+定理\ref{thm:success}と費用の$\tau$に関する単調性から式\eqref{eq:optcost}を得る。
+振幅上下界は費用の逆向きの上下界となり、最小値を取れば式\eqref{eq:gap}となる。
+独自の連続証明を持つ既存関数族を、選択上界の候補に含めてもよい。
+\end{proof}
+同じ$M,b$を持つ候補$i,j$の費用は準備費用$c$の一次関数である。
+$s_j>s_i$、$n_j>n_i$なら、その優劣が変わる点は
+\begin{equation}\label{eq:crossover}
+ c_* =\frac{4(n_js_i-n_is_j)}{s_j-s_i}.
+\end{equation}
+受理確率の包囲区間から費用上下界を比較すれば、切替点も区間として証明できる。
+受理確率最大化と次数最小化が異なる選択になる理由がここにある。
+
+\section{事前区間幅が課す、関数族に依らない制約}\label{sec:prior-limit}
+次数を制約しなくても、一つの固定応答が達成できる目標透過率には限界がある。
+$A_b=ab/(1-a)$、$\Delta_0=b/(1-a)$として
+\begin{equation}\label{eq:F}
+ F_b(z)=\max\left(\{0\}\cup\left\{
+ n\log\frac{z/n-b}{A_b}:n\in\mathbb N_{>0},\ z/n>\Delta_0\right\}\right)
+\end{equation}
+と置く。比較する整数は有限個である。
+
+\begin{proposition}[無制約スカラー応答の正確な透過率]\label{prop:prior}
+$0\leq w\leq1$、目標区間上正で、二点平均バイアス条件を満たす可測重み全体について
+\begin{equation}\label{eq:priorbound}
+ \sup_w\inf_{0\leq e\leq u}w(e)=e^{-F_b(u)}
+\end{equation}
+である。特に、どの一つの固定フィルタにも、期待再試行回数が$e^{F_b(u)}$以上となる
+許容pure-target入力が存在する。
+\end{proposition}
+\begin{proof}
+$[0,u]$を長さ$d_j>\Delta_0$のstepに分け、比条件を連鎖すると
+$w(u)\leq\prod_j A_b/(d_j-b)$。
+$\log(d-b)$の凹性から、固定step数では等分が最も強い上界となる。
+総長$z$以下の任意分割を許しても、余りはstepへ加えられるため、最強値は
+式\eqref{eq:F}に一致する。分割の連結から$F_b$はsuperadditiveであり、非減少でもある。
+したがって$w_*(x)=e^{-F_b(x)}$は$d>\Delta_0$で
+$w_*(e+d)/w_*(e)\leq A_b/(d-b)$を満たす。
+$b<d\leq\Delta_0$では右辺が1以上なので単調性だけで十分。
+この重みは全supportで可行であり、$u$で最小値を達成する。
+純粋固有状態$u$の受理確率は$w(u)$なので、再試行の主張も従う。
+\end{proof}
+大きい区間幅での指数率は$r_a/b$、
+$r_a=W_0((1-a)/(a\mathrm e))$であり、
+$\log((d-b)/A_b)/d$を最大化すると$d_*=b(1+1/r_a)$を得る。
+指数重み$\exp(-r_ax/b)$も可行で、既知のimaginary-time型の比較になる。
+この命題は関数レベルの限界であり、適応的に事前情報を得る方法、別の推定器、
+振幅増幅・再利用に対する量子query下界ではない。
+また、表示した最適重みが非解析的であることだけでは、別の多項式が同じ値を
+達成できないとは結論できない。
+
+\section{連続証明と位相実現の検証}\label{sec:cert}
+$P(x)=\sum_{k=0}^n c_kT_k(2x-1)$と表し、有限格子LPとexchangeで候補を作る。
+有限点の可行性を連続区間の証明とは扱わない。
+保存十進係数を厳密有理数と解釈し、$P(1)=0$を代数的に強制する。
+Bernstein係数と220-bit固定小数の外向き整数分割\cite{Farouki}で、
+区間有界性、目標振幅の正値性、長方形全体の二点残差を証明する。
+検証node数・深さの上限で解けなければ、格子で通っていても未証明として棄却する。
+連続上界による正規化は合成多項式全体に一度だけ掛ける。
+
+双対上界では、格子LPの平方根を有理数へ上向きに丸めて制約を緩和する。
+非負有理数dual weight $y$、厳密stationarity残差$r=d-A^Ty$について
+\begin{equation}\label{eq:dual}
+ d^Tz\leq y^Th+\sum_j|r_j|B_j
+\end{equation}
+を用いる。真のChebyshev係数は$|c_0|\leq1$、$|c_k|\leq2$、$0\leq\tau\leq1$を
+満たすので、この補正は浮動小数dualが不完全でも有効である。
+係数境界はcosine積分表示から得る。
+
+多項式$\kappa P(s^2)$全体を、\texttt{pyqsp}の対称QSP Newton法\cite{Symmetric}で
+一度だけ合成する。signal規約は
+\[
+ W(s)=\begin{pmatrix}s&i\sqrt{1-s^2}\\i\sqrt{1-s^2}&s\end{pmatrix},\qquad
+ U_\Phi=e^{i\phi_0Z}\prod_{j=1}^{2n}[W(s)e^{i\phi_jZ}].
+\]
+応答は$\operatorname{Im}(U_\Phi)_{00}$であり、
+$(-iU_\Phi+iU_\Phi^\dagger)/2$のsuccess blockとして抽出する。
+保存位相を厳密実数角として、sin/cosの有理Taylor余剰境界、複素区間多項式漸化式、
+Bernstein分割から、全特異値区間の応答誤差$\eta$を包囲する。
+これは理想signal oracleについての連続証明であり、ハードウェア誤差の証明ではない。
+
+\begin{proposition}[受理状態への誤差伝播]\label{prop:phase}
+理想受理確率が$s>0$以上で、実装success blockの作用素誤差が$\eta<\sqrt s$以下なら、
+実装受理確率は$(\sqrt s-\eta)^2$以上、受理後Gram平均の差は$2\eta/\sqrt s$以下となる。
+\end{proposition}
+\begin{proof}
+非規格化状態誤差は$\eta$以下。逆三角不等式が受理確率の下界を与える。
+規格化後のベクトル距離は$2\eta/\sqrt s$以下で、純粋状態のtrace distanceと
+$0\leq G\leq I$の期待値差もその値以下となる。
+\end{proof}
+$0.01b$をこの伝播用に予約し、全選択応答で満たすことを検査する。
+実際のencoding誤差も、この式を使う前に$\eta$へ含める必要がある。
+安全なscaleを各反復に掛けると不要な指数ペナルティが生じるが、
+合成多項式全体を一度で実装すれば、その特定の損失は避けられる。
+
+\input{results-ja.tex}
+
+\section{考察と限界}
+本選択則は、与えられた事前情報のもとで、どの実多項式・次数・有限誤差配分が
+最悪再試行費用の保証を小さくするかに答える。
+上端零化の比較により、目的関数が正確な操作的意味を持つクラスへ制限する費用を
+明示できる。連続可行性と双対証明は、少数の既存関数に対する改善と、
+制限した最適値への近さを区別する。
+
+推定器と再試行規約の制限は大きい。振幅増幅、coherent recycling、仮想フィルタ、
+位相推定型の読出し、適応的な事前情報取得は資源依存性を変え得る。
+QET-Uや他の基底energy推定器は別の情報・読出し条件を扱い\cite{QETU,Accurate}、
+本結果はそれらの下界ではない。重なり下界の取得費、物理ゲート深さ、誤り訂正、
+化学系encoding、実機雑音は評価していない。連続な誤差配分全体での最適性も、
+有限配分格子からは主張しない。
+
+最悪条件は個別スペクトルには保守的であり、事前区間幅に比べ許容バイアスが小さいと
+絶対費用は大きくなる。これは関数の柔軟性だけでは弱い事前情報の費用を消せないことを
+示す。本稿は最適QSVT関数族の発明や一般量子優位を主張せず、
+構造的帰着と指定された頑健選択問題への再現可能な証明付き回答を示す。
+
+\section{結論}
+全再試行・読出しqueryを算入した、事前情報だけによるgap-free平均推定のフィルタ選択を
+定式化した。制御された上端零化は、一般の実応答を最悪受理確率が正確に分かるクラスへ
+結びつける。その結果、費用上下界を伴う凸多項式設計と、選択後の連続位相検証が可能に
+なる。状態準備費用や事前情報によって応答を変えるべき場合を示す一方で、
+固定フィルタ平均推定器が依然として高価になる領域も明確にした。
+
+\appendix
+\input{verification-ja.tex}
+\input{references.tex}
+\end{document}

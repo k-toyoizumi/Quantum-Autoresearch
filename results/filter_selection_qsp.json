@@ -1,0 +1,469 @@
+{
+  "metadata": {
+    "input_sha256": "b59e238f6a92e64f2ea6e77b9e49d30fa62b0271cab4a4da7499db2b038874fe",
+    "source_sha256": "7355ec795586e8925f83dd2f3d8ae3a2ad1f5606c7194cb1cf64bfd03fc2ce48",
+    "pyqsp": "0.2.0",
+    "oracle": "ideal singular-value Wx signal; no hardware compilation",
+    "normalization": "kappa applied once to the whole polynomial, not once per scalar step"
+  },
+  "cases": [
+    {
+      "prior": {
+        "a": "3/10",
+        "u": "1/8",
+        "mean_error": "1/40",
+        "maximum_degree_lambda": 20,
+        "maximum_filter_readout_queries": 81,
+        "maximum_total_serial_queries": 82,
+        "prep_cost": 1,
+        "kappa": "19/20"
+      },
+      "phase_realization": {
+        "phases_exact_decimal_radians": [
+          "7801468314860111/1000000000000000000",
+          "-2452257572327087/250000000000000000",
+          "1646586516812419/100000000000000000",
+          "-45028363046811/1250000000000000",
+          "1281588655678103/20000000000000000",
+          "-1014531597829981/10000000000000000",
+          "6859581969100191/50000000000000000",
+          "-3320481877321771/20000000000000000",
+          "548566054543441/3125000000000000",
+          "-3320481877321771/20000000000000000",
+          "6859581969100191/50000000000000000",
+          "-1014531597829981/10000000000000000",
+          "1281588655678103/20000000000000000",
+          "-45028363046811/1250000000000000",
+          "1646586516812419/100000000000000000",
+          "-2452257572327087/250000000000000000",
+          "7801468314860111/1000000000000000000"
+        ],
+        "solver_error": 6.765421556309548e-16,
+        "solver_iterations": 6,
+        "certificate": {
+          "uniform_amplitude_error_upper_exact": "53291630395855187886456407218346164148097619846983/421249166674228746791672110734681729275580381602196445017243910144",
+          "uniform_amplitude_error_upper": 1.2650857167645874e-16,
+          "arithmetic_bits": 220,
+          "scope": "whole lambda interval [0,1], exact saved decimal phase angles",
+          "method": "Taylor enclosures for sin/cos, complex interval recurrence, Bernstein subdivision"
+        },
+        "meets_implementation_bias_reserve": true,
+        "implemented_success_lower_exact": "150934966340344109178147806527476237553772138518753227016297813404740696547071927230852027555092768649238894888343644671386529849/44362715105933037753254626946289339254982993206013065202727673289833940924890009968639590497666233249558259375382457149263586525184",
+        "implemented_success_lower": 0.003402293254142107,
+        "relative_cost_inflation_upper": 1.0000000000000044,
+        "numerical_grid_amplitude_error": 4.414819204656695e-13,
+        "lcu_extraction_error": 2.224179682237664e-16,
+        "lcu_unitarity_error": 3.6637359812630166e-15,
+        "signal_degree": 16,
+        "serial_extraction_signal_calls": 32
+      }
+    },
+    {
+      "prior": {
+        "a": "3/10",
+        "u": "1/8",
+        "mean_error": "1/40",
+        "maximum_degree_lambda": 20,
+        "maximum_filter_readout_queries": 81,
+        "maximum_total_serial_queries": 113,
+        "prep_cost": 32,
+        "kappa": "19/20"
+      },
+      "phase_realization": {
+        "phases_exact_decimal_radians": [
+          "7801468314860111/1000000000000000000",
+          "-2452257572327087/250000000000000000",
+          "1646586516812419/100000000000000000",
+          "-45028363046811/1250000000000000",
+          "1281588655678103/20000000000000000",
+          "-1014531597829981/10000000000000000",
+          "6859581969100191/50000000000000000",
+          "-3320481877321771/20000000000000000",
+          "548566054543441/3125000000000000",
+          "-3320481877321771/20000000000000000",
+          "6859581969100191/50000000000000000",
+          "-1014531597829981/10000000000000000",
+          "1281588655678103/20000000000000000",
+          "-45028363046811/1250000000000000",
+          "1646586516812419/100000000000000000",
+          "-2452257572327087/250000000000000000",
+          "7801468314860111/1000000000000000000"
+        ],
+        "solver_error": 6.765421556309548e-16,
+        "solver_iterations": 6,
+        "certificate": {
+          "uniform_amplitude_error_upper_exact": "53291630395855187886456407218346164148097619846983/421249166674228746791672110734681729275580381602196445017243910144",
+          "uniform_amplitude_error_upper": 1.2650857167645874e-16,
+          "arithmetic_bits": 220,
+          "scope": "whole lambda interval [0,1], exact saved decimal phase angles",
+          "method": "Taylor enclosures for sin/cos, complex interval recurrence, Bernstein subdivision"
+        },
+        "meets_implementation_bias_reserve": true,
+        "implemented_success_lower_exact": "150934966340344109178147806527476237553772138518753227016297813404740696547071927230852027555092768649238894888343644671386529849/44362715105933037753254626946289339254982993206013065202727673289833940924890009968639590497666233249558259375382457149263586525184",
+        "implemented_success_lower": 0.003402293254142107,
+        "relative_cost_inflation_upper": 1.0000000000000044,
+        "numerical_grid_amplitude_error": 4.414819204656695e-13,
+        "lcu_extraction_error": 2.224179682237664e-16,
+        "lcu_unitarity_error": 3.6637359812630166e-15,
+        "signal_degree": 16,
+        "serial_extraction_signal_calls": 32
+      }
+    },
+    {
+      "prior": {
+        "a": "3/10",
+        "u": "1/5",
+        "mean_error": "1/40",
+        "maximum_degree_lambda": 20,
+        "maximum_filter_readout_queries": 81,
+        "maximum_total_serial_queries": 82,
+        "prep_cost": 1,
+        "kappa": "19/20"
+      },
+      "phase_realization": {
+        "phases_exact_decimal_radians": [
+          "31277049989152077/10000000000000000000",
+          "-29951935867950593/10000000000000000000",
+          "5625760184963329/500000000000000000",
+          "-13877101152599937/500000000000000000",
+          "5223929681647539/100000000000000000",
+          "-1172839178035579/12500000000000000",
+          "1439843615279997/10000000000000000",
+          "-9436622212050119/50000000000000000",
+          "5135304533126333/25000000000000000",
+          "-9436622212050119/50000000000000000",
+          "1439843615279997/10000000000000000",
+          "-1172839178035579/12500000000000000",
+          "5223929681647539/100000000000000000",
+          "-13877101152599937/500000000000000000",
+          "5625760184963329/500000000000000000",
+          "-29951935867950593/10000000000000000000",
+          "31277049989152077/10000000000000000000"
+        ],
+        "solver_error": 4.98732999343332e-16,
+        "solver_iterations": 6,
+        "certificate": {
+          "uniform_amplitude_error_upper_exact": "212434825607415298376268639771641707117830649699809/842498333348457493583344221469363458551160763204392890034487820288",
+          "uniform_amplitude_error_upper": 2.5214865976423507e-16,
+          "arithmetic_bits": 220,
+          "scope": "whole lambda interval [0,1], exact saved decimal phase angles",
+          "method": "Taylor enclosures for sin/cos, complex interval recurrence, Bernstein subdivision"
+        },
+        "meets_implementation_bias_reserve": true,
+        "implemented_success_lower_exact": "1012533484127761719192285724640112307345201867256406235096993378159726780403391812730732623172171042114993850705824887723918183689/709803441694928604052074031140629428079727891296209043243642772637343054798240159498233447962659731992932150006119314388217384402944",
+        "implemented_success_lower": 0.0014264984144201228,
+        "relative_cost_inflation_upper": 1.0000000000000133,
+        "numerical_grid_amplitude_error": 1.3642038887429209e-13,
+        "lcu_extraction_error": 2.2292328129557253e-16,
+        "lcu_unitarity_error": 3.1086244689504383e-15,
+        "signal_degree": 16,
+        "serial_extraction_signal_calls": 32
+      }
+    },
+    {
+      "prior": {
+        "a": "3/10",
+        "u": "1/5",
+        "mean_error": "1/40",
+        "maximum_degree_lambda": 20,
+        "maximum_filter_readout_queries": 81,
+        "maximum_total_serial_queries": 113,
+        "prep_cost": 32,
+        "kappa": "19/20"
+      },
+      "phase_realization": {
+        "phases_exact_decimal_radians": [
+          "31277049989152077/10000000000000000000",
+          "-29951935867950593/10000000000000000000",
+          "5625760184963329/500000000000000000",
+          "-13877101152599937/500000000000000000",
+          "5223929681647539/100000000000000000",
+          "-1172839178035579/12500000000000000",
+          "1439843615279997/10000000000000000",
+          "-9436622212050119/50000000000000000",
+          "5135304533126333/25000000000000000",
+          "-9436622212050119/50000000000000000",
+          "1439843615279997/10000000000000000",
+          "-1172839178035579/12500000000000000",
+          "5223929681647539/100000000000000000",
+          "-13877101152599937/500000000000000000",
+          "5625760184963329/500000000000000000",
+          "-29951935867950593/10000000000000000000",
+          "31277049989152077/10000000000000000000"
+        ],
+        "solver_error": 4.98732999343332e-16,
+        "solver_iterations": 6,
+        "certificate": {
+          "uniform_amplitude_error_upper_exact": "212434825607415298376268639771641707117830649699809/842498333348457493583344221469363458551160763204392890034487820288",
+          "uniform_amplitude_error_upper": 2.5214865976423507e-16,
+          "arithmetic_bits": 220,
+          "scope": "whole lambda interval [0,1], exact saved decimal phase angles",
+          "method": "Taylor enclosures for sin/cos, complex interval recurrence, Bernstein subdivision"
+        },
+        "meets_implementation_bias_reserve": true,
+        "implemented_success_lower_exact": "1012533484127761719192285724640112307345201867256406235096993378159726780403391812730732623172171042114993850705824887723918183689/709803441694928604052074031140629428079727891296209043243642772637343054798240159498233447962659731992932150006119314388217384402944",
+        "implemented_success_lower": 0.0014264984144201228,
+        "relative_cost_inflation_upper": 1.0000000000000133,
+        "numerical_grid_amplitude_error": 1.3642038887429209e-13,
+        "lcu_extraction_error": 2.2292328129557253e-16,
+        "lcu_unitarity_error": 3.1086244689504383e-15,
+        "signal_degree": 16,
+        "serial_extraction_signal_calls": 32
+      }
+    },
+    {
+      "prior": {
+        "a": "3/5",
+        "u": "1/8",
+        "mean_error": "1/40",
+        "maximum_degree_lambda": 20,
+        "maximum_filter_readout_queries": 81,
+        "maximum_total_serial_queries": 82,
+        "prep_cost": 1,
+        "kappa": "19/20"
+      },
+      "phase_realization": {
+        "phases_exact_decimal_radians": [
+          "7963161188244107/200000000000000000",
+          "-3098469987425097/50000000000000000",
+          "1310072876898893/10000000000000000",
+          "-1256697873136709/5000000000000000",
+          "5699435229789357/20000000000000000",
+          "-1256697873136709/5000000000000000",
+          "1310072876898893/10000000000000000",
+          "-3098469987425097/50000000000000000",
+          "7963161188244107/200000000000000000"
+        ],
+        "solver_error": 1.3877787807814457e-16,
+        "solver_iterations": 6,
+        "certificate": {
+          "uniform_amplitude_error_upper_exact": "149446772798564111224493858956655939638018361613113/842498333348457493583344221469363458551160763204392890034487820288",
+          "uniform_amplitude_error_upper": 1.7738524443674227e-16,
+          "arithmetic_bits": 220,
+          "scope": "whole lambda interval [0,1], exact saved decimal phase angles",
+          "method": "Taylor enclosures for sin/cos, complex interval recurrence, Bernstein subdivision"
+        },
+        "meets_implementation_bias_reserve": true,
+        "implemented_success_lower_exact": "273936206705568608189177320919381569467683871633765123015248899789023089685399731810592592150607297777980132927178572510452626189041/2839213766779714416208296124562517712318911565184836172974571090549372219192960637992933791850638927971728600024477257552869537611776",
+        "implemented_success_lower": 0.09648312145804781,
+        "relative_cost_inflation_upper": 1.000000000000001,
+        "numerical_grid_amplitude_error": 2.1441182163073336e-15,
+        "lcu_extraction_error": 2.224532318464215e-16,
+        "lcu_unitarity_error": 2.1094237467877974e-15,
+        "signal_degree": 8,
+        "serial_extraction_signal_calls": 16
+      }
+    },
+    {
+      "prior": {
+        "a": "3/5",
+        "u": "1/8",
+        "mean_error": "1/40",
+        "maximum_degree_lambda": 20,
+        "maximum_filter_readout_queries": 81,
+        "maximum_total_serial_queries": 113,
+        "prep_cost": 32,
+        "kappa": "19/20"
+      },
+      "phase_realization": {
+        "phases_exact_decimal_radians": [
+          "7963161188244107/200000000000000000",
+          "-3098469987425097/50000000000000000",
+          "1310072876898893/10000000000000000",
+          "-1256697873136709/5000000000000000",
+          "5699435229789357/20000000000000000",
+          "-1256697873136709/5000000000000000",
+          "1310072876898893/10000000000000000",
+          "-3098469987425097/50000000000000000",
+          "7963161188244107/200000000000000000"
+        ],
+        "solver_error": 1.3877787807814457e-16,
+        "solver_iterations": 6,
+        "certificate": {
+          "uniform_amplitude_error_upper_exact": "149446772798564111224493858956655939638018361613113/842498333348457493583344221469363458551160763204392890034487820288",
+          "uniform_amplitude_error_upper": 1.7738524443674227e-16,
+          "arithmetic_bits": 220,
+          "scope": "whole lambda interval [0,1], exact saved decimal phase angles",
+          "method": "Taylor enclosures for sin/cos, complex interval recurrence, Bernstein subdivision"
+        },
+        "meets_implementation_bias_reserve": true,
+        "implemented_success_lower_exact": "273936206705568608189177320919381569467683871633765123015248899789023089685399731810592592150607297777980132927178572510452626189041/2839213766779714416208296124562517712318911565184836172974571090549372219192960637992933791850638927971728600024477257552869537611776",
+        "implemented_success_lower": 0.09648312145804781,
+        "relative_cost_inflation_upper": 1.000000000000001,
+        "numerical_grid_amplitude_error": 2.1441182163073336e-15,
+        "lcu_extraction_error": 2.224532318464215e-16,
+        "lcu_unitarity_error": 2.1094237467877974e-15,
+        "signal_degree": 8,
+        "serial_extraction_signal_calls": 16
+      }
+    },
+    {
+      "prior": {
+        "a": "3/5",
+        "u": "1/5",
+        "mean_error": "1/40",
+        "maximum_degree_lambda": 20,
+        "maximum_filter_readout_queries": 81,
+        "maximum_total_serial_queries": 82,
+        "prep_cost": 1,
+        "kappa": "19/20"
+      },
+      "phase_realization": {
+        "phases_exact_decimal_radians": [
+          "66665948286181/2000000000000000",
+          "-3368503328970743/50000000000000000",
+          "6859690682892537/50000000000000000",
+          "-4918778155928581/20000000000000000",
+          "14278218657490263/50000000000000000",
+          "-4918778155928581/20000000000000000",
+          "6859690682892537/50000000000000000",
+          "-3368503328970743/50000000000000000",
+          "66665948286181/2000000000000000"
+        ],
+        "solver_error": 1.734723475976807e-16,
+        "solver_iterations": 6,
+        "certificate": {
+          "uniform_amplitude_error_upper_exact": "284349268521272114870333995476401689271511422529919/1684996666696914987166688442938726917102321526408785780068975640576",
+          "uniform_amplitude_error_upper": 1.6875360891881147e-16,
+          "arithmetic_bits": 220,
+          "scope": "whole lambda interval [0,1], exact saved decimal phase angles",
+          "method": "Taylor enclosures for sin/cos, complex interval recurrence, Bernstein subdivision"
+        },
+        "meets_implementation_bias_reserve": true,
+        "implemented_success_lower_exact": "87782262600631741315329954114415474439224008539058764462852916230288925567627266199178440876728275565238290772848102318834873776249/2839213766779714416208296124562517712318911565184836172974571090549372219192960637992933791850638927971728600024477257552869537611776",
+        "implemented_success_lower": 0.03091780676317159,
+        "relative_cost_inflation_upper": 1.000000000000002,
+        "numerical_grid_amplitude_error": 1.908195823574488e-15,
+        "lcu_extraction_error": 2.2243328264077257e-16,
+        "lcu_unitarity_error": 1.9984014443252818e-15,
+        "signal_degree": 8,
+        "serial_extraction_signal_calls": 16
+      }
+    },
+    {
+      "prior": {
+        "a": "3/5",
+        "u": "1/5",
+        "mean_error": "1/40",
+        "maximum_degree_lambda": 20,
+        "maximum_filter_readout_queries": 81,
+        "maximum_total_serial_queries": 113,
+        "prep_cost": 32,
+        "kappa": "19/20"
+      },
+      "phase_realization": {
+        "phases_exact_decimal_radians": [
+          "-7533005755191369/500000000000000000",
+          "16213075780697927/1000000000000000000",
+          "-6220778303758473/100000000000000000",
+          "191989160083259/1250000000000000",
+          "-11801758991393829/50000000000000000",
+          "2870091410570779/10000000000000000",
+          "-11801758991393829/50000000000000000",
+          "191989160083259/1250000000000000",
+          "-6220778303758473/100000000000000000",
+          "16213075780697927/1000000000000000000",
+          "-7533005755191369/500000000000000000"
+        ],
+        "solver_error": 3.469446951953614e-16,
+        "solver_iterations": 6,
+        "certificate": {
+          "uniform_amplitude_error_upper_exact": "305746128977657817465993137764585995747092594018901/842498333348457493583344221469363458551160763204392890034487820288",
+          "uniform_amplitude_error_upper": 3.629041350888954e-16,
+          "arithmetic_bits": 220,
+          "scope": "whole lambda interval [0,1], exact saved decimal phase angles",
+          "method": "Taylor enclosures for sin/cos, complex interval recurrence, Bernstein subdivision"
+        },
+        "meets_implementation_bias_reserve": true,
+        "implemented_success_lower_exact": "100172641881661056787828842870961174744781955876706671797978784957910907490845205511894891129368387404675819869503274141616857633249/2839213766779714416208296124562517712318911565184836172974571090549372219192960637992933791850638927971728600024477257552869537611776",
+        "implemented_success_lower": 0.035281824515551924,
+        "relative_cost_inflation_upper": 1.0000000000000038,
+        "numerical_grid_amplitude_error": 6.918077222195507e-15,
+        "lcu_extraction_error": 2.2245575135180215e-16,
+        "lcu_unitarity_error": 2.4424906541753444e-15,
+        "signal_degree": 10,
+        "serial_extraction_signal_calls": 20
+      }
+    },
+    {
+      "prior": {
+        "a": "3/5",
+        "u": "1/4",
+        "mean_error": "1/20",
+        "maximum_degree_lambda": 12,
+        "maximum_filter_readout_queries": 49,
+        "maximum_total_serial_queries": 50,
+        "prep_cost": 1,
+        "kappa": "19/20"
+      },
+      "phase_realization": {
+        "phases_exact_decimal_radians": [
+          "13619716074267477/100000000000000000",
+          "-3133089743758439/10000000000000000",
+          "4427795340829227/12500000000000000",
+          "-3133089743758439/10000000000000000",
+          "13619716074267477/100000000000000000"
+        ],
+        "solver_error": 1.1102230246251565e-16,
+        "solver_iterations": 6,
+        "certificate": {
+          "uniform_amplitude_error_upper_exact": "199345132568096751755475067046564523839138631493071/1684996666696914987166688442938726917102321526408785780068975640576",
+          "uniform_amplitude_error_upper": 1.1830595069298941e-16,
+          "arithmetic_bits": 220,
+          "scope": "whole lambda interval [0,1], exact saved decimal phase angles",
+          "method": "Taylor enclosures for sin/cos, complex interval recurrence, Bernstein subdivision"
+        },
+        "meets_implementation_bias_reserve": true,
+        "implemented_success_lower_exact": "14572026027933555521342261834198797744605449313162599494646130492199972630596351429651712370972816286076018471585754819734315660209/177450860423732151013018507785157357019931972824052260810910693159335763699560039874558361990664932998233037501529828597054346100736",
+        "implemented_success_lower": 0.08211865523298811,
+        "relative_cost_inflation_upper": 1.0000000000000009,
+        "numerical_grid_amplitude_error": 4.440892098500626e-16,
+        "lcu_extraction_error": 2.223968730001086e-16,
+        "lcu_unitarity_error": 1.3322676295501878e-15,
+        "signal_degree": 4,
+        "serial_extraction_signal_calls": 8
+      }
+    },
+    {
+      "prior": {
+        "a": "3/5",
+        "u": "2/5",
+        "mean_error": "1/20",
+        "maximum_degree_lambda": 12,
+        "maximum_filter_readout_queries": 49,
+        "maximum_total_serial_queries": 50,
+        "prep_cost": 1,
+        "kappa": "19/20"
+      },
+      "phase_realization": {
+        "phases_exact_decimal_radians": [
+          "-387404848169089/12500000000000000",
+          "209918650797381/2000000000000000",
+          "-1411582932611583/5000000000000000",
+          "833398595908613/2000000000000000",
+          "-1411582932611583/5000000000000000",
+          "209918650797381/2000000000000000",
+          "-387404848169089/12500000000000000"
+        ],
+        "solver_error": 3.469446951953614e-17,
+        "solver_iterations": 6,
+        "certificate": {
+          "uniform_amplitude_error_upper_exact": "167700352777850611417825816083495346685393813093537/1684996666696914987166688442938726917102321526408785780068975640576",
+          "uniform_amplitude_error_upper": 9.952562879936863e-17,
+          "arithmetic_bits": 220,
+          "scope": "whole lambda interval [0,1], exact saved decimal phase angles",
+          "method": "Taylor enclosures for sin/cos, complex interval recurrence, Bernstein subdivision"
+        },
+        "meets_implementation_bias_reserve": true,
+        "implemented_success_lower_exact": "86271862335442513704829226826309852432534037980694018089971778179571230474835969663094258388855421679679529811978819112476210187025/2839213766779714416208296124562517712318911565184836172974571090549372219192960637992933791850638927971728600024477257552869537611776",
+        "implemented_success_lower": 0.030385828409564792,
+        "relative_cost_inflation_upper": 1.000000000000001,
+        "numerical_grid_amplitude_error": 5.620504062164855e-16,
+        "lcu_extraction_error": 2.2245491653211845e-16,
+        "lcu_unitarity_error": 1.6653345369377348e-15,
+        "signal_degree": 6,
+        "serial_extraction_signal_calls": 12
+      }
+    }
+  ]
+}

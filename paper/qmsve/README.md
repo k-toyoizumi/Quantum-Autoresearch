@@ -1,6 +1,11 @@
-# QMSVE technical reassessment drafts
+# Sharp gap-free bias analysis: QMSVE paper drafts
 
-This directory contains Japanese and English review drafts of the supplied QMSVE manuscript. The English file is an internal technical-report draft, not an arXiv submission. Author and affiliation fields remain placeholders because the source copy does not identify them.
+This directory contains revised Japanese and English drafts based on the QMSVE proposal. The analytical focus is now an exact two-point worst-case mean-bias envelope and sharp gap-free constants for specified cosine and polynomial filters. The combined statement is a small contribution candidate with unresolved priority and publication significance; it is not a new quantum filtering primitive. The drafts remain internal and have not been submitted. Author and affiliation fields remain placeholders.
+
+- `QMSVE-en.pdf`: 12 pages; `main-en.tex` plus `gapfree-en.tex`.
+- `QMSVE-ja.pdf`: 10 pages; `main-ja.tex` plus `gapfree-ja.tex`.
+- `literature-comparison.md`: overlap and differences from the selected primary literature.
+- `claim-evidence.md`: hand proofs, numerical checks, inherited Lean status, and limitations.
 
 ## Reproduce the matrix-level results
 
@@ -9,23 +14,22 @@ From the repository root, run:
 ```sh
 python experiments/qmsve_matrix_level.py
 python -m json.tool results/qmsve_matrix_level.json >/dev/null
+python experiments/qmsve_gapfree_envelope.py
 ```
 
-The script uses Python, NumPy, and Matplotlib. The saved JSON records the exact versions, fixed seed, matrices, spectral weights, outcomes, and analytic-error diagnostics. It diagonalizes small matrices classically and defines the initial state in the exact right-eigenvector basis. It does not prepare unknown singular vectors, simulate a quantum circuit, synthesize QSVT phases, or establish a quantum-resource advantage.
+Install `requirements-numerics.txt` in a virtual environment first (Python 3.12 was used). The matrix script uses NumPy/Matplotlib; the new envelope script also uses SciPy. Saved JSON records versions, seeds, parameters and outcomes; the new script also records its source hash and base commit. The envelope audit checks 1,000 many-level distributions, dense grids, sharp constants and the global-normalization penalty. Both are scalar/classical audits, not state-preparation or quantum-circuit simulations. Re-running overwrites their named JSON/figure outputs; preserve historical results if required.
 
 ## Build the PDFs
 
-From `paper/qmsve/`, run:
+From the repository root, run:
 
 ```sh
-xelatex -interaction=nonstopmode -halt-on-error main-en.tex
-xelatex -interaction=nonstopmode -halt-on-error main-en.tex
-xelatex -interaction=nonstopmode -halt-on-error main-ja.tex
-xelatex -interaction=nonstopmode -halt-on-error main-ja.tex
+sh paper/qmsve/build.sh
+sh paper/qmsve/package-arxiv-source.sh
 ```
 
-Both drafts use the included DejaVu Sans Mono for the Lean source appendix. The Japanese draft also uses the included IPAex Gothic font; both font licenses are included. The figure path is relative to this directory and points to `figures/qmsve_matrix_level.png` at the repository root. The source package requires XeLaTeX and the `fvextra`, `fontspec`, and AMS packages.
+The helper uses XeLaTeX if installed, otherwise Tectonic. It also supports the locally downloaded Tectonic 0.17.0 under `work/tools/` and ICU71 data under `work/tools/icu71/`, using `work/cache/`. These ignored runtime files are not part of the source archive. Japanese line breaking with that static Tectonic build requires the matching ICU data. Standard XeLaTeX needs `fontspec`, `fvextra`, and AMS packages. The included IPAex/DejaVu font licenses are preserved. Successful builds refresh the named `QMSVE-*.pdf` artifacts. The English source ZIP is validated by compilation in an empty directory before replacement; its filename/script name does not imply submission to arXiv.
 
 ## Formalization
 
-`lean/QMSVE.lean` contains the scalar finite-weight postselection theorem. The formal statement begins after the finite spectral-weight reduction; matrix diagonalization, QSVT circuit completion, and readout concentration are outside its scope. See the Lean appendix in both drafts for the exact assumptions and verified status.
+`lean/QMSVE.lean` contains the unchanged finite-weight leakage and posterior-moment theorems and their inherited successful checker record. The new exact envelope, sharp rates and perturbation results have complete hand proofs in the article but are **not Lean-verified**. Lean/lake was unavailable in this revision's execution environment; no new Lean or CI success is claimed. Matrix reduction, QSVT realization and measurement concentration also remain outside the formalized scope.

@@ -13,15 +13,15 @@
 \newtheorem{theorem}{定理}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\ket}[1]{\lvert #1\rangle}
-\title{極端特異値推定におけるべき乗法とコサイン・フィルタ\\
-QSVT提案の仮定を明示した技術的再評価}
+\title{cosine・多項式特異値フィルタの\\
+鋭いgap-freeバイアス境界}
 \author{[著者名・所属を記入]}
 \date{内部確認用技術報告草稿\\2026年10月26日}
 \begin{document}
 \maketitle
 {\jfont
 \begin{abstract}
-未公開の量子最大・最小特異値推定案、とくにコサインを用いる「三角反復法」を再評価する。長方形行列 $A$ に対し、正規化右Gram作用素 $G=(A/\alpha)^\dagger(A/\alpha)$ 上に方法を定式化する。ここで $\alpha\geq\|A\|$ は利用可能な正規化上界である。$\cos(\beta G)$ の有界な偶多項式近似は、固有値多項式変換の候補となるが、具体的な実装にはQSP completion、実部の抽出、および正規化規約が必要である。本報告ではそれらの位相列・回路を構成しない。最小固有値の固有空間に入力確率 $a>0$ があり、最大の非目標応答が目標応答の $r<1$ 倍以下なら、$t$ 回反復後の条件付き漏れが $(1-a)r^{2t}/a$ 以下となる有限スペクトルの境界を示す。また、Bernoulli型ブロックエンコーディング読出しからフィルタ後のGram期待値を推定し、その加法誤差を特異値誤差へ換算する。境界は目標重なり、スペクトル分離、受理確率、正規化、読出し精度に依存し、回路全体やエンドツーエンドの計算量定理ではない。小行列の行列レベル計算は、重なりゼロ、狭いギャップ、右核に対する収束と失敗を再現する。原案の $\cos(\beta(\sigma/\alpha)^2)$ 応答と、別方式である拡張行列に基づく $\cos(\beta\sigma/\alpha)$ 応答も比較する。新規性や量子高速化は主張しない。
+正規化右Gram作用素$G=(A/\alpha)^\dagger(A/\alpha)$上の反復フィルタによる最小特異値推定を解析する。固有状態忠実度をgapで制御する代わりに、最小値と初期目標質量を固定した有限スペクトル全体に対する、フィルタ後Gram平均の正確な最大バイアスを求める。最悪例は二固有値だけで構成できる。これにより、cosine-Gram応答$\cos(\beta G)$の平均バイアスは$t^{-1/2}$、別方式の拡張応答$\cos(\beta\sqrt G)$では$t^{-1}$という、鋭い漸近定数を持つ一様gap-free境界を得る。特異値推定の最悪無雑音誤差の率はそれぞれ$t^{-1/4}$、$t^{-1/2}$であり、固定次数多項式baselineでも同じ率を達成する。さらに、Taylor近似の全体スケーリングを反復することで受理確率に指数的ペナルティが生じることを示し、success blockの誤差を事後選択とBernoulli読出しまで伝播する。古典スペクトル監査で鋭い包絡と正規化ペナルティを確認する。既存提案の解析を精密化する成果であり、新しい量子フィルタ原理や回路全体での優位性は主張しない。組み合わせた解析の文献上の優先性には追加確認が必要である。
 \end{abstract}
 
 \section{はじめに}
@@ -29,19 +29,54 @@ QSVT提案の仮定を明示した技術的再評価}
 
 中心となる修正は変換対象である。一般の長方形行列に $\cos(A)$ を直接適用しても特異値変換とはならない。そこで $B=A/\alpha$、$G=B^\dagger B$ とし、右特異ベクトル空間で考える。QMSVEのコサイン則は $C=\cos(\beta G)$ となり、その固有値は $\cos(\beta\sigma_i^2/\alpha^2)$ である。$0<\beta<\pi/2$ なら正規化スペクトル上で正かつ単調減少する。エルミート拡張行列から得られる $\cos(\beta\sigma_i/\alpha)$ は別の応答であり、原案の方式と区別する。
 
-本報告の成果は、条件付きフィルタ収束、測定値から特異値への誤差換算、および再現可能な行列レベル監査を明示することにある。原案の新規性、全資源評価の正しさ、既存法に対する優位性は示さない。特にギャップと初期重なりが必要であり、フィルタ後の状態を受理するために多数の再試行が必要となる場合がある。
+本稿の中心課題は、スペクトルgapの下界なしに平均からの推定誤差を評価できるかである。固定応答の二点最悪例への正確な帰着と鋭い漸近定数を導出し、正規化による受理費用と実装誤差も評価する。元の幾何的漏れ境界は背景として残す。新しい量子アルゴリズムの提案とは区別する。
 
-\section{関連研究と本報告の範囲}
-量子特異値変換（QSVT）はブロックエンコードされた行列の特異値へ有界多項式変換を適用し、エルミートの場合には固有値多項式変換を実現する\cite{Gilyen}。ここではコサイン多項式の実装候補として位置づけ、位相角列は合成しない。量子べき乗法および量子逆反復法には既存の研究がある\cite{SekiYunoki,Kyriienko,Nghiem}。入力・実装モデルはそれぞれ異なるが、べき乗法やQSVTによるべき乗自体の新規性は主張しない。
+\section{関連研究と本稿の位置づけ}
+\paragraph{量子線形代数とべき乗法}
+QSVTはブロックエンコードされた特異値の多項式変換を与える\cite{Gilyen}。
+量子べき乗法、逆反復法、QSVTに基づくべき乗法には先行研究があり
+\cite{SekiYunoki,Kyriienko,Nghiem}、反復や多項式フィルタ自体を新規とはしない。
+Nghiemらは小さな受理確率も分析し、変換を変更して改善している。
+そのoracle構成は本稿と異なり、今回の再試行評価は彼らの計算量定理への反証ではない。
 
-確認したQMSVE原稿は著者・掲載先の記載がない未公開資料であり、「三角反復法」に仮題を付している。本報告では再評価対象となるアイデアの原資料として扱い、検証済み定理や既発表成果とは見なさない。著者の別のQCG研究は関連する既存資産としてのみ引用し、本手法と混同しない\cite{QCG2023,QCG2024}。
+\paragraph{cosine・Gaussianフィルタ}
+Ge・Tura・Ciracは既に$\cos H$のべき乗、応答比の評価、energy shift、
+振幅増幅を用いている\cite{GeTuraCirac}。特にarXiv版の式(7)--(22)が直接関連する。
+Lu・Ba\~nuls・Ciracは、フィルタ状態を物理的に準備せずに期待値を復元する方法も
+含めて有限energyのcosineフィルタを扱う\cite{LuBanulsCirac}。
+He・Zhang・WangはGaussianフィルタとcosineフィルタを付録Cで比較している
+\cite{HeZhangWang}。cosineの局所Gaussian近似は既知の背景である。
+最近のpreprintも単一補助量子ビットと時間発展によるpower-cosine反復を扱う
+\cite{Jo}が、shift・resonance条件と入力モデルが異なるため、その性能主張を
+本稿へ無条件に引き継がない。
 
+\paragraph{最適化projectorと入力モデル}
+Lin・Tongは既知の孤立した目標に対する多項式projectorを最適化し
+\cite{LinTongFilter}、追加情報下での準最適状態準備・energy推定も扱う
+\cite{LinTongGround}。Dong・Lin・Tongはcontrolled time evolutionによる
+QET-Uを用いる\cite{DongLinTong}。比較にはgap、energy情報、深さ、振幅増幅の
+仮定を揃える必要がある。本稿の固定応答に対するスペクトル上の最大化と、
+多項式自体のminimax最適化は異なる。目標点で応答1を保つ方針はLin・Tongに
+既にあり、今回の正規化監査はそれを現Taylor近似へ適用したものである。
+
+\paragraph{古典的背景と主張する貢献}
+古典べき乗・Krylov法にもgap非依存の精度保証があり\cite{MuscoMusco}、
+ギャップを仮定しないという概念自体は新しくない。二点への帰着も線形分数最適化
+\cite{CharnesCooper}の初等的な議論である。本稿で導出する解析的成果は、
+固定応答の正確な平均バイアス包絡、cosine-Gramと拡張応答の鋭い漸近定数、
+および正規化と受理状態の摂動を合わせた監査である。
+選定した一次文献ではこの組合せと同一の主張を確認できなかったが、
+限定した調査であり、古典・量子フィルタ全体にわたる優先性の証明ではない。
+特定推定器についての小さな解析的貢献と位置づけ、新しい量子アルゴリズムや
+最適化projectorに対する優位性とはしない。
+未公開QMSVE資料は提案の由来として扱い\cite{QMSVE}、別の既存成果
+\cite{QCG2023,QCG2024}をQMSVE実装と混同しない。
 \section{モデルとアルゴリズム}
-$A\in\C^{m\times n}$、$m\geq n$ とし、既知の $\alpha\geq\|A\|_2>0$ を選ぶ。$B=A/\alpha$、$G=B^\dagger B$ と置く。$G$ の固有値を昇順に
+$A\in\C^{m\times n}$（$m,n$は任意の正整数）とし、既知の $\alpha\geq\|A\|_2>0$ を選ぶ。$B=A/\alpha$、$G=B^\dagger B$ と置く。$G$ の固有値を昇順に
 \[
  0\leq\lambda_0\leq\lambda_1\leq\cdots\leq\lambda_{n-1}\leq1
 \]
-と並べると、$\lambda_i=\sigma_i(A)^2/\alpha^2$ である。ここでは右空間全体における最小特異値を対象とし、零特異値も含める。最小「非零」特異値には、核直交部分空間へのアクセス等、追加の仮定が必要となる。横長行列 ($m<n$) の右Gram作用素には必ず核が含まれ、同じ区別が必要である。
+と並べると、$\lambda_i=\sigma_i(A)^2/\alpha^2$ である。ここでは$\sigma_0(A)=\min_{\|v\|=1}\|Av\|$という右空間全体の最小値を対象とし、右核の零も含める。横長行列では通常のthin SVDが返す最小値と異なり得る。最小「非零」特異値には、核直交部分空間へのアクセス等、追加の仮定が必要となる。横長行列 ($m<n$) の右Gram作用素には必ず核が含まれ、同じ区別が必要である。
 
 右特異ベクトル基底に展開した正規化入力を $\ket{\psi}=\sum_i c_i\ket{v_i}$ とし、$p_i=|c_i|^2$ とする。$0<\beta<\pi/2$ に対する理想コサインGramフィルタを
 \[
@@ -85,7 +120,7 @@ $B$ のブロックエンコーディングがあれば、積の構成により�
 である。
 \end{theorem}
 
-証明を付録に示す。Lean形式化は作業中であり、付録に正確な範囲とchecker状況を記す。有限重みと行列固有基底の対応、ブロックエンコーディング、および読出しの解釈は有限次元での導出であり、scalar theoremのLean形式化には含まれない。
+証明を付録に示す。既存スカラー定理のLean確認記録は付録に記す。新しい鋭い包絡・収束率・摂動定理は本稿で手証明を与え、Lean検証済みとは扱わない。有限重みと行列固有基底の対応、ブロックエンコーディング、および読出しの解釈は有限次元での導出であり、scalar theoremのLean形式化には含まれない。
 
 \paragraph{有限次数多項式への十分条件}
 有界多項式であることだけでは、目標固有値が最大応答になるとは限らない。厳密コサイン応答の非目標最大値を $q_{\rm out}=\max_{i\notin T}q_i$ とし、区間上一様誤差を $|\widetilde P(x)-\cos(\beta x)|\leq E$ とする。$E<(q_*-q_{\rm out})/2$ なら、$|\widetilde q_*|\geq q_*-E>0$、かつ $|\widetilde q_i|/|\widetilde q_*|\leq(q_{\rm out}+E)/(q_*-E)<1$ である。同じ有限重み境界がこの比で成り立つ。これは十分条件であり、次数最適性は評価していない。
@@ -107,7 +142,9 @@ $B$ のブロックエンコーディングがあれば、積の構成により�
 \]
 と書く。$d_B$ は1回のBernoulli読出しに使う $B$ ブロックエンコーディング費用である。振幅増幅、コヒーレントな再利用、コンパイル済みゲート費用は未計上。理想コサインの場合、$\lambda_0>0$ なら $q_*<1$ で受理確率は反復回数とともに指数減衰し得る。条件付き漏れが小さいことだけでは総費用が小さいとは言えない。
 
-\section{数値結果}
+\input{gapfree-ja.tex}
+
+\section{追加の行列レベル確認}
 7個の小行列について右Gram作用素を古典的に固有値分解し、固定したスペクトル重みを用いる決定論的な行列レベル計算を行った。入力状態は計算した右固有ベクトル基底で定義し、固有値応答で重みを更新する。これは固有状態を使った制御スペクトル監査であり、未知の特異ベクトルを準備する性能評価ではない。量子状態ベクトルや量子回路はシミュレートしていない。図は $\beta=1.2$ における厳密な $\cos(\beta G)$ 応答を示す。別途、seed 20261026、受理後2,000 Bernoulli標本の読出しを行った。コードと完全なJSON結果は \texttt{experiments/qmsve\_matrix\_level.py} と \texttt{results/qmsve\_matrix\_level.json} にある。
 
 \begin{figure}[t]
@@ -160,14 +197,14 @@ $t=64$ では、分離ギャップ例 $(0.12,0.48,0.86)$ の最小固有空間�
 別方式の $\cos(\beta\sigma/\alpha)$ は分離ギャップ例では $t=16$ に目標質量 $0.996$（原案の $\cos(\beta(\sigma/\alpha)^2)$ は $0.797$）へ達する一方、受理確率はそれぞれ $0.288$ と $0.500$ である。近縮退例では両応答とも $t=16$ で質量は約 $0.5$ にとどまる。多項式次数、エンコーディング、コンパイル費用を一致させた比較ではない。
 
 \section{考察と限界}
-有限スペクトルの議論は、目標固有空間でフィルタ応答が厳密に最大なら他の重みが幾何的に抑圧されることを示す。同じ計算は応答比の仮定を満たす他の対角フィルタにも当てはまるため、この漏れ不等式自体を新しい量子アルゴリズムと解釈すべきではない。実用上の問いは、選んだ応答を適切な多項式次数で実装できるか、深さ・問い合わせ予算内に十分な受理標本を得られるかである。本報告はこのエンドツーエンド最適化を解決していない。
+鋭い包絡は、固有空間への一様忠実度保証がなくても平均の推定誤差を保証できることを明確にする。漸近定数はunshifted cosine-Gram応答の核近傍での遅さを定量化する。同一の条件付き推定器でも、正規化だけで再試行費用が指数的に異なり得る。いずれも特定推定器の解析であり、一般の特異値推定の計算量下界ではない。
 
-目標固有空間への初期質量は正でなければならず、有用な保証にはその下界が必要である。また $r<1$ の応答比が必要であり、コサインGramフィルタでは最小値より上のスペクトルギャップから従う。反復postselectionは $1/Z_t$ の期待オーバーヘッドを生じ、目標固有値が正なら成功確率は反復回数とともに指数的に小さくなる場合がある。正規化 $\alpha$ の取得費用は含まない。Taylor応答は指定区間で有界だが、位相合成、有限精度誤差の反復伝播、ノイズは評価していない。
+数値監査は厳密な古典スペクトル情報と理想スカラーsuccess応答を用い、未知特異ベクトルの準備、QSVT位相合成、物理雑音は検証しない。正の目標固有値では、小さなバイアスでも再試行費用が指数的になり得る。Bernoulli/Hoeffding読出しは一つのモデルであり、最適精度依存性とは限らない。公平な比較には状態準備、正規化、block encoding、次数、受理・増幅・再試行、読出しを含める必要がある。最大値べき乗分枝は背景であり、新しい鋭い結果は最小値分枝に関する。
 
-数値例は縮退、狭いギャップ、重なりゼロ、右核を示すための小例であり、化学系、大規模疎行列、実機性能を示さない。量子高速化、問い合わせ計算量の改善、新規性は主張しない。実資源比較には共通入力モデル、状態準備、正規化、ブロックエンコーディング、フィルタ次数、成功増幅または再試行、読出し標本数、有限精度誤差を含める必要がある。
+二点の証明や多項式baselineは初等的で、既存の道具と重なる。選定文献との比較が支えるのは限定した解析的位置づけであり、全分野での優先性ではない。投稿可能な新規性と判断する前に、古典の重み付きべき乗法と追加のcosine論文に対する独立確認が必要である。著者欄と原資料の所在も未確定である。
 
 \section{結論}
-正規化右Gram作用素上でQMSVEコサイン反復法を仮定明示的に定式化し、有限スペクトルでの条件付き収束とBernoulli読出し保証を示した。再現可能な小行列計算はギャップ、目標重なり、縮退、重なりゼロ、右核の役割を示した。条件付き収束だけでは効率的なアルゴリズムを確立できず、成功確率と実装費用も計上しなければならない。本検討ではエンドツーエンドの資源優位を確立していない。
+フィルタ後平均のバイアスを二点スペクトル上の正確な最大値として表し、特定のcosine・多項式応答について鋭いgap-free境界を導出した。状態忠実度、推定誤差、受理費用を分離し、反復全体スケーリングの指数的ペナルティと事後選択を含む摂動境界も示した。解析的な焦点を持つ論文草稿となったが、回路実現、同一資源下の比較、新規性の独立確認は今後の課題である。
 
 \appendix
 \section{有限スペクトル境界の証明}
@@ -194,15 +231,14 @@ $x\in[-1,1]$ における余弦Taylor多項式の誤差は
 である。よって $|P_{m_0}(x)|\leq1+\delta_{m_0}$ であり、$\widetilde P_{m_0}$ は全区間で絶対値1以下となる。近似誤差は $2\delta_{m_0}/(1+\delta_{m_0})$ 以下である。この一様境界は数値グリッドだけからの推測ではない。
 
 \section{Lean形式化の対応と範囲}
-Lean付録では、有限重みの漏れ不等式と事後Gram期待値の逸脱境界を形式化する。目標総質量 $a>0$、目標応答 $q_*>0$、目標外応答が $r q_*$ 以下のとき、漏れは $((1-a)/a)r^{2t}$ 以下となる。完全なLeanソースを付録に掲載し、Lean 4.35.0、Mathlib v4.35.0で確認した。\texttt{lake build QMSVE} と \texttt{lake env lean Audit.lean} はともにexit code 0である。実行記録はソース一式に含む。行列対角化とQSVTから有限確率重みへの同定は手証明による。量子回路、ブロックエンコーディング、SVD、Hoeffding集中全体をLean検証済みとは扱わない。
+Lean付録では、有限重みの漏れ不等式と事後Gram期待値の逸脱境界を形式化する。目標総質量 $a>0$、目標応答 $q_*>0$、目標外応答が $r q_*$ 以下のとき、漏れは $((1-a)/a)r^{2t}$ 以下となる。完全なLeanソースは補足資料に含める。継承した記録ではLean 4.35.0、Mathlib v4.35.0で確認している。\texttt{lake build QMSVE} と \texttt{lake env lean Audit.lean} はともにexit code 0である。実行記録はソース一式に含む。行列対角化とQSVTから有限確率重みへの同定は手証明による。量子回路、ブロックエンコーディング、SVD、Hoeffding集中全体をLean検証済みとは扱わない。
 
 \section{原資料の書誌情報}
 利用したQMSVE原稿の題名は『量子最大・最小特異値推定アルゴリズム』である。確認したコピーには著者、所属、公開先の記載がなく、「三角反復法」は仮題とされる。本文の著者情報は未確定とし、人物・所属は推定しない。
-\section{Lean証明ソース}
-以下に本文の有限重み不等式と事後期待値境界を検証した完全なLeanソースを掲載する。プロジェクトの固定版と再現可能なchecker commandは同梱READMEに記す。
-\VerbatimInput[fontsize=\tiny,breaklines=true]{../../lean/QMSVE.lean}
-\renewcommand{\refname}{参考文献}
-\begin{thebibliography}{9}
+\section{再現性と検証範囲}
+補足ソースに二つの実験スクリプト、全JSON・図、依存版、変更していないスカラーLean projectを含める。既存Lean checkerの成功は継承した記録であり、この改訂の新規CI実行ではない。鋭い包絡・収束率・多項式baseline・摂動評価の新しい証明はLean未検証である。有限の数値検査と手証明を区別する。全Leanソースは本文への印刷を省き、\texttt{lean/QMSVE.lean}として配布する。
+
+\begin{thebibliography}{99}
 \bibitem{QMSVE} \emph{Quantum maximum/minimum singular-value estimation algorithms}. Unpublished manuscript supplied as \texttt{2023\_0311\_QMSVE.pdf}; author and publication metadata unstated in the copy examined.
 \bibitem{Gilyen} A. Gily\'en, Y. Su, G. H. Low, and N. Wiebe, "Quantum singular value transformation and beyond: exponential improvements for quantum matrix arithmetics," in \emph{Proceedings of the 51st Annual ACM SIGACT Symposium on Theory of Computing}, pp. 193--204 (2019), doi:10.1145/3313276.3316366; arXiv:1806.01838.
 \bibitem{SekiYunoki} K. Seki and S. Yunoki, "Quantum Power Method by a Superposition of Time-Evolved States," \emph{PRX Quantum} \textbf{2}, 010333 (2021), doi:10.1103/PRXQuantum.2.010333; arXiv:2008.03661.
@@ -210,6 +246,15 @@ Lean付録では、有限重みの漏れ不等式と事後Gram期待値の逸脱
 \bibitem{Nghiem} N. A. Nghiem, H. Sukeno, S. Zhang, and T.-C. Wei, "Improved Quantum Power Method and Numerical Integration Using Quantum Singular Value Transformation," \emph{Physical Review A} \textbf{111}, 012434 (2025), doi:10.1103/PhysRevA.111.012434; arXiv:2407.11744.
 \bibitem{QCG2023} K. Toyoizumi, S. Yamamoto, and Y. Hoshino, "Hamiltonian simulation using quantum singular value transformation: complexity analysis and application to the linearized Vlasov-Poisson equation," arXiv:2304.08937, version 2 (2023).
 \bibitem{QCG2024} K. Toyoizumi, K. Wada, S. Yamamoto, and Y. Hoshino, "Quantum conjugate gradient method using the positive-side quantum eigenvalue transformation," arXiv:2404.02713, version 2 (2024).
+\bibitem{GeTuraCirac} Y. Ge, J. Tura, and J. I. Cirac, ``Faster ground state preparation and high-precision ground energy estimation with fewer qubits,'' \emph{Journal of Mathematical Physics} \textbf{60}, 022202 (2019), doi:10.1063/1.5027484; arXiv:1712.03193.
+\bibitem{LinTongFilter} L. Lin and Y. Tong, ``Optimal polynomial based quantum eigenstate filtering with application to solving quantum linear systems,'' \emph{Quantum} \textbf{4}, 361 (2020), doi:10.22331/q-2020-11-11-361; arXiv:1910.14596.
+\bibitem{LinTongGround} L. Lin and Y. Tong, ``Near-optimal ground state preparation,'' \emph{Quantum} \textbf{4}, 372 (2020), doi:10.22331/q-2020-12-14-372; arXiv:2002.12508.
+\bibitem{DongLinTong} Y. Dong, L. Lin, and Y. Tong, ``Ground state preparation and energy estimation on early fault-tolerant quantum computers via quantum eigenvalue transformation of unitary matrices,'' \emph{PRX Quantum} \textbf{3}, 040305 (2022), doi:10.1103/PRXQuantum.3.040305; arXiv:2204.05955.
+\bibitem{LuBanulsCirac} S. Lu, M. C. Ba\~nuls, and J. I. Cirac, ``Algorithms for Quantum Simulation at Finite Energies,'' \emph{PRX Quantum} \textbf{2}, 020321 (2021), doi:10.1103/PRXQuantum.2.020321; arXiv:2006.03032.
+\bibitem{HeZhangWang} M.-Q. He, D.-B. Zhang, and Z. D. Wang, ``Quantum Gaussian filter for exploring ground-state properties,'' \emph{Physical Review A} \textbf{106}, 032420 (2022), doi:10.1103/PhysRevA.106.032420; arXiv:2112.06026.
+\bibitem{Jo} J. Jo, ``Deterministic Ground State Preparation via Power-Cosine Filtering of Time Evolution Operators,'' preprint, arXiv:2602.19556 (2026). The comparison here concerns its stated scalar response, not independent verification of its resource claims.
+\bibitem{CharnesCooper} A. Charnes and W. W. Cooper, ``Programming with linear fractional functionals,'' \emph{Naval Research Logistics Quarterly} \textbf{9}, 181--186 (1962), doi:10.1002/nav.3800090303.
+\bibitem{MuscoMusco} C. Musco and C. Musco, ``Randomized Block Krylov Methods for Stronger and Faster Approximate Singular Value Decomposition,'' in \emph{Advances in Neural Information Processing Systems} \textbf{28} (2015); arXiv:1504.05477.
 \end{thebibliography}
 }
 \end{document}

@@ -2,6 +2,14 @@
 
 AI Agentを活用し、量子アルゴリズム・量子数値線形代数の研究を進めるプロジェクトです。
 
+## 最新の成果物（2026-10-27）
+
+事前情報に頑健なQSVTフィルタ選択を、理論・数値実験・実装証明書を含む論文 **Prior-Robust QSVT Filter Selection for Gap-Free Spectral-Mean Estimation** にまとめました。上端零化による損失の定理と、固定推定・再試行モデルに限定した費用最適化を中心にしています。広い意味の関数選択やLPを新規性とは主張しません。
+
+[英語PDF・13頁](paper/filter-selection/Filter-selection-en.pdf)、[日本語PDF・11頁](paper/filter-selection/Filter-selection-ja.pdf)、[arXiv用ソース](paper/filter-selection/Filter-selection-arxiv.zip)、[再現手順・検証結果](paper/filter-selection/README.md)、[批判的レビュー](paper/filter-selection/novelty-review.md)を参照してください。非自明な10条件で選択費用上界は制限クラスの最適費用下界の1.04–1.24倍。一般量子優位は主張せず、著者情報は希望により空欄、未投稿です。最新の引継ぎは [PROJECT_STATE.md](PROJECT_STATE.md)。
+
+以前の[QMSVE原案レビュー](paper/qmsve/README.md)も保存しています。
+
 ## 目的
 
 - 学生時代の研究アイデアを再評価し、新規性と研究価値のある課題に発展させる。
@@ -54,6 +62,7 @@ AI Agentを活用し、量子アルゴリズム・量子数値線形代数の研
 | `memo/research/` | 文献調査・仮説・理論検討 |
 | `memo/experiments/` | 実験過程・失敗・解釈 |
 | `memo/reviews/` | 批判的レビューと対応過程 |
+| `paper/filter-selection/` | 頑健フィルタ選択の日英論文、投稿用ソース、再現・検証手順 |
 | `paper/qmsve/` | QMSVE日英技術報告草稿、PDF、ビルド・再現手順 |
 
 実装・実験・Lean・論文用のディレクトリは、作業に応じて追加します。QMSVE技術報告の確認用草稿は `paper/qmsve/` にあります。
@@ -74,7 +83,7 @@ AI Agentを活用し、量子アルゴリズム・量子数値線形代数の研
 
 参照時の手順は [過去プロジェクト](docs/references/prior-projects.md) を確認してください。
 
-## 現在地
+## 以前の研究方向（更新経緯）
 
 **化学・物性のエネルギー推定を応用先とし、下流も浅い推定器に固定したうえで、全工程のdepth cap内でフィルタ形・強さと推定器を共同設計する方向を確定しました。** 操作可能な事前情報下でのフィルタ優位/棄却条件は補助評価とします。新規性や性能改善は未確認です。
 
