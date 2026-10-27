@@ -1,5 +1,11 @@
 # 過去の研究資産
 
+## 本人提供の原本PDF（2026-10-27保存）
+
+元のPDF本体2件を [references/](../../references/README.md) で管理する。
+QMSVE原案は `references/qmsve/2023_0311_QMSVE.pdf`、ランチョス/共役勾配法の原案は
+`references/qcg/2023_0413_QLanzos_CG.pdf`。Google Driveから取得したバイナリを変更せず保存し、出典とSHA-256を記録した。
+
 登録日：2026-10-23（日本時間）
 本人から、今後のコーディング・論文執筆時の参照先として指定されたリポジトリ。
 

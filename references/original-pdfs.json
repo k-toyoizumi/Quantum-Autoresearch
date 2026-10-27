@@ -1,0 +1,31 @@
+{
+  "description": "User-provided original research PDFs, preserved without modification.",
+  "files": [
+    {
+      "path": "references/qmsve/2023_0311_QMSVE.pdf",
+      "original_filename": "2023_0311_QMSVE.pdf",
+      "source": "Google Drive (user-provided link)",
+      "google_drive_file_id": "1IYo4UdiI3v2n90Q8flvktT-IROhIoNDF",
+      "source_url": "https://drive.google.com/file/d/1IYo4UdiI3v2n90Q8flvktT-IROhIoNDF/view",
+      "retrieved_date_jst": "2026-10-27",
+      "size_bytes": 218826,
+      "pages": 19,
+      "title_first_page": "量子最大・最小特異値推定アルゴリズム",
+      "sha256": "b3aaf0aee5a825d086118b73e03d40764bdce5d9c5dd1f77482ea6442d8422ad",
+      "preservation": "original bytes; no conversion or PDF edits"
+    },
+    {
+      "path": "references/qcg/2023_0413_QLanzos_CG.pdf",
+      "original_filename": "2023_0413_QLanzos_CG.pdf",
+      "source": "Google Drive (user-provided link)",
+      "google_drive_file_id": "141QVyPGTaPXHUWw7vrtIV1c2i7xPehqa",
+      "source_url": "https://drive.google.com/file/d/141QVyPGTaPXHUWw7vrtIV1c2i7xPehqa/view",
+      "retrieved_date_jst": "2026-10-27",
+      "size_bytes": 233428,
+      "pages": 16,
+      "title_first_page": "量子特異値変換による量子ランチョス法と共役勾配法",
+      "sha256": "dfe918b1a80a10ee83513654d844002b7039b84779c76cb8778e8b9971c9ede1",
+      "preservation": "original bytes; no conversion or PDF edits"
+    }
+  ]
+}
